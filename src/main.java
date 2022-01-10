@@ -8,5 +8,5 @@ Requirements:
     Use version control.
     Have 3-4 members.
 
-Authors:    Stephen Stammen, _____, _____, ____
+Authors:    Stephen Stammen, Daniel Mills, _____
  */
