@@ -10,3 +10,15 @@ Requirements:
 
 Authors:    Stephen Stammen, Daniel Mills, _____
  */
+
+/**
+ * The HelloWorldApp class implements an application that
+ * simply prints "Hello World!" to standard output.
+ * This type of comment is considered documentation.
+ * This part will be removed and is just for an example.
+ */
+class HelloWorldApp {
+    public static void main(String[] args) {
+        System.out.println("Hello World!"); // Display the string.
+    }
+}
