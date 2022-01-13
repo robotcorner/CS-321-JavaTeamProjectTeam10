@@ -1,0 +1,22 @@
+# Adapted from https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# User-specific stuff
+.idea/
+*.iml
+
+# CMake
+cmake-build-*/
+
+# File-based project format
+*.iws
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
