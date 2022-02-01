@@ -1,4 +1,4 @@
-# CS-321-JavaTeamProject - TEAM 10 - ____
+# CS-321-JavaTeamProject - TEAM 10
 
 This is a team project for creating a Java Swing app related to organize a list of books or movies that the user chooses.
 
