@@ -11,6 +11,8 @@ Requirements:
 Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell,
  */
 
+import java.text.ParseException;
+
 /**
  * The HelloWorldApp class implements an application that
  * simply prints "Hello World!" to standard output.
@@ -18,7 +20,11 @@ Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell,
  * This part will be removed and is just for an example.
  */
 class HelloWorldApp {
-    public static void main(String[] args) {
-        System.out.println("Hello World!"); // Display the string.
+    public static void main(String[] args) throws ParseException {
+        System.out.println("Hello World!"); // Display the string
+
+
+        // Run Tests
+        Tests.testMovie();
     }
 }
