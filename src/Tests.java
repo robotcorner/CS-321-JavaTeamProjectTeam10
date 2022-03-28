@@ -1,4 +1,6 @@
+import javax.swing.*;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 class Tests {
     static void testMovie() throws ParseException {
@@ -18,6 +20,26 @@ class Tests {
         // TEST: MOVIE GETTER FUNCTION - STRING WITH COMMAS
         System.out.println(movie1.getGenre());
 
+        //MovieList myList = new MovieList();
+        //myList.add("IDMovie1");
+
+        ArrayList<String> IDs = new ArrayList<String>();
+        IDs.add("IDMovie1");
+        IDs.add("IDMovie2");
+        IDs.add("IDMovie3");
+        System.out.println(IDs);
+
+        /*
+        Form1 form = new Form1();
+        MovieListView myMovieList = new MovieListView();
+        myMovieList.setVisibile(true);
+        JFrame frame = new JFrame("My First GUI");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.open(myMovieList);
+        frame.setSize(300,300);
+        frame.setVisible(true);
+
+         */
     }
 }
 
