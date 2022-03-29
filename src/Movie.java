@@ -1,6 +1,8 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -9,7 +11,7 @@ import java.util.Date;
  *      We don't need setters for everything because we expect the contructor
  *          to do that.
  */
-public class Movie {
+public class Movie implements Comparable<Movie>, Comparator<Movie> {
 
     // Instance Variables
     private String imdbID;   // uniquely identifies the movie.
@@ -119,4 +121,24 @@ public class Movie {
         System.out.println();
         System.out.println("-----------------------------------------------------------------------------");
     }
+
+
+    /*
+    Compare by movie title
+     */
+    public int compareTo(Movie o) {
+        int result = o.getTitle().toLowerCase(Locale.ROOT).compareTo(getTitle().toLowerCase(Locale.ROOT));
+        if(result != 0) {
+            return -1 * result;
+        }
+
+        return result;
+    }
+
+
+    @Override
+    public int compare(Movie o1, Movie o2) {
+        return 0;
+    }
 }
+
