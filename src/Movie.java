@@ -12,37 +12,38 @@ import java.util.Date;
 public class Movie {
 
     // Instance Variables
-    private String imdbID;   // uniquely indentifies the movie.
-    private String title;
-    private int year;
-    private String rated;
+    private String imdbID;   // uniquely identifies the movie.
+    private String Title;
+    private int Year;
+    private String Rated;
+    private String Released;
     private Date dateReleased;
-    private String runtime;
-    private String genre;
-    private String director;
-    private String actors;
-    private String languages;
-    private String poster;
-    private int metascore;
+    private String Runtime;
+    private String Genre;
+    private String Director;
+    private String Actors;
+    private String Languages;
+    private String Poster;
+    private String Metascore;
     private float imdbRating;
     private String imdbVotes;
-    private String typeOfContent;
+    private String Type;
 
     Movie(String title, String year, String rated, String released, String runtime, String genre, String director, String actors, String languages, String poster, String metascore, String imdbRating, String imdbVotes, String imdbID, String typeOfContent) throws ParseException {
-        this.title = title;
-        this.year = Integer.parseInt(year);
-        this.rated = rated;
-        this.genre = genre;
-        this.runtime = runtime;
+        this.Title = title;
+        this.Year = Integer.parseInt(year);
+        this.Rated = rated;
+        this.Genre = genre;
+        this.Runtime = runtime;
         this.dateReleased = new SimpleDateFormat("dd MMM yyyy").parse(released);
-        this.director = director;
-        this.actors = actors;
-        this.languages = languages;
-        this.poster = poster;
-        this.metascore = Integer.parseInt(metascore);
+        this.Director = director;
+        this.Actors = actors;
+        this.Languages = languages;
+        this.Poster = poster;
+        this.Metascore = metascore;
         this.imdbRating = Float.parseFloat(imdbRating);
         this.imdbVotes = imdbVotes;
-        this.typeOfContent = typeOfContent;
+        this.Type = typeOfContent;
         this.imdbID = imdbID;
     }
 
@@ -51,15 +52,15 @@ public class Movie {
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public int getYear() {
-        return year;
+        return Year;
     }
 
     public String getRated() {
-        return rated;
+        return Rated;
     }
 
     public Date getDateReleased() {
@@ -67,31 +68,31 @@ public class Movie {
     }
 
     public String getRuntime() {
-        return runtime;
+        return Runtime;
     }
 
     public String getGenre() {
-        return genre;
+        return Genre;
     }
 
     public String getDirector() {
-        return director;
+        return Director;
     }
 
     public String getActors() {
-        return actors;
+        return Actors;
     }
 
     public String getLanguage() {
-        return languages;
+        return Languages;
     }
 
     public String getPoster() {
-        return poster;
+        return Poster;
     }
 
-    public int getMetascore() {
-        return metascore;
+    public String getMetascore() {
+        return Metascore;
     }
 
     public float getImdbRating() {
@@ -103,7 +104,7 @@ public class Movie {
     }
 
     public String getTypeOfContent() {
-        return typeOfContent;
+        return Type;
     }
 
     /**
@@ -114,11 +115,8 @@ public class Movie {
         // This is independent of the instances and tests a single movie object passed in.
         System.out.println("-----------------------------------------------------------------------------");
         System.out.println("Title | IMDbID | Year | Rated | Released");
-        System.out.printf("%s | %s | %d | %s | %tc", media.title, media.imdbID, media.year, media.rated, media.dateReleased);
+        System.out.printf("%s | %s | %d | %s | %tc", media.Title, media.imdbID, media.Year, media.Rated, media.dateReleased);
         System.out.println();
         System.out.println("-----------------------------------------------------------------------------");
     }
-
 }
-
-

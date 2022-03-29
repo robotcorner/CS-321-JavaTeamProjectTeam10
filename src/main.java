@@ -13,6 +13,7 @@ Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell, Braden Willingham
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 /**
  * The HelloWorldApp class implements an application that
@@ -22,10 +23,8 @@ import java.text.ParseException;
  */
 class HelloWorldApp {
     public static void main(String[] args) throws ParseException {
-        System.out.println(new File("data/SampleMovieFile.json").getAbsolutePath()); // correct path
-        MovieJsonOperator operator = new MovieJsonOperator("data/SampleMovieFile.json"); // still not working
-        operator.Get("tt1785572"); // Should see spiderman movie details printed to console
-
+        MovieJsonOperator operator = new MovieJsonOperator("data/SampleMovieFile.json");
+        ArrayList<Movie> movielist = operator.GetAll();
         // Run Tests
         Tests.testMovie();
     }
