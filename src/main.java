@@ -8,7 +8,7 @@ Requirements:
     Use version control.
     Have 3-4 members.
 
-Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell,
+Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell, Braden Willingham
  */
 
 import java.io.File;
