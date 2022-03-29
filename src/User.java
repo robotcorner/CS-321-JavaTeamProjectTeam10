@@ -1,9 +1,11 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class User {
 
     private String username;
     private String password;
+    private ArrayList<MovieCollection> collections = new ArrayList<MovieCollection>();
 
     User(String u, String p) {
 
@@ -41,5 +43,25 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void newCollection(String name) {
+        collections.add(new MovieCollection(name));
+    }
+
+    public MovieCollection getCollection(String name) {
+        for (MovieCollection c: collections) {
+            if(c.getName() == name) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    // run this when a user logs in
+    public void buildCollections(ArrayList<Movie> movieList) {
+        for (MovieCollection c: collections) {
+            c.buildMovieCollectionFromIds(movieList);
+        }
     }
 }

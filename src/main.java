@@ -42,7 +42,16 @@ class HelloWorldApp {
         ArrayList<Movie> movielist = operator.GetAllMovies();
         ArrayList<User> userlist = operator.GetAllUsers();
 
-        User u = new User("user3", "password");
+        // login
+        User u1 = userlist.get(0);
+        // build collections from the id list that gets saved
+        u1.buildCollections(movielist);
+
+        // new user
+        User u = new User("user2", "test123");
+        u.newCollection("watchlist");
+        u.getCollection("watchlist").addMovie(movielist.get(5));
+        u.getCollection("watchlist").removeMovie(movielist.get(5));
         userlist.add(u);
         operator.SaveAllUsers(userlist);
 
