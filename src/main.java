@@ -11,6 +11,7 @@ Requirements:
 Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell,
  */
 
+import java.io.File;
 import java.text.ParseException;
 
 /**
@@ -21,8 +22,9 @@ import java.text.ParseException;
  */
 class HelloWorldApp {
     public static void main(String[] args) throws ParseException {
-        System.out.println("Hello World!"); // Display the string
-
+        System.out.println(new File("data/SampleMovieFile.json").getAbsolutePath()); // correct path
+        MovieJsonOperator operator = new MovieJsonOperator("data/SampleMovieFile.json"); // still not working
+        operator.Get("tt1785572"); // Should see spiderman movie details printed to console
 
         // Run Tests
         Tests.testMovie();
