@@ -1,18 +1,18 @@
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class MovieJsonOperator implements IJsonOperator {
-    private String filename;
+    private String movie_filename;
+    private String user_filename;
 
-    MovieJsonOperator(String filename) {
-        this.filename = filename;
+    MovieJsonOperator(String movie_filename, String user_filename) {
+        this.movie_filename = movie_filename;
+        this.user_filename  = user_filename;
     }
     //public String Get(int id);
 
@@ -23,7 +23,7 @@ public class MovieJsonOperator implements IJsonOperator {
      */
     public Movie Get(String imdbID) {
         try {
-            Scanner sc = new Scanner(new File(filename));
+            Scanner sc = new Scanner(new File(movie_filename));
             sc.nextLine();
             Movie movie;
             while (sc.hasNextLine()) {
@@ -45,12 +45,31 @@ public class MovieJsonOperator implements IJsonOperator {
      * Dump the entire contents of a json file into a list
      * @return array of movies
      */
-    public ArrayList<Movie> GetAll() {
+    public ArrayList<Movie> GetAllMovies() {
         try {
-            Movie[] movies = gson.fromJson(new FileReader(filename), Movie[].class);
+            Movie[] movies = gson.fromJson(new FileReader(movie_filename), Movie[].class);
             return new ArrayList<Movie>(List.of(movies));
         } catch (FileNotFoundException e) {
             return null;
+        }
+    }
+
+    public ArrayList<User> GetAllUsers() {
+        try {
+            User[] users = gson.fromJson(new FileReader(user_filename), User[].class);
+            return new ArrayList<User>(List.of(users));
+        } catch (FileNotFoundException e) {
+            return null;
+        }
+    }
+
+    public void SaveAllUsers(ArrayList<User> u) {
+        try {
+            FileWriter writer = new FileWriter(user_filename, false);
+            writer.write(gson.toJson(u));
+            writer.close();
+        } catch(IOException e) {
+            System.out.println(e);
         }
     }
 
