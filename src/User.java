@@ -45,7 +45,14 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * Add new collection. Must have different names
+     * @param name
+     */
     public void newCollection(String name) {
+        for (MovieCollection c: collections) {
+            if(name.equals(c.getName())) return;
+        }
         collections.add(new MovieCollection(name));
     }
 

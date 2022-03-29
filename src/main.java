@@ -24,10 +24,15 @@ import java.util.ArrayList;
 class HelloWorldApp {
 
     public static void main(String[] args) throws ParseException {
+        // Exit if movie file does not exist
+        if(! new File("data/SampleMovieFile.json").exists()) {
+            System.out.println("No SampleMovieFile.json. Exiting...");
+            return;
+        }
+
         // Create user file if it does not exist
-        File usersfile = new File("data/users.json");
         try {
-            if (usersfile.createNewFile()) {
+            if (new File("data/users.json").createNewFile()) {
                 FileOutputStream writer = new FileOutputStream("data/users.json");
                 writer.write(("[]").getBytes());
                 writer.close();
@@ -42,7 +47,7 @@ class HelloWorldApp {
         ArrayList<Movie> movielist = operator.GetAllMovies();
         ArrayList<User> userlist = operator.GetAllUsers();
 
-        // login
+        // login - this test assumes data is present
         User u1 = userlist.get(0);
         // build collections from the id list that gets saved
         u1.buildCollections(movielist);
@@ -50,6 +55,7 @@ class HelloWorldApp {
         // new user
         User u = new User("user2", "test123");
         u.newCollection("watchlist");
+        u.newCollection("watchlist"); // won't add twice
         u.getCollection("watchlist").addMovie(movielist.get(5));
         u.getCollection("watchlist").removeMovie(movielist.get(5));
         userlist.add(u);
