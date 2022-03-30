@@ -123,8 +123,8 @@ public class Movie implements Comparable<Movie>, Comparator<Movie> {
     }
 
 
-    /*
-    Compare by movie title
+    /**
+     *Compare by movie title
      */
     public int compareTo(Movie o) {
         int result = o.getTitle().toLowerCase(Locale.ROOT).compareTo(getTitle().toLowerCase(Locale.ROOT));

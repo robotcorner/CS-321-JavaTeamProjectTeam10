@@ -14,6 +14,7 @@ Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell, Braden Willingham
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * The HelloWorldApp class implements an application that
@@ -60,6 +61,16 @@ class HelloWorldApp {
         u.getCollection("watchlist").removeMovie(movielist.get(5));
         userlist.add(u);
         operator.SaveAllUsers(userlist);
+
+        // Create Movie List Object for the Movie List View to display
+        MovieList movieList = new MovieList(movielist);
+        movieList.displayList();
+        // Prints out the number of movies in the database
+        System.out.println(movieList.size());
+
+
+
+
 
         // Run Tests
         Tests.testMovie();

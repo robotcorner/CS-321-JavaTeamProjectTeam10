@@ -1,5 +1,7 @@
+import javax.sql.rowset.spi.SyncFactory;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -23,11 +25,46 @@ public class MovieList {
         mediaList.add(movie);
     }
 
+    /**
+     *  A function that displays every movie title
+     */
 
+    public void displayList()
+    {
+        for (Movie movie: mediaList)
+            System.out.println(movie.getTitle());
+    }
+
+
+    /**
+     *
+     * @return how many movies are in the list
+     */
+    public int size() {
+        int i = 0;
+
+        for(Movie movie: mediaList)
+            i++;
+
+        return i;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 
     // Create member function to allow maninpulation of a media list
-}
+
 
 
 
