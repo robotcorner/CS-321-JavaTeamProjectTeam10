@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MovieJsonOperator implements IJsonOperator {
+    private Gson gson = new Gson();
     private String movie_filename;
     private String user_filename;
 
