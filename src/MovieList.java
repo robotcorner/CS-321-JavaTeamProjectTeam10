@@ -41,30 +41,8 @@ public class MovieList {
      * @return how many movies are in the list
      */
     public int size() {
-        int i = 0;
-
-        for(Movie movie: mediaList)
-            i++;
-
-        return i;
+        return mediaList.size();
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
-
     // Create member function to allow maninpulation of a media list
-
-
-
-

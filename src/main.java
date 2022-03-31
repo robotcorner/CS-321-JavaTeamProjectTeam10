@@ -1,6 +1,3 @@
-// This is a default file for the sake of starting version control.
-// The main file would use the class structure definitions as needed.
-
 /*
 Course:         CS-321
 Project:        Build an app with GUI in swing for managing a book or movie watch later personal list.
@@ -14,7 +11,6 @@ Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell, Braden Willingham
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * The HelloWorldApp class implements an application that
@@ -43,36 +39,23 @@ class HelloWorldApp {
             return;
         }
 
-        // create movie list and user list
+        // Initialize dependencies for our app
         MovieJsonOperator operator = new MovieJsonOperator("data/SampleMovieFile.json", "data/users.json");
-        ArrayList<Movie> movielist = operator.GetAllMovies();
-        ArrayList<User> userlist = operator.GetAllUsers();
+        ArrayList<Movie> movieListFromJson = operator.GetAllMovies();
+        ArrayList<User> userList = operator.GetAllUsers();
+        LoginManager loginManager = new LoginManager(userList, movieListFromJson, operator);
 
-        // login - this test assumes data is present
-        User u1 = userlist.get(0);
-        // build collections from the id list that gets saved
-        u1.buildCollections(movielist);
-
-        // new user
-        User u = new User("user2", "test123");
-        u.newCollection("watchlist");
-        u.newCollection("watchlist"); // won't add twice
-        u.getCollection("watchlist").addMovie(movielist.get(5));
-        u.getCollection("watchlist").removeMovie(movielist.get(5));
-        userlist.add(u);
-        operator.SaveAllUsers(userlist);
-
-        // Create Movie List Object for the Movie List View to display
-        MovieList movieList = new MovieList(movielist);
-        movieList.displayList();
-        // Prints out the number of movies in the database
-        System.out.println(movieList.size());
-
-
-
+        // TODO: GUI entry here
 
 
         // Run Tests
-        Tests.testMovie();
+        Tests.testMovie(); // Tests that movies get loaded and prints to console
+        Tests.loginFlow(); // Tests the basic login flow
+
+        // Create Movie List Object for the Movie List View to display
+        MovieList movieList = new MovieList(movieListFromJson);
+        movieList.displayList();
+        // Prints out the number of movies in the database
+        System.out.println(movieList.size());
     }
 }

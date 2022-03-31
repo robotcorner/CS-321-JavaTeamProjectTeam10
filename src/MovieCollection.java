@@ -22,8 +22,10 @@ public class MovieCollection {
     }
 
     public void removeMovie(Movie m) {
-        ids.remove(m.getImdbID());
-        movies.remove(m);
+        if(ids.contains(m.getImdbID()))
+            ids.remove(m.getImdbID());
+        if(movies.contains(m))
+            movies.remove(m);
     }
 
     // This function allows us to store IDs in JSON and get movielist in memory

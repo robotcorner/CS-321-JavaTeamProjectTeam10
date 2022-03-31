@@ -56,9 +56,13 @@ public class User {
         collections.add(new MovieCollection(name));
     }
 
+    /**
+     * Get collection by name
+     * @param name
+     */
     public MovieCollection getCollection(String name) {
         for (MovieCollection c: collections) {
-            if(c.getName() == name) {
+            if(c.getName().equals(name)) {
                 return c;
             }
         }

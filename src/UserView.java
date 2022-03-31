@@ -3,8 +3,12 @@ import java.awt.*;
 
 public class UserView {
 
-    LoginManager m = new LoginManager();
+    private LoginManager loginManager;
     SimpleMessage s = new SimpleMessage();
+
+    UserView(LoginManager loginManager) {
+        this.loginManager = loginManager;
+    }
 
     public void openLogInView() {
 
@@ -27,7 +31,7 @@ public class UserView {
             String username = userTextField.getText();
             String password = passwordTextField.getText();
 
-            if (m.verifyLogIn(username, password) == false) {
+            if (loginManager.login(username, password) == false) {
 
                 s.message("Error", "Password or username is incorrect. Please try again.");
             }
@@ -71,7 +75,7 @@ public class UserView {
                 String username = userTextField.getText();
                 String password = passwordTextField.getText();
 
-                m.createUser(username, password);
+                loginManager.signup(username, password);
 
                 s.message("New User Created", "Press 'OK' to proceed.");
 
