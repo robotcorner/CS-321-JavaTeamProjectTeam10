@@ -2,7 +2,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public interface IJsonOperator {
-    Gson gson = new Gson();
+    //Gson gson = new Gson();
     /*Gson gson = new GsonBuilder()
     .excludeFieldsWithoutExposeAnnotation()
     .create();*/

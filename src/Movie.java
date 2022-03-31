@@ -11,7 +11,7 @@ import java.util.Locale;
  *      We don't need setters for everything because we expect the contructor
  *          to do that.
  */
-public class Movie {
+public class Movie{
 
     // Instance Variables
     private String imdbID;   // uniquely identifies the movie.
@@ -123,40 +123,48 @@ public class Movie {
     }
 
 
-    /**
-     *  Sorts the medialist by Title
-     * @return
-     */
-    public static Comparator<Movie> comparatorByTitle() {
-        return new
-                Comparator<Movie>()
-                {
-                    public int compare(Movie movie1,
-                                       Movie movie2) {
-                        return movie1.getTitle().compareTo(
-                                movie2.getTitle());
-                    }
-                };
-    }
+
 
     /**
-     *  Sorts the medialist by Year
-     * @return
+     * Sort by name
+     * I just used the compareTo function Braden already wrote.
+     * We can make more sort functions following this pattern
+     * Like sorting Genre, Director, Rating (G, PG, ...), etc.
+     * Usage Collections.sort(movieList, Movie.sortByName());
+     * @return Comparator with compare function
      */
-    public static Comparator<Movie> comparatorByYear() {
-        return new Comparator<Movie>()
-        {
-
-            public int compare(Movie o1, Movie o2) {
-                if(o1.getYear() < o2.getYear())
-                    return -1;
-                if(o1.getYear() > o2.getYear())
-                    return 1;
-                return 0;
+    public static Comparator<Movie> sortByName() {
+        return new Comparator<Movie>() {
+            @Override
+            public int compare(Movie m1, Movie m2) {
+                return m1.getTitle().compareTo(m2.getTitle());
             }
-
-
         };
     }
+
+    public static Comparator<Movie> sortByYear() {
+        return new Comparator<Movie>() {
+            @Override
+            public int compare(Movie m1, Movie m2) {
+                if(m1.getYear() > m2.getYear())
+                    return 1;
+                if ((m1.getYear() < m2.getYear()))
+                    return -1;
+                return 0;
+            }
+        };
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
