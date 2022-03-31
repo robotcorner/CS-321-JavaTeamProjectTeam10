@@ -105,12 +105,12 @@ class MovieList {
   List<Movie>
 }
 
-class MovieListView {
+class MovieManagerView {
   +initalize()
   +paginate()
 }
 
-MovieListView <|-- MovieList
+MovieManagerView <|-- MovieList
 MovieList <|-- Movie
 User <|-- MovieCollection
 MovieCollectionView <|-- MovieCollectionList

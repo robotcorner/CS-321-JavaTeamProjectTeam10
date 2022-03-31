@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="MovieListView">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="MovieManagerView">
   <grid id="27dc6" binding="moviepanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
     <constraints>
       <xy x="17" y="15" width="881" height="758"/>
