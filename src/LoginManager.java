@@ -1,27 +1,74 @@
+import java.util.ArrayList;
+
 public class LoginManager {
+    private ArrayList<User> userList;
+    private ArrayList<Movie> movieList;
+    private User currentUser;
+    private MovieJsonOperator jsonOperator;
 
-    void createUser(String u, String p) {
-
-
+    LoginManager(ArrayList<User> userList, ArrayList<Movie> movieList, MovieJsonOperator jsonOperator) {
+        this.userList = userList;
+        this.jsonOperator = jsonOperator;
+        this.movieList = movieList;
     }
 
-    boolean verifyLogIn(String u, String p) {
+    public boolean signup(String username, String password) {
+        // return false if username already taken
+        for (User u : userList) {
+            if (username.equals(u.getUsername())) {
+                return false;
+            }
+        }
 
-
-
+        // sign up - create new user, set current user, and add to userlist
+        currentUser = new User(username, password);
+        userList.add(currentUser);
         return true;
     }
 
-    boolean logInUser() {
+    public boolean login(String username, String password) {
+        // return true if correct credentials provided
+        for (User u: userList) {
+            if(username.equals(u.getUsername()) && password.equals(u.getPassword())) {
+                currentUser = u;
+                currentUser.buildCollections(movieList);
+                return true;
+            }
+        }
 
+        // return false if unsuccessful login
+        return false;
+    }
+
+    public boolean logout() {
+        if(currentUser == null)
+            return false;
+
+        jsonOperator.SaveAllUsers(userList);
+        currentUser = null;
         return true;
     }
 
-    String updateUserPermission() {
+    public boolean save() {
+        if(currentUser == null)
+            return false;
 
-        if (logInUser() == true)
-            return "User";
+        jsonOperator.SaveAllUsers(userList);
+        return true;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public boolean verifyLogin() {
+        if (currentUser != null)
+            return true;
         else
-            return "Guest";
+            return false; // guest
     }
+
+    // not sure what these will be used for
+    public void updateUserStatus() {}
+    public void updateUserPermission() {}
 }
