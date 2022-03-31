@@ -50,8 +50,8 @@ class HelloWorldApp {
 
 
         // Run Tests
-        Tests.testMovie(); // Tests that movies get loaded and prints to console
-        Tests.loginFlow(); // Tests the basic login flow
+        // Tests.testMovie(); // Tests that movies get loaded and prints to console
+        // Tests.loginFlow(); // Tests the basic login flow
 
         // Create Movie List Object for the Movie List View to display
         MovieManager movieManager = new MovieManager(movieList);
