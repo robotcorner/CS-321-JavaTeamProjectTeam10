@@ -1,13 +1,20 @@
 import javax.swing.*;
 
-public class MovieListView extends JFrame {
+public class MovieListView {
+    private JPanel moviepanel;
+    private JComboBox comboBox1;
+    private JTextField textField1;
 
 
-
-    public void initialize() {
-
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Movie View");
+        frame.setSize(1000,1000);
+        frame.setContentPane(new MovieListView().moviepanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
-    public void paginate() {
 
-    }
+
+
 }

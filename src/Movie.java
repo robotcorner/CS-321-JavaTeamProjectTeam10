@@ -11,7 +11,7 @@ import java.util.Locale;
  *      We don't need setters for everything because we expect the contructor
  *          to do that.
  */
-public class Movie implements Comparable<Movie>, Comparator<Movie> {
+public class Movie {
 
     // Instance Variables
     private String imdbID;   // uniquely identifies the movie.
@@ -124,21 +124,39 @@ public class Movie implements Comparable<Movie>, Comparator<Movie> {
 
 
     /**
-     *Compare by movie title
+     *  Sorts the medialist by Title
+     * @return
      */
-    public int compareTo(Movie o) {
-        int result = o.getTitle().toLowerCase(Locale.ROOT).compareTo(getTitle().toLowerCase(Locale.ROOT));
-        if(result != 0) {
-            return -1 * result;
-        }
-
-        return result;
+    public static Comparator<Movie> comparatorByTitle() {
+        return new
+                Comparator<Movie>()
+                {
+                    public int compare(Movie movie1,
+                                       Movie movie2) {
+                        return movie1.getTitle().compareTo(
+                                movie2.getTitle());
+                    }
+                };
     }
 
+    /**
+     *  Sorts the medialist by Year
+     * @return
+     */
+    public static Comparator<Movie> comparatorByYear() {
+        return new Comparator<Movie>()
+        {
 
-    @Override
-    public int compare(Movie o1, Movie o2) {
-        return 0;
+            public int compare(Movie o1, Movie o2) {
+                if(o1.getYear() < o2.getYear())
+                    return -1;
+                if(o1.getYear() > o2.getYear())
+                    return 1;
+                return 0;
+            }
+
+
+        };
     }
 }
 

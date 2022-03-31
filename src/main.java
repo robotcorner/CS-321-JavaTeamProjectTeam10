@@ -11,6 +11,8 @@ Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell, Braden Willingham
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * The HelloWorldApp class implements an application that
@@ -54,8 +56,17 @@ class HelloWorldApp {
 
         // Create Movie List Object for the Movie List View to display
         MovieList movieList = new MovieList(movieListFromJson);
-        movieList.displayList();
+
         // Prints out the number of movies in the database
         System.out.println(movieList.size());
+
+        // Prints out the medialist sorted by movie titles alphabetically
+        //movieList.sortbyTitleAlphabetically();
+        //movieList.displayList();
+
+        // Prints out the medialist sorted by their release data
+        movieList.sortbyYearReleased();
+        movieList.displayList();
+
     }
 }

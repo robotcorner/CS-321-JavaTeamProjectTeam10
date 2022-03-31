@@ -1,8 +1,5 @@
 import javax.sql.rowset.spi.SyncFactory;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * In order to implement the MovieList in a data efficient manner, I will use the imdDb ID's as a way to track what is saved.
@@ -43,6 +40,40 @@ public class MovieList {
     public int size() {
         return mediaList.size();
     }
+
+
+    /**
+     *  Sorts the medialist by Title
+     * @return
+     */
+    public void sortbyTitleAlphabetically() {
+        Collections.sort(mediaList, Movie.comparatorByTitle());
+    }
+
+    /**
+     *  Sorts the medialist by Year
+     * @return
+     */
+    public void sortbyYearReleased() {
+        Collections.sort(mediaList, Movie.comparatorByYear());
+    }
+
+
+    /**
+     * A method to see if a movie is in the movie database
+     * @return boolean whether the movie was found or not
+     */
+
+    public boolean findMovie(String movieName){
+
+        if (mediaList.contains(movieName))
+            return true;
+        else
+            return false;
+
+    }
+
+
 }
 
-    // Create member function to allow maninpulation of a media list
+    
