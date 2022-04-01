@@ -11,6 +11,7 @@ Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell, Braden Willingham
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * The HelloWorldApp class implements an application that
@@ -41,21 +42,23 @@ class HelloWorldApp {
 
         // Initialize dependencies for our app
         MovieJsonOperator operator = new MovieJsonOperator("data/SampleMovieFile.json", "data/users.json");
-        ArrayList<Movie> movieListFromJson = operator.GetAllMovies();
+        ArrayList<Movie> movieList = operator.GetAllMovies();
         ArrayList<User> userList = operator.GetAllUsers();
-        LoginManager loginManager = new LoginManager(userList, movieListFromJson, operator);
+        LoginManager loginManager = new LoginManager(userList, movieList, operator);
 
         // TODO: GUI entry here
 
 
         // Run Tests
-        Tests.testMovie(); // Tests that movies get loaded and prints to console
-        Tests.loginFlow(); // Tests the basic login flow
+        // Tests.testMovie(); // Tests that movies get loaded and prints to console
+        // Tests.loginFlow(); // Tests the basic login flow
 
         // Create Movie List Object for the Movie List View to display
-        MovieList movieList = new MovieList(movieListFromJson);
-        movieList.displayList();
+        MovieManager movieManager = new MovieManager(movieList);
+        ArrayList<Movie> ml = movieManager.search("Short");
+        Collections.sort(ml, Movie.sortByName());
+        movieManager.displayList();
         // Prints out the number of movies in the database
-        System.out.println(movieList.size());
+        System.out.println(movieManager.size());
     }
 }

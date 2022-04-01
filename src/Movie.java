@@ -11,7 +11,7 @@ import java.util.Locale;
  *      We don't need setters for everything because we expect the contructor
  *          to do that.
  */
-public class Movie implements Comparable<Movie>, Comparator<Movie> {
+public class Movie{
 
     // Instance Variables
     private String imdbID;   // uniquely identifies the movie.
@@ -123,22 +123,48 @@ public class Movie implements Comparable<Movie>, Comparator<Movie> {
     }
 
 
+
+
     /**
-     *Compare by movie title
+     * Sort by name
+     * I just used the compareTo function Braden already wrote.
+     * We can make more sort functions following this pattern
+     * Like sorting Genre, Director, Rating (G, PG, ...), etc.
+     * Usage Collections.sort(movieList, Movie.sortByName());
+     * @return Comparator with compare function
      */
-    public int compareTo(Movie o) {
-        int result = o.getTitle().toLowerCase(Locale.ROOT).compareTo(getTitle().toLowerCase(Locale.ROOT));
-        if(result != 0) {
-            return -1 * result;
-        }
+    public static Comparator<Movie> sortByName() {
+        return new Comparator<Movie>() {
+            @Override
+            public int compare(Movie m1, Movie m2) {
+                return m1.getTitle().compareTo(m2.getTitle());
+            }
+        };
+    }
 
-        return result;
+    public static Comparator<Movie> sortByYear() {
+        return new Comparator<Movie>() {
+            @Override
+            public int compare(Movie m1, Movie m2) {
+                if(m1.getYear() > m2.getYear())
+                    return 1;
+                if ((m1.getYear() < m2.getYear()))
+                    return -1;
+                return 0;
+            }
+        };
     }
 
 
-    @Override
-    public int compare(Movie o1, Movie o2) {
-        return 0;
-    }
+
+
+
+
+
+
+
+
+
+
 }
 
