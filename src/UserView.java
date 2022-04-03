@@ -26,6 +26,12 @@ public class UserView {
 
         JTextArea signInText = new JTextArea("Don't have an account? Press the Sign Up button.");
 
+        userView.add(userText);
+        userView.add(logIn);
+        userView.add(cancel);
+        userView.add(signInText);
+        userView.add(signUp);
+
         logIn.addActionListener(event -> {
 
             String username = userTextField.getText();
@@ -42,12 +48,6 @@ public class UserView {
         signUp.addActionListener(event -> openSignUpView());
 
         userView.setLayout(new FlowLayout());
-
-        userView.add(userText);
-        userView.add(logIn);
-        userView.add(cancel);
-        userView.add(signInText);
-        userView.add(signUp);
     }
 
     public void openSignUpView() {
@@ -67,6 +67,17 @@ public class UserView {
 
         JButton signUp = new JButton("Sign Up");
         JButton cancel = new JButton("Cancel");
+
+        newUserView.setLayout(new FlowLayout());
+
+        newUserView.add(userText);
+        newUserView.add(userTextField);
+        newUserView.add(passwordTextField);
+        newUserView.add(verifyUserText);
+        newUserView.add(verifyUserTextField);
+        newUserView.add(verifyPasswordTextField);
+        newUserView.add(signUp);
+        newUserView.add(cancel);
 
         signUp.addActionListener(event -> {
 
@@ -99,16 +110,5 @@ public class UserView {
         });
 
         cancel.addActionListener(event -> newUserView.setVisible(false));
-
-        newUserView.setLayout(new FlowLayout());
-
-        newUserView.add(userText);
-        newUserView.add(userTextField);
-        newUserView.add(passwordTextField);
-        newUserView.add(verifyUserText);
-        newUserView.add(verifyUserTextField);
-        newUserView.add(verifyPasswordTextField);
-        newUserView.add(signUp);
-        newUserView.add(cancel);
     }
 }
