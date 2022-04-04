@@ -2,10 +2,10 @@ import javax.swing.*;
 
 
 public class MovieManagerView {
-    static UserView accountView;
+    static LoginView accountView;
 
-    public MovieManagerView(UserView userView) {
-        this.accountView = userView;
+    public MovieManagerView(LoginView loginView) {
+        this.accountView = loginView;
         System.out.println("initialized account view");
     }
 

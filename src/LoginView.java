@@ -1,12 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class UserView {
+public class LoginView {
 
     private LoginManager loginManager;
     SimpleMessage s = new SimpleMessage();
 
-    public UserView(LoginManager loginManager) {
+    public LoginView(LoginManager loginManager) {
         this.loginManager = loginManager;
     }
 

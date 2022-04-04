@@ -76,7 +76,7 @@ class User {
   -movie_collections: MovieCollectionList
 }
 
-class UserView {
+class LoginView {
   +initialize()
 }
 
@@ -122,6 +122,6 @@ Ratings_List <|-- Ratings
 MovieCollection <|-- Movie
 MovieJsonOperator <|-- Movie
 MovieJsonOperator <|-- JsonMovieFile
-UserView <|-- User
+LoginView <|-- User
 
 @enduml
