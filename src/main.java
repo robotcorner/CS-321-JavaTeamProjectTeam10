@@ -19,7 +19,7 @@ import java.util.Collections;
  * This type of comment is considered documentation.
  * This part will be removed and is just for an example.
  */
-class HelloWorldApp {
+class Main {
 
     public static void main(String[] args) throws ParseException {
         // Exit if movie file does not exist
@@ -47,7 +47,15 @@ class HelloWorldApp {
         LoginManager loginManager = new LoginManager(userList, movieList, operator);
 
         // TODO: GUI entry here
+        // Start the Main GUI
+        /**
+         * - Main GUI
+         * -- UserView - depends on: LoginManager,
+         */
 
+        UserView userView = new UserView(loginManager);
+        MovieManagerView mainView = new MovieManagerView(userView);
+        mainView.main();
 
         // Run Tests
         // Tests.testMovie(); // Tests that movies get loaded and prints to console
