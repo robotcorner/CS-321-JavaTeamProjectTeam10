@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class MovieManagerView {
@@ -6,6 +9,7 @@ public class MovieManagerView {
 
     public MovieManagerView(LoginView loginView) {
         this.accountView = loginView;
+        
         System.out.println("initialized account view");
     }
 
@@ -15,36 +19,49 @@ public class MovieManagerView {
         JPanel frameP = new JPanel();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000,1000);
+        frame.setSize(1000, 1000);
 
         // Build out the TopBar
         // The SEARCH bar for the top middle section
+        // JLabel searchBarIcon = new JLabel("Search: ");🔎
+        JLabel searchBarIcon = new JLabel("Search: ");
         JTextField searchBar = new JTextField("Search Here");
+        searchBar.setMinimumSize(searchBar.getSize());
+        searchBar.setPreferredSize(new Dimension(225, 30));
+        searchBar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                searchBar.setText("");
+            }
+        });
+
+        searchBarIcon.setVisible(true);
         searchBar.setVisible(true);
-        searchBar.setLocation(frame.getWidth()/2, 20);
+        searchBar.setLocation(frame.getWidth() / 2, 20);
         searchBar.setVisible(true);
 
 
         JPanel loginSection = new JPanel();
         loginSection.add(new JLabel("Login/Signup: "));
         JButton loginBtn = new JButton("Login");
-        loginBtn.addActionListener(e-> {
+        loginBtn.addActionListener(e -> {
             System.out.println("Pressed Login Button");
             accountView.openLogInView();
         });
         JButton signupBtn = new JButton("Sign-up");
-        signupBtn.addActionListener(e-> {
+        signupBtn.addActionListener(e -> {
             System.out.println("Pressed Sign-Up Button");
             accountView.openSignUpView();
         });
 
         loginSection.add(loginBtn);
         loginSection.add(signupBtn);
-        loginSection.setLocation((frame.getWidth()-60), 20);
+        loginSection.setLocation((frame.getWidth() - 60), 20);
         loginSection.setVisible(true);
 
 
         JPanel topBar = new JPanel();
+        topBar.add(searchBarIcon);
         topBar.add(searchBar);
         topBar.add(loginSection);
         topBar.setVisible(true);
