@@ -14,7 +14,7 @@ public class UserView {
 
         JFrame userView = new JFrame("Log In");
 
-        JTextArea userText = new JTextArea("Please enter your username and password.");
+        JLabel userText = new JLabel("Please enter your username and password.");
 
         final int FIELD_WIDTH = 25;
         JTextField userTextField = new JTextField(FIELD_WIDTH);
@@ -24,7 +24,7 @@ public class UserView {
         JButton cancel = new JButton("Cancel");
         JButton signUp = new JButton("Sign Up");
 
-        JTextArea signInText = new JTextArea("Don't have an account? Press the Sign Up button.");
+        JLabel signInText = new JLabel("Don't have an account? Press the Sign Up button.");
 
         logIn.addActionListener(event -> {
 
@@ -60,13 +60,13 @@ public class UserView {
 
         JFrame newUserView = new JFrame("Sign Up Page");
 
-        JTextArea userText = new JTextArea("Enter your desired username and password.");
+        JLabel userText = new JLabel("Enter your desired username and password.");
 
         final int FIELD_WIDTH = 25;
         JTextField userTextField = new JTextField(FIELD_WIDTH);
         JTextField passwordTextField = new JTextField(FIELD_WIDTH);
 
-        JTextArea verifyUserText = new JTextArea("Re-Enter your username and password.");
+        JLabel verifyUserText = new JLabel("Re-Enter your username and password.");
 
         JTextField verifyUserTextField = new JTextField(FIELD_WIDTH);
         JTextField verifyPasswordTextField = new JTextField(FIELD_WIDTH);
