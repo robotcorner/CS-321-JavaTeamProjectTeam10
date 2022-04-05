@@ -16,11 +16,6 @@ public class MovieManagerView {
         System.out.println("initialized account view");
     }
 
-    static LoginManager loginManager;
-
-    public MovieManagerView(LoginManager loginManager) {
-        this.loginManager = loginManager;
-    }
 
     public static void main() {
         JFrame frame = new JFrame("Main");
