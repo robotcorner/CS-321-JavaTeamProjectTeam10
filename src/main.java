@@ -49,6 +49,8 @@ class Main {
         ArrayList<Movie> movieList = operator.GetAllMovies();
         ArrayList<User> userList = operator.GetAllUsers();
         LoginManager loginManager = new LoginManager(userList, movieList, operator);
+        // Create Movie List Object for the Movie List View to display
+        MovieManager movieManager = new MovieManager(movieList);
 
         // TODO: GUI entry here
         // Start the Main GUI
@@ -58,18 +60,16 @@ class Main {
          */
 
         LoginView loginView = new LoginView(loginManager);
-        MovieManagerView mainView = new MovieManagerView(loginView, loginManager);
+        MovieManagerView mainView = new MovieManagerView(loginView, loginManager, movieManager);
         mainView.main();
 
         // Run Tests
         // Tests.testMovie(); // Tests that movies get loaded and prints to console
         // Tests.loginFlow(); // Tests the basic login flow
 
-        // Create Movie List Object for the Movie List View to display
-        MovieManager movieManager = new MovieManager(movieList);
-        ArrayList<Movie> ml = movieManager.search("Short");
-        Collections.sort(ml, Movie.sortByName());
-        movieManager.displayList();
+        //ArrayList<Movie> ml = movieManager.search("Short");
+        //Collections.sort(ml, Movie.sortByName());
+        //movieManager.displayList();
         // Prints out the number of movies in the database
         System.out.println(movieManager.size());
     }
