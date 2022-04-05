@@ -1,57 +1,62 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.jar.JarEntry;
 
 public class MovieCollectionView {
 
     private LoginManager loginManager;
-    private MovieCollection movieCollection;
-
-    private User user = loginManager.getCurrentUser();
-    private ArrayList<MovieCollection> userCollections;
+    private ArrayList<MovieCollection> movieCollectionList;
     private ArrayList<JPanel> collectionList;
 
-    public MovieCollectionView(ArrayList<MovieCollection> movieCollection, LoginManager loginManager) {
-        this.userCollections = movieCollection;
+    public MovieCollectionView(LoginManager loginManager) {
+        if (loginManager.getCurrentUser() != null) {
+            this.movieCollectionList = loginManager.getCurrentUser().getallCollections();
+        }
         this.loginManager = loginManager;
     }
 
-    public void openCollectionView() {
-        // This will be the main JPanel that holds collections which will also be JPanels
-        JPanel userCollectionView = new JPanel();
+    public JScrollPane openCollectionView() {
 
-        // Sets the layout so that components will be added from top to bottom
-        userCollectionView.setLayout(new BoxLayout(userCollectionView,BoxLayout.Y_AXIS));
-
-
+        JPanel cBlockList = new JPanel();
+        cBlockList.setLayout(new GridLayout(0, 1));
 
         // Collection Panel
-        for(MovieCollection m: userCollections){
-            JPanel l = new JPanel();
-            l.setName(m.getName());
-            for(Movie movie: m.getMovieList()){
-                l.add(new JLabel(movie.getTitle()));
+        if (movieCollectionList != null) {
+            for(MovieCollection mc: movieCollectionList){
+                String cName = mc.getName();
+                JLabel cBlockLabel = new JLabel(cName);
+                cBlockLabel.setVisible(true);
+
+                JPanel cBlock = new JPanel();
+                cBlock.setLayout(new FlowLayout());
+                cBlock.setName(cName);
+                cBlock.add(cBlockLabel);
+                cBlock.revalidate();
+                cBlock.setVisible(true);
+                /*
+                for(Movie movie: mc.getMovieList()){
+                    cBlock.add(new JLabel(movie.getTitle()));
+                }
+                */
+                collectionList.add(cBlock);
             }
-            collectionList.add(l);
+
+            // This will be the main JPanel that holds collections which will also be JPanels
+            // Sets the layout so that components will be added from top to bottom
+
+
+            // Adds all the movie collection panels to the main collection view panel
+            for(JPanel p: collectionList){
+                cBlockList.add(p);
+            }
+
+            cBlockList.revalidate();
+            cBlockList.setVisible(true);
         }
 
-        // Adds all the movie collection panels to the main collection view panel
-        for(JPanel p: collectionList){
-            userCollectionView.add(p);
-        }
-
-        
-        userCollectionView.setVisible(true);
-
-
+        JScrollPane scrollPane = new JScrollPane(cBlockList);
+        scrollPane.setVisible(true);
+        return scrollPane;
     }
-
-    public static void main(String[] args) {
-        JFrame f = new JFrame("Collections");
-
-
-    }
-
-
-
 }
