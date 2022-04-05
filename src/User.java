@@ -57,6 +57,13 @@ public class User {
     }
 
     /**
+     * Gets collection list
+     */
+    public ArrayList<MovieCollection> getallCollections(){
+        return collections;
+    }
+
+    /**
      * Get collection by name
      * @param name
      */

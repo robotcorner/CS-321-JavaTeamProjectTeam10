@@ -38,6 +38,12 @@ public class MovieCollection {
         }
     }
 
+    // Get a movies list
+    public ArrayList<Movie> getMovieList() {
+        return movies;
+    }
+
+
     public String getName() {
         return name;
     }
