@@ -70,10 +70,19 @@ public class MovieManagerView {
         
         // create movie panel
         JPanel moviePanel = new JPanel();
+        moviePanel.setLayout(new FlowLayout());
+        int count = 0;
         for(Movie m : movieManager.getMediaList()) {
-            JLabel blah = new JLabel(m.getTitle());
-            moviePanel.add(blah);
+            JPanel movieBlock = new JPanel();
+            JLabel title = new JLabel(m.getTitle());
+            movieBlock.setLayout(new FlowLayout());
+            movieBlock.setLocation(frame.getWidth()/2, 40+(count*20));
+            movieBlock.add(title);
+            movieBlock.setVisible(true);
+            count++;
+            moviePanel.validate();
         }
+        moviePanel.setVisible(true);
 
         // add the two main pieces
         frameP.add(topBar);
