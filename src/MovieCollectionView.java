@@ -11,15 +11,12 @@ public class MovieCollectionView {
     private ArrayList<MovieCollection> userCollections = user.getallCollections();
     private ArrayList<JPanel> collectionList;
 
-    public MovieCollectionView(MovieCollection movieCollection) {
+    public MovieCollectionView(MovieCollection movieCollection, LoginManager loginManager) {
         this.movieCollection = movieCollection;
+        this.loginManager = loginManager;
     }
 
-
     public void openCollectionView() {
-
-
-
         // This will be the main JPanel that holds collections which will also be JPanels
         JPanel userCollectionView = new JPanel();
 
