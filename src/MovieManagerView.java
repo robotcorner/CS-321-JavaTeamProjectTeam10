@@ -14,7 +14,6 @@ public class MovieManagerView {
         System.out.println("initialized account view");
     }
 
-
     public static void main() {
         JFrame frame = new JFrame("Main");
         JPanel frameP = new JPanel();
