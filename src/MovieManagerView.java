@@ -83,17 +83,17 @@ public class MovieManagerView {
         
         // create movie panel
         JPanel moviePanel = new JPanel();
-        moviePanel.setLayout(new FlowLayout());
+        moviePanel.setLayout(new GridLayout(0, 1));
         int count = 0;
         for(Movie m : movieManager.getMediaList()) {
             JPanel movieBlock = new JPanel();
             JLabel title = new JLabel(m.getTitle());
             movieBlock.setLayout(new FlowLayout());
-            movieBlock.setLocation(frame.getWidth()/2, 40+(count*20));
+            movieBlock.setBounds(frameP.getWidth()/2, 40+(count*20), 250, 50);
             movieBlock.add(title);
-            movieBlock.setVisible(true);
+            moviePanel.add(movieBlock);
+            moviePanel.revalidate();
             count++;
-            moviePanel.validate();
         }
         moviePanel.setVisible(true);
 
