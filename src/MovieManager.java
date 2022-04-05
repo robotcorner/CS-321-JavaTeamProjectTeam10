@@ -42,6 +42,9 @@ public class MovieManager {
      * @return ArrayList<Movie> result
      */
     public ArrayList<Movie> search(String term) {
+        if(term.isEmpty())
+            return mediaList;
+
         ArrayList<Movie> result = new ArrayList<Movie>();
         for (Movie m : mediaList) {
             if(m.getTitle().toLowerCase(Locale.ROOT).contains(term.toLowerCase(Locale.ROOT)))

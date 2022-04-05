@@ -59,9 +59,8 @@ class Main {
          * -- UserView - depends on: LoginManager,
          */
 
-        LoginView loginView = new LoginView(loginManager);
         MovieCollectionView movieCollection = new MovieCollectionView(loginManager);
-        MovieManagerView mainView = new MovieManagerView(loginView, loginManager, movieManager, movieCollection);
+        MovieManagerView mainView = new MovieManagerView(loginManager, movieManager, movieCollection);
         mainView.main();
 
         // Run Tests

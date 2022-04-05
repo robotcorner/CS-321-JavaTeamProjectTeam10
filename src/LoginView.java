@@ -4,10 +4,12 @@ import java.awt.*;
 public class LoginView {
 
     private LoginManager loginManager;
+    private MovieManagerView movieManagerView;
     SimpleMessage s = new SimpleMessage();
 
-    public LoginView(LoginManager loginManager) {
+    public LoginView(LoginManager loginManager, MovieManagerView movieManagerView) {
         this.loginManager = loginManager;
+        this.movieManagerView = movieManagerView;
     }
 
     public void openLogInView() {
@@ -32,8 +34,10 @@ public class LoginView {
             String password = passwordTextField.getText();
 
             if (loginManager.login(username, password) == false) {
-
                 s.message("Error", "Password and/or username is incorrect. Please try again.");
+            } else {
+                movieManagerView.updateLoginSection();
+                userView.setVisible(false);
             }
         });
 
@@ -92,10 +96,12 @@ public class LoginView {
                 String username = userTextField.getText();
                 String password = passwordTextField.getText();
 
-                loginManager.signup(username, password);
-                loginManager.save();
-
-                s.message("New User Created", "Press 'OK' to proceed.");
+                if(loginManager.signup(username, password)) {
+                    s.message("New User Created", "Press 'OK' to proceed.");
+                    loginManager.save();
+                } else {
+                    s.message("Error", "User already exists.");
+                }
 
                 newUserView.setVisible(false);
             }

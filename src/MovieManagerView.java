@@ -7,18 +7,66 @@ import java.awt.event.MouseEvent;
 
 
 public class MovieManagerView {
+    // Views
     static LoginView accountView;
     static MovieCollectionView MovieCollectionView;
+
+    // Dependencies
     static LoginManager loginManager;
     static MovieManager movieManager;
-    static JPanel moviePanel;
 
-    public MovieManagerView(LoginView loginView, LoginManager loginManager, MovieManager movieManager, MovieCollectionView movieCollection) {
-        this.accountView = loginView;
+    // UI Components
+    static JPanel moviePanel;
+    static JPanel loginSection;
+
+    public MovieManagerView(LoginManager loginManager, MovieManager movieManager, MovieCollectionView movieCollection) {
+        this.accountView = new LoginView(loginManager, this);
         this.loginManager = loginManager;
         this.movieManager = movieManager;
         this.MovieCollectionView = movieCollection;
         System.out.println("initialized account view");
+    }
+
+    public static void updateMoviepanel(String term) {
+        moviePanel.removeAll();
+        for(Movie m : movieManager.search(term)) {
+            JPanel movieBlock = new JPanel();
+            JLabel title = new JLabel(m.getTitle());
+            movieBlock.setLayout(new FlowLayout());
+            movieBlock.add(title);
+            moviePanel.add(movieBlock);
+        }
+        moviePanel.revalidate();
+    }
+
+    public static void updateLoginSection() {
+        loginSection.removeAll();
+        loginSection.add(new JLabel("Login/Signup: "));
+        JButton loginBtn;
+        if (loginManager.verifyLogin() == false) {
+            loginBtn = new JButton("Login");
+            loginBtn.addActionListener(e -> {
+                System.out.println("Pressed Login Button");
+                accountView.openLogInView();
+            });
+        }  else {
+
+            loginBtn = new JButton("Logout");
+            loginBtn.addActionListener(e -> {
+                System.out.println("Pressed Logout Button");
+                loginManager.logout();
+                updateLoginSection();
+            });
+        }
+        JButton signupBtn = new JButton("Sign-up");
+        signupBtn.addActionListener(e -> {
+            System.out.println("Pressed Sign-Up Button");
+            accountView.openSignUpView();
+        });
+
+        loginSection.add(loginBtn);
+        loginSection.add(signupBtn);
+        loginSection.revalidate();
     }
 
     public static void main() {
@@ -52,51 +100,18 @@ public class MovieManagerView {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                moviePanel.removeAll();
-                for(Movie m : movieManager.search(searchBar.getText())) {
-                    JPanel movieBlock = new JPanel();
-                    JLabel title = new JLabel(m.getTitle());
-                    movieBlock.setLayout(new FlowLayout());
-                    movieBlock.add(title);
-                    moviePanel.add(movieBlock);
-                }
-                moviePanel.revalidate();
+                updateMoviepanel(searchBar.getText());
             }
         });
 
         searchBarIcon.setVisible(true);
-        searchBar.setVisible(true);
         searchBar.setLocation(frame.getWidth() / 2, 20);
         searchBar.setVisible(true);
 
 
-        JPanel loginSection = new JPanel();
+        loginSection = new JPanel();
         loginSection.add(new JLabel("Login/Signup: "));
-        JButton loginBtn;
-        if (loginManager.verifyLogin() == false) {
-
-            loginBtn = new JButton("Login");
-            loginBtn.addActionListener(e -> {
-                System.out.println("Pressed Login Button");
-                accountView.openLogInView();
-            });
-        }
-        else {
-
-            loginBtn = new JButton("Logout");
-            loginBtn.addActionListener(e -> {
-                System.out.println("Pressed Logout Button");
-                //makes currentuser = null
-            });
-        }
-        JButton signupBtn = new JButton("Sign-up");
-        signupBtn.addActionListener(e -> {
-            System.out.println("Pressed Sign-Up Button");
-            accountView.openSignUpView();
-        });
-
-        loginSection.add(loginBtn);
-        loginSection.add(signupBtn);
+        updateLoginSection();
         loginSection.setLocation((frame.getWidth() - 60), 20);
         loginSection.setVisible(true);
 
@@ -111,18 +126,8 @@ public class MovieManagerView {
 
         moviePanel = new JPanel();
         moviePanel.setLayout(new GridLayout(0, 1));
-        //int count = 0;
-        for(Movie m : movieManager.getMediaList()) {
-            JPanel movieBlock = new JPanel();
-            JLabel title = new JLabel(m.getTitle());
-            movieBlock.setLayout(new FlowLayout());
-            //movieBlock.setBounds(frameP.getWidth()/2, 40+(count*20), 250, 50);
-            movieBlock.add(title);
-            moviePanel.add(movieBlock);
-            moviePanel.revalidate();
-            //count++;
-        }
-        moviePanel.setVisible(true);
+        updateMoviepanel("");
+
         JScrollPane scrollPane = new JScrollPane(moviePanel);
         scrollPane.setVisible(true);
 
@@ -136,6 +141,4 @@ public class MovieManagerView {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
-
 }
