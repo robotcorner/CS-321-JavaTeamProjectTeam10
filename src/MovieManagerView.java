@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -8,6 +10,7 @@ public class MovieManagerView {
     static LoginView accountView;
     static LoginManager loginManager;
     static MovieManager movieManager;
+    static JPanel moviePanel;
 
     public MovieManagerView(LoginView loginView, LoginManager loginManager, MovieManager movieManager) {
         this.accountView = loginView;
@@ -36,6 +39,27 @@ public class MovieManagerView {
             @Override
             public void mouseClicked(MouseEvent e) {
                 searchBar.setText("");
+            }
+        });
+
+        searchBar.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+
+            @Override
+            public void keyPressed(KeyEvent e) {}
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                moviePanel.removeAll();
+                for(Movie m : movieManager.search(searchBar.getText())) {
+                    JPanel movieBlock = new JPanel();
+                    JLabel title = new JLabel(m.getTitle());
+                    movieBlock.setLayout(new FlowLayout());
+                    movieBlock.add(title);
+                    moviePanel.add(movieBlock);
+                }
+                moviePanel.revalidate();
             }
         });
 
@@ -84,9 +108,9 @@ public class MovieManagerView {
         
         // create movie panel
 
-        JPanel moviePanel = new JPanel();
+        moviePanel = new JPanel();
         moviePanel.setLayout(new GridLayout(0, 1));
-        int count = 0;
+        //int count = 0;
         for(Movie m : movieManager.getMediaList()) {
             JPanel movieBlock = new JPanel();
             JLabel title = new JLabel(m.getTitle());
@@ -95,7 +119,7 @@ public class MovieManagerView {
             movieBlock.add(title);
             moviePanel.add(movieBlock);
             moviePanel.revalidate();
-            count++;
+            //count++;
         }
         moviePanel.setVisible(true);
         JScrollPane scrollPane = new JScrollPane(moviePanel);

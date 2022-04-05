@@ -1,6 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 /**
  * In order to implement the MovieList in a data efficient manner, I will use the imdDb ID's as a way to track what is saved.
@@ -43,13 +44,13 @@ public class MovieManager {
     public ArrayList<Movie> search(String term) {
         ArrayList<Movie> result = new ArrayList<Movie>();
         for (Movie m : mediaList) {
-            if(m.getTitle().contains(term))
+            if(m.getTitle().toLowerCase(Locale.ROOT).contains(term.toLowerCase(Locale.ROOT)))
                 result.add(m);
-            else if(m.getDirector().contains(term))
+            else if(m.getDirector().toLowerCase(Locale.ROOT).contains(term.toLowerCase(Locale.ROOT)))
                 result.add(m);
-            else if(m.getActors().contains(term))
+            else if(m.getActors().toLowerCase(Locale.ROOT).contains(term.toLowerCase(Locale.ROOT)))
                 result.add(m);
-            else if(m.getGenre().contains(term))
+            else if(m.getGenre().toLowerCase(Locale.ROOT).contains(term.toLowerCase(Locale.ROOT)))
                 result.add(m);
         }
 

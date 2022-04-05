@@ -93,6 +93,7 @@ public class LoginView {
                 String password = passwordTextField.getText();
 
                 loginManager.signup(username, password);
+                loginManager.save();
 
                 s.message("New User Created", "Press 'OK' to proceed.");
 
