@@ -6,10 +6,13 @@ import java.awt.event.MouseEvent;
 
 public class MovieManagerView {
     static LoginView accountView;
+    static LoginManager loginManager;
+    static MovieManager movieManager;
 
-    public MovieManagerView(LoginView loginView) {
+    public MovieManagerView(LoginView loginView, LoginManager loginManager, MovieManager movieManager) {
         this.accountView = loginView;
-
+        this.loginManager = loginManager;
+        this.movieManager = movieManager;
         System.out.println("initialized account view");
     }
 
@@ -82,7 +85,13 @@ public class MovieManagerView {
         topBar.add(searchBar);
         topBar.add(loginSection);
         topBar.setVisible(true);
+        
+        // create movie panel
         JPanel moviePanel = new JPanel();
+        for(Movie m : movieManager.getMediaList()) {
+            JLabel blah = new JLabel(m.getTitle());
+            moviePanel.add(blah);
+        }
 
         // add the two main pieces
         frameP.add(topBar);
