@@ -60,7 +60,8 @@ class Main {
          */
 
         LoginView loginView = new LoginView(loginManager);
-        MovieManagerView mainView = new MovieManagerView(loginView, loginManager, movieManager);
+        MovieCollectionView movieCollection = new MovieCollectionView(loginManager);
+        MovieManagerView mainView = new MovieManagerView(loginView, loginManager, movieManager, movieCollection);
         mainView.main();
 
         // Run Tests

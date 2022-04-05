@@ -6,16 +6,17 @@ import java.awt.event.MouseEvent;
 
 public class MovieManagerView {
     static LoginView accountView;
+    static MovieCollectionView MovieCollectionView;
     static LoginManager loginManager;
     static MovieManager movieManager;
 
-    public MovieManagerView(LoginView loginView, LoginManager loginManager, MovieManager movieManager) {
+    public MovieManagerView(LoginView loginView, LoginManager loginManager, MovieManager movieManager, MovieCollectionView movieCollection) {
         this.accountView = loginView;
         this.loginManager = loginManager;
         this.movieManager = movieManager;
+        this.MovieCollectionView = movieCollection;
         System.out.println("initialized account view");
     }
-
 
     public static void main() {
         JFrame frame = new JFrame("Main");
@@ -104,10 +105,10 @@ public class MovieManagerView {
         // add the two main pieces
         frameP.add(topBar, BorderLayout.PAGE_START);
         frameP.add(scrollPane, BorderLayout.CENTER);
+        frameP.add(MovieCollectionView.openCollectionView(), BorderLayout.LINE_START);
         frameP.setVisible(true);
-        //frame.pack();
         frame.setContentPane(frameP);
-        // frame.pack();
+        //frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
