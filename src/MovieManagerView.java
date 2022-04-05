@@ -6,10 +6,11 @@ import java.awt.event.MouseEvent;
 
 public class MovieManagerView {
     static LoginView accountView;
+    static LoginManager loginManager;
 
-    public MovieManagerView(LoginView loginView) {
+    public MovieManagerView(LoginView loginView, LoginManager loginManager) {
         this.accountView = loginView;
-
+        this.loginManager = loginManager;
         System.out.println("initialized account view");
     }
 

@@ -58,7 +58,7 @@ class Main {
          */
 
         LoginView loginView = new LoginView(loginManager);
-        MovieManagerView mainView = new MovieManagerView(loginView);
+        MovieManagerView mainView = new MovieManagerView(loginView, loginManager);
         mainView.main();
 
         // Run Tests
