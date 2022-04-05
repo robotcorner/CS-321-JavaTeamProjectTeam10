@@ -8,11 +8,11 @@ public class MovieCollectionView {
     private MovieCollection movieCollection;
 
     private User user = loginManager.getCurrentUser();
-    private ArrayList<MovieCollection> userCollections = user.getallCollections();
+    private ArrayList<MovieCollection> userCollections;
     private ArrayList<JPanel> collectionList;
 
-    public MovieCollectionView(MovieCollection movieCollection, LoginManager loginManager) {
-        this.movieCollection = movieCollection;
+    public MovieCollectionView(ArrayList<MovieCollection> movieCollection, LoginManager loginManager) {
+        this.userCollections = movieCollection;
         this.loginManager = loginManager;
     }
 
@@ -41,19 +41,16 @@ public class MovieCollectionView {
         }
 
         
-
-
-
-
-
-
-
-
+        userCollectionView.setVisible(true);
 
 
     }
 
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Collections");
 
+
+    }
 
 
 
