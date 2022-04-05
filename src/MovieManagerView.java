@@ -13,6 +13,12 @@ public class MovieManagerView {
         System.out.println("initialized account view");
     }
 
+    static LoginManager loginManager;
+
+    public MovieManagerView(LoginManager loginManager) {
+        this.loginManager = loginManager;
+    }
+
     public static void main() {
         JFrame frame = new JFrame("Main");
         JPanel frameP = new JPanel();
@@ -42,11 +48,23 @@ public class MovieManagerView {
 
         JPanel loginSection = new JPanel();
         loginSection.add(new JLabel("Login/Signup: "));
-        JButton loginBtn = new JButton("Login");
-        loginBtn.addActionListener(e -> {
-            System.out.println("Pressed Login Button");
-            accountView.openLogInView();
-        });
+        JButton loginBtn;
+        if (loginManager.verifyLogin() == false) {
+
+            loginBtn = new JButton("Login");
+            loginBtn.addActionListener(e -> {
+                System.out.println("Pressed Login Button");
+                accountView.openLogInView();
+            });
+        }
+        else {
+
+            loginBtn = new JButton("Logout");
+            loginBtn.addActionListener(e -> {
+                System.out.println("Pressed Logout Button");
+                //makes currentuser = null
+            });
+        }
         JButton signupBtn = new JButton("Sign-up");
         signupBtn.addActionListener(e -> {
             System.out.println("Pressed Sign-Up Button");
