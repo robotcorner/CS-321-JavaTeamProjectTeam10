@@ -22,6 +22,10 @@ import java.util.Collections;
 class Main {
 
     public static void main(String[] args) throws ParseException {
+
+        Tests test = new Tests();
+
+        test.loginFlow();
         // Exit if movie file does not exist
         if(! new File("data/SampleMovieFile.json").exists()) {
             System.out.println("No SampleMovieFile.json. Exiting...");

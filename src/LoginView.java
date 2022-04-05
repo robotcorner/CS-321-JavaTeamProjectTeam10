@@ -26,12 +26,6 @@ public class LoginView {
 
         JLabel signInText = new JLabel("Don't have an account? Press the Sign Up button.");
 
-        userView.add(userText);
-        userView.add(logIn);
-        userView.add(cancel);
-        userView.add(signInText);
-        userView.add(signUp);
-
         logIn.addActionListener(event -> {
 
             String username = userTextField.getText();
@@ -39,7 +33,7 @@ public class LoginView {
 
             if (!loginManager.login(username, password)) {
 
-                s.message("Error", "Password or username is incorrect. Please try again.");
+                s.message("Error", "Password and/or username is incorrect. Please try again.");
             }
         });
 

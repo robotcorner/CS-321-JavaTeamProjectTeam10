@@ -11,11 +11,11 @@ public class SimpleMessage {
 
         JButton ok = new JButton("OK");
 
-        ok.addActionListener(event -> messageFrame.setVisible(false));
-
         messageFrame.setLayout(new FlowLayout());
 
         messageFrame.add(messageText);
         messageFrame.add(ok);
+
+        ok.addActionListener(event -> messageFrame.setVisible(false));
     }
 }

@@ -9,7 +9,7 @@ public class MovieManagerView {
 
     public MovieManagerView(LoginView loginView) {
         this.accountView = loginView;
-        
+
         System.out.println("initialized account view");
     }
 
