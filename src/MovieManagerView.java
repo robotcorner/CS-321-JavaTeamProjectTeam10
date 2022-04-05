@@ -20,6 +20,7 @@ public class MovieManagerView {
     public static void main() {
         JFrame frame = new JFrame("Main");
         JPanel frameP = new JPanel();
+        frameP.setLayout(new BorderLayout(5, 5));
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 1000);
@@ -82,6 +83,7 @@ public class MovieManagerView {
         topBar.setVisible(true);
         
         // create movie panel
+
         JPanel moviePanel = new JPanel();
         moviePanel.setLayout(new GridLayout(0, 1));
         int count = 0;
@@ -89,17 +91,19 @@ public class MovieManagerView {
             JPanel movieBlock = new JPanel();
             JLabel title = new JLabel(m.getTitle());
             movieBlock.setLayout(new FlowLayout());
-            movieBlock.setBounds(frameP.getWidth()/2, 40+(count*20), 250, 50);
+            //movieBlock.setBounds(frameP.getWidth()/2, 40+(count*20), 250, 50);
             movieBlock.add(title);
             moviePanel.add(movieBlock);
             moviePanel.revalidate();
             count++;
         }
         moviePanel.setVisible(true);
+        JScrollPane scrollPane = new JScrollPane(moviePanel);
+        scrollPane.setVisible(true);
 
         // add the two main pieces
-        frameP.add(topBar);
-        frameP.add(moviePanel);
+        frameP.add(topBar, BorderLayout.PAGE_START);
+        frameP.add(scrollPane, BorderLayout.CENTER);
         frameP.setVisible(true);
         //frame.pack();
         frame.setContentPane(frameP);
