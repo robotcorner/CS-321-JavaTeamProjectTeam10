@@ -67,8 +67,4 @@ public class LoginManager {
         else
             return false; // guest
     }
-
-    // not sure what these will be used for
-    public void updateUserStatus() {}
-    public void updateUserPermission() {}
 }
