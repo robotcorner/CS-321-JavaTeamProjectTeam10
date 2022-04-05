@@ -31,7 +31,7 @@ public class LoginView {
             String username = userTextField.getText();
             String password = passwordTextField.getText();
 
-            if (!loginManager.login(username, password)) {
+            if (loginManager.login(username, password) == false) {
 
                 s.message("Error", "Password and/or username is incorrect. Please try again.");
             }

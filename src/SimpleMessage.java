@@ -7,7 +7,7 @@ public class SimpleMessage {
 
         JFrame messageFrame = new JFrame(t);
 
-        JTextArea messageText = new JTextArea(m);
+        JLabel messageText = new JLabel(m);
 
         JButton ok = new JButton("OK");
 
@@ -15,6 +15,9 @@ public class SimpleMessage {
 
         messageFrame.add(messageText);
         messageFrame.add(ok);
+        messageFrame.setBounds(0,0,700, 120);
+        messageFrame.setLocationRelativeTo(null);
+        messageFrame.setVisible(true);
 
         ok.addActionListener(event -> messageFrame.setVisible(false));
     }
