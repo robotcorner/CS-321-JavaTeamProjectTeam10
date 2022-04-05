@@ -10,6 +10,7 @@ public class MovieManagerView {
     // Views
     static LoginView accountView;
     static MovieCollectionView MovieCollectionView;
+    static SimpleMessage s = new SimpleMessage();
 
     // Dependencies
     static LoginManager loginManager;
@@ -29,13 +30,18 @@ public class MovieManagerView {
 
     public static void updateMoviepanel(String term) {
         moviePanel.removeAll();
-        for(Movie m : movieManager.search(term)) {
-            JPanel movieBlock = new JPanel();
-            JLabel title = new JLabel(m.getTitle());
-            movieBlock.setLayout(new FlowLayout());
-            movieBlock.add(title);
-            moviePanel.add(movieBlock);
+        if(movieManager.search(term).isEmpty()) {
+            s.message("None found", "Error: No movies match your search.");
+        } else {
+            for (Movie m : movieManager.search(term)) {
+                JPanel movieBlock = new JPanel();
+                JLabel title = new JLabel(m.getTitle());
+                movieBlock.setLayout(new FlowLayout());
+                movieBlock.add(title);
+                moviePanel.add(movieBlock);
+            }
         }
+        moviePanel.add(new JPanel());
         moviePanel.revalidate();
     }
 
@@ -43,6 +49,7 @@ public class MovieManagerView {
         loginSection.removeAll();
         loginSection.add(new JLabel("Login/Signup: "));
         JButton loginBtn;
+
         if (loginManager.verifyLogin() == false) {
             loginBtn = new JButton("Login");
             loginBtn.addActionListener(e -> {
@@ -50,7 +57,6 @@ public class MovieManagerView {
                 accountView.openLogInView();
             });
         }  else {
-
             loginBtn = new JButton("Logout");
             loginBtn.addActionListener(e -> {
                 System.out.println("Pressed Logout Button");
@@ -123,7 +129,6 @@ public class MovieManagerView {
         topBar.setVisible(true);
         
         // create movie panel
-
         moviePanel = new JPanel();
         moviePanel.setLayout(new GridLayout(0, 1));
         updateMoviepanel("");

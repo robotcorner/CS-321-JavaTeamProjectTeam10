@@ -15,7 +15,6 @@ public class MovieJsonOperator {
         this.movie_filename = movie_filename;
         this.user_filename  = user_filename;
     }
-    //public String Get(int id);
 
     /**
      * Get movie by imdbID
@@ -44,7 +43,7 @@ public class MovieJsonOperator {
 
     /**
      * Dump the entire contents of a json file into a list
-     * @return array of movies
+     * @return list of all movies
      */
     public ArrayList<Movie> GetAllMovies() {
         try {
@@ -55,6 +54,10 @@ public class MovieJsonOperator {
         }
     }
 
+    /**
+     * Dump the entire contents of a users.json into a list
+     * @return list of all users
+     */
     public ArrayList<User> GetAllUsers() {
         try {
             User[] users = gson.fromJson(new FileReader(user_filename), User[].class);
@@ -64,23 +67,21 @@ public class MovieJsonOperator {
         }
     }
 
-    public void SaveAllUsers(ArrayList<User> u) {
+    /**
+     * Writes data back to users.json
+     * Should be called from loginManager only!
+     * @param u list of ALL users
+     * @return true if no error occurs
+     */
+    public boolean SaveAllUsers(ArrayList<User> u) {
         try {
             FileWriter writer = new FileWriter(user_filename, false);
             writer.write(gson.toJson(u));
             writer.close();
+            return true;
         } catch(IOException e) {
             System.out.println(e);
+            return false;
         }
-    }
-
-    // GSON is a serializer, not a JSON parser...
-    public String Search(String key, String value) {
-        return "";
-    }
-
-    // This should probably be delegated to the movie class similar to program 5
-    public String Sort(String key) {
-        return "";
     }
 }

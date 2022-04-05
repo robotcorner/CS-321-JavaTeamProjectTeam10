@@ -1,16 +1,10 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-/**
- * In order to implement the MovieList in a data efficient manner, I will use the imdDb ID's as a way to track what is saved.
- */
 public class MovieManager {
-
     // Used by an Instance
-    // TODO: make private later when we can right getter / setters for necessary functions
-    public ArrayList<Movie> mediaList;
+    private ArrayList<Movie> mediaList;
 
     MovieManager() {
         this.mediaList = new ArrayList<Movie>();
@@ -20,10 +14,19 @@ public class MovieManager {
         this.mediaList = medias;
     }
 
+    /**
+     * Should not be used. Adds movie to list.
+     * @param movie
+     */
     public void add(Movie movie) {
         mediaList.add(movie);
     }
 
+    /**
+     * Gets a movie by its imdbID
+     * @param imdbID
+     * @return Movie or null if not found
+     */
     public Movie get(String imdbID) {
         for (Movie movie: mediaList)
             if(movie.getImdbID().equals(imdbID))
@@ -31,14 +34,17 @@ public class MovieManager {
         return null;
     }
 
-    // this returns reference, perhaps should return copy
+    /**
+     * Getter for mediaList
+     * @return reference to the entire media list. Perhaps should return copy?
+     */
     public ArrayList<Movie> getMediaList() {
         return mediaList;
     }
 
     /**
      * Searches a few interesting fields and returns a list of all matches
-     * @param term
+     * @param term whatever the user enters in the GUI
      * @return ArrayList<Movie> result
      */
     public ArrayList<Movie> search(String term) {
@@ -58,24 +64,6 @@ public class MovieManager {
         }
 
         return result;
-    }
-
-
-    public ArrayList<Movie> sortByName() {
-        // Sort mediaList like Project5 and Slides 4a3
-        //return Collections.sort(mediaList, Movie.compareByName());
-        return mediaList;
-    }
-
-    /**
-     * Sort the given list (perhaps the one returned by Search)
-     * I don't think this really needs its own function, its one line
-     * Collections.sort(list, list.sortfunction)
-     * @param m
-     * @return sorted m
-     */
-    public ArrayList<Movie> sortByName(ArrayList<Movie> m) {
-        return m;
     }
 
     /**
@@ -121,10 +109,4 @@ public class MovieManager {
         else
             return false;
     }
-
-
-
-
 }
-
-    // Create member function to allow maninpulation of a media list

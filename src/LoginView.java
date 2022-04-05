@@ -99,6 +99,7 @@ public class LoginView {
                 if(loginManager.signup(username, password)) {
                     s.message("New User Created", "Press 'OK' to proceed.");
                     loginManager.save();
+                    movieManagerView.updateLoginSection();
                 } else {
                     s.message("Error", "User already exists.");
                 }
