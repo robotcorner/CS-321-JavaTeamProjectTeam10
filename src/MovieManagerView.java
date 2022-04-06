@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 public class MovieManagerView {
     // Views
     static LoginView accountView;
-    static MovieCollectionView MovieCollectionView;
+    static MovieCollectionView movieCollectionView;
     static SimpleMessage s = new SimpleMessage();
 
     // Dependencies
@@ -19,13 +19,30 @@ public class MovieManagerView {
     // UI Components
     static JPanel moviePanel;
     static JPanel loginSection;
+    static JScrollPane cListWidget;
 
     public MovieManagerView(LoginManager loginManager, MovieManager movieManager, MovieCollectionView movieCollection) {
         this.accountView = new LoginView(loginManager, this);
         this.loginManager = loginManager;
         this.movieManager = movieManager;
-        this.MovieCollectionView = movieCollection;
+        this.movieCollectionView = movieCollection;
         System.out.println("initialized account view");
+    }
+
+    public static void updateCollectionPanel() {
+        // clear old view
+        if (cListWidget != null) {
+            cListWidget.removeAll();
+        }
+
+        // create new view
+        movieCollectionView = new MovieCollectionView(loginManager);
+        cListWidget = new JScrollPane(movieCollectionView.refreshCollectionView());
+
+        // revalidate view
+        cListWidget.setMinimumSize(new Dimension(80, 40));
+        cListWidget.revalidate();
+        cListWidget.setVisible(true);
     }
 
     public static void updateMoviepanel(String term) {
@@ -50,12 +67,19 @@ public class MovieManagerView {
         loginSection.add(new JLabel("Login/Signup: "));
         JButton loginBtn;
 
+        JButton signupBtn = new JButton("Sign-up");
+        signupBtn.addActionListener(e -> {
+            System.out.println("Pressed Sign-Up Button");
+            accountView.openSignUpView();
+        });
+
         if (loginManager.verifyLogin() == false) {
             loginBtn = new JButton("Login");
             loginBtn.addActionListener(e -> {
                 System.out.println("Pressed Login Button");
                 accountView.openLogInView();
             });
+            signupBtn.setVisible(true);
         }  else {
             loginBtn = new JButton("Logout");
             loginBtn.addActionListener(e -> {
@@ -63,23 +87,19 @@ public class MovieManagerView {
                 loginManager.logout();
                 updateLoginSection();
             });
+            updateCollectionPanel();
+            signupBtn.setVisible(false);
         }
-        JButton signupBtn = new JButton("Sign-up");
-        signupBtn.addActionListener(e -> {
-            System.out.println("Pressed Sign-Up Button");
-            accountView.openSignUpView();
-        });
-
         loginSection.add(loginBtn);
         loginSection.add(signupBtn);
         loginSection.revalidate();
+        updateCollectionPanel();
     }
 
     public static void main() {
         JFrame frame = new JFrame("Main");
         JPanel frameP = new JPanel();
         frameP.setLayout(new BorderLayout(5, 5));
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 1000);
 
@@ -127,19 +147,20 @@ public class MovieManagerView {
         topBar.add(searchBar);
         topBar.add(loginSection);
         topBar.setVisible(true);
-        
+
         // create movie panel
         moviePanel = new JPanel();
         moviePanel.setLayout(new GridLayout(0, 1));
         updateMoviepanel("");
 
-        JScrollPane scrollPane = new JScrollPane(moviePanel);
-        scrollPane.setVisible(true);
+        JScrollPane movieScroll = new JScrollPane(moviePanel);
+        movieScroll.setVisible(true);
 
-        // add the two main pieces
+        updateCollectionPanel();
+
         frameP.add(topBar, BorderLayout.PAGE_START);
-        frameP.add(scrollPane, BorderLayout.CENTER);
-        frameP.add(MovieCollectionView.openCollectionView(), BorderLayout.LINE_START);
+        frameP.add(movieScroll, BorderLayout.CENTER);
+        frameP.add(cListWidget, BorderLayout.LINE_START);
         frameP.setVisible(true);
         frame.setContentPane(frameP);
         //frame.pack();
