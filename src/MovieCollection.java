@@ -2,8 +2,9 @@ import java.util.ArrayList;
 
 /**
  * This holds a movie collection that the user has
- * ArrayLists of ids and movies are both here
- * until we determine which is easiest for our implementation
+ * The id ArrayList is from the json file
+ * The Movie ArrayList is built from the id ArrayList
+ * (use the Movie arraylist for everything)
  */
 public class MovieCollection {
     private ArrayList<String> ids = new ArrayList<String>(); // array of movie IDs
