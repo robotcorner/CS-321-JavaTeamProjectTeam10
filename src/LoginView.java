@@ -36,7 +36,7 @@ public class LoginView {
             if (loginManager.login(username, password) == false) {
                 s.message("Error", "Password and/or username is incorrect. Please try again.");
             } else {
-                movieManagerView.updateLoginSection();
+                MovieManagerView.updateLoginSection();
                 userView.setVisible(false);
             }
         });
