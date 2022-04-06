@@ -49,18 +49,11 @@ class Main {
         ArrayList<Movie> movieList = operator.GetAllMovies();
         ArrayList<User> userList = operator.GetAllUsers();
         LoginManager loginManager = new LoginManager(userList, movieList, operator);
+
         // Create Movie List Object for the Movie List View to display
         MovieManager movieManager = new MovieManager(movieList);
-
-        // TODO: GUI entry here
-        // Start the Main GUI
-        /**
-         * - Main GUI
-         * -- UserView - depends on: LoginManager,
-         */
-
-        MovieCollectionView movieCollection = new MovieCollectionView(loginManager);
-        MovieManagerView mainView = new MovieManagerView(loginManager, movieManager, movieCollection);
+        MovieCollectionView mcView = new MovieCollectionView(loginManager);
+        MovieManagerView mainView = new MovieManagerView(loginManager, movieManager, mcView);
         mainView.main();
 
         // Run Tests
