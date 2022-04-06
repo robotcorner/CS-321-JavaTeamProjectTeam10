@@ -3,6 +3,11 @@ import java.awt.*;
 
 public class SimpleMessage {
 
+    /**
+     * Displays a small frame with a simple message, which can vary depending on the circumstance
+     * @param t frame text
+     * @param m main message
+     */
     public void message(String t, String m) {
 
         JFrame messageFrame = new JFrame(t);
