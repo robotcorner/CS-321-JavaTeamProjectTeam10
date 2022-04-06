@@ -7,6 +7,11 @@ public class User {
     private String password;
     private ArrayList<MovieCollection> collections = new ArrayList<MovieCollection>();
 
+    /**
+     * Parametrized constructor for User
+     * @param u username goes here
+     * @param p password goes here
+     */
     User(String u, String p) {
 
         this.username = u;
@@ -76,7 +81,10 @@ public class User {
         return null;
     }
 
-    // run this when a user logs in
+    /**
+     * builds the collection of a user when they log into their account
+     * @param movieList
+     */
     public void buildCollections(ArrayList<Movie> movieList) {
         for (MovieCollection c: collections) {
             c.buildMovieCollectionFromIds(movieList);

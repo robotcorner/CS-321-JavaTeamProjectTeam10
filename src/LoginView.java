@@ -7,11 +7,20 @@ public class LoginView {
     private MovieManagerView movieManagerView;
     SimpleMessage s = new SimpleMessage();
 
+    /**
+     * sets the instances of LoginManager and MovieManagerView so that the methods
+     * in those classes can be used here
+     * @param loginManager
+     * @param movieManagerView
+     */
     public LoginView(LoginManager loginManager, MovieManagerView movieManagerView) {
         this.loginManager = loginManager;
         this.movieManagerView = movieManagerView;
     }
 
+    /**
+     * Opens the log in view when someone tries to log in
+     */
     public void openLogInView() {
 
         JFrame userView = new JFrame("Log In");
@@ -60,6 +69,9 @@ public class LoginView {
         userView.setVisible(true);
     }
 
+    /**
+     * Opens the sign up view when someone tries to sign up
+     */
     public void openSignUpView() {
 
         JFrame newUserView = new JFrame("Sign Up Page");

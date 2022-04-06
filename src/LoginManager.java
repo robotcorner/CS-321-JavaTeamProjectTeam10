@@ -6,6 +6,13 @@ public class LoginManager {
     private User currentUser;
     private MovieJsonOperator jsonOperator;
 
+    /**
+     * sets the instances of UserList, MovieList, and MovieJsonOperator so that the info
+     * in those json files can be used here
+     * @param userList
+     * @param movieList
+     * @param jsonOperator
+     */
     LoginManager(ArrayList<User> userList, ArrayList<Movie> movieList, MovieJsonOperator jsonOperator) {
         this.userList = userList;
         this.jsonOperator = jsonOperator;

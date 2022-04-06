@@ -21,6 +21,13 @@ public class MovieManagerView {
     static JPanel loginSection;
     static JScrollPane cListWidget;
 
+    /**
+     * sets the instances of LoginManager, MovieManager, and MovieCollectionView so that the methods
+     * in those classes can be used here
+     * @param loginManager
+     * @param movieManager
+     * @param movieCollection
+     */
     public MovieManagerView(LoginManager loginManager, MovieManager movieManager, MovieCollectionView movieCollection) {
         this.accountView = new LoginView(loginManager, this);
         this.loginManager = loginManager;
