@@ -18,6 +18,7 @@ public class MovieManagerView {
     // Dependencies
     static LoginManager loginManager;
     static MovieManager movieManager;
+    static MovieCollection currentCollection;
 
     // UI Components
     static JPanel moviePanel;
@@ -30,13 +31,13 @@ public class MovieManagerView {
      * in those classes can be used here
      * @param loginManager
      * @param movieManager
-     * @param movieCollection
      */
     public MovieManagerView(LoginManager loginManager, MovieManager movieManager) {
         this.accountView = new LoginView(loginManager, this);
         this.loginManager = loginManager;
         this.movieManager = movieManager;
         this.movieCollectionView = new MovieCollectionView(loginManager);
+        currentCollection = new MovieCollection(movieManager.getMediaList());
         System.out.println("initialized account view");
     }
 
@@ -46,12 +47,13 @@ public class MovieManagerView {
         collectionsPanel.revalidate();
     }
 
+    // search within the current collection
     public static void updateMoviePanel(String term) {
         moviePanel.removeAll();
-        if(movieManager.search(term).isEmpty()) {
+        if(currentCollection.search(term).isEmpty()) {
             s.message("None found", "Error: No movies match your search.");
         } else {
-            for (Movie m : movieManager.search(term)) {
+            for (Movie m : currentCollection.search(term)) {
                 moviePanel.add(new MovieBlock(m));
             }
         }
@@ -60,6 +62,7 @@ public class MovieManagerView {
     }
 
     public static void updateMoviePanel(MovieCollection term) {
+        currentCollection = term;
         moviePanel.removeAll();
         if(term.getMovieList().isEmpty()) {
             s.message("None found", "Error: No movies match your search.");
@@ -214,6 +217,7 @@ public class MovieManagerView {
         topBar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                currentCollection = new MovieCollection(movieManager.getMediaList());
                 updateMoviePanel("");
             }
         });
