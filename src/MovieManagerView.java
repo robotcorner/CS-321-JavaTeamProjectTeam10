@@ -108,6 +108,14 @@ public class MovieManagerView {
         movieDetails.revalidate();
     }
 
+    public static void userAddMovieToCollection(String name, Movie movie) {
+        loginManager.getCurrentUser().getCollection(name).addMovie(movie);
+    }
+
+    public static void userRemoveMovieFromCollection(String name, Movie movie) {
+        loginManager.getCurrentUser().getCollection(name).removeMovie(movie);
+    }
+
     public static void updateLoginSection() {
         loginSection.removeAll();
         loginSection.add(new JLabel("Login/Signup: "));
