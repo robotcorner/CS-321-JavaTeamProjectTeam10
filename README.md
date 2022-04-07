@@ -18,7 +18,7 @@ This is six week team project for creating a **Java** Swing app related to organ
 2. ~~Plan CRC cards for classes.~~
 3. Futher develop classes with UML diagram and outline relationships.
 
-For more details, please refer to the Github project [board](https://github.com/robotcorner/CS-321-JavaTeamProjectTeam10/projects?type=beta).
+For more details, please refer to the GitHub project [board](https://github.com/robotcorner/CS-321-JavaTeamProjectTeam10/projects?type=beta).
 
 
 ## App Details
@@ -35,7 +35,5 @@ For more details, please refer to the Github project [board](https://github.com/
 
 - This is incomplete.
 
-
 ### App Demonstrations for Onlookers
-![](Output.gif)
 
