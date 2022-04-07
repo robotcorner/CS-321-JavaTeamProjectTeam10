@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
 public class MovieManagerView {
     // Views
     static LoginView accountView;
@@ -24,9 +23,7 @@ public class MovieManagerView {
     static JPanel moviePanel;
     static JPanel movieDetails;
     static JPanel loginSection;
-    //static JScrollPane cListWidget;
     static JPanel collectionsPanel;
-    static JPanel frameP;
 
     /**
      * sets the instances of LoginManager, MovieManager, and MovieCollectionView so that the methods
@@ -49,25 +46,13 @@ public class MovieManagerView {
         collectionsPanel.revalidate();
     }
 
-    public static void updateMoviepanel(String term) {
+    public static void updateMoviePanel(String term) {
         moviePanel.removeAll();
         if(movieManager.search(term).isEmpty()) {
             s.message("None found", "Error: No movies match your search.");
         } else {
             for (Movie m : movieManager.search(term)) {
-                JPanel movieBlock = new JPanel();
-                JLabel title = new JLabel(m.getTitle());
-                movieBlock.setLayout(new FlowLayout());
-                movieBlock.add(title);
-                moviePanel.add(movieBlock);
-                String imdbID = m.getImdbID();
-                movieBlock.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        // add movie panel to side
-                        updateMovieDetails(imdbID);
-                    }
-                });
+                moviePanel.add(new MovieBlock(m));
             }
         }
         moviePanel.add(new JPanel());
@@ -79,7 +64,6 @@ public class MovieManagerView {
         Movie movie = movieManager.get(imdbID);
         movieDetails.setVisible(false);
         movieDetails.removeAll();
-        //movieDetails.setLayout(new GridLayout(0, 1));
         movieDetails.setLayout(new BoxLayout(movieDetails, BoxLayout.PAGE_AXIS));
         movieDetails.setMaximumSize(new Dimension(100, 100));
 
@@ -175,7 +159,7 @@ public class MovieManagerView {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                updateMoviepanel(searchBar.getText());
+                updateMoviePanel(searchBar.getText());
             }
         });
 
@@ -200,7 +184,7 @@ public class MovieManagerView {
         // create movie panel
         moviePanel = new JPanel();
         moviePanel.setLayout(new GridLayout(0, 1));
-        updateMoviepanel("");
+        updateMoviePanel("");
 
         JScrollPane movieScroll = new JScrollPane(moviePanel);
         JScrollPane cListWidget = new JScrollPane(collectionsPanel);
@@ -217,4 +201,4 @@ public class MovieManagerView {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-}
+};
