@@ -63,16 +63,7 @@ public class MovieManagerView {
 
     public static void updateMoviePanel(MovieCollection term) {
         currentCollection = term;
-        moviePanel.removeAll();
-        if(term.getMovieList().isEmpty()) {
-            s.message("None found", "Error: No movies match your search.");
-        } else {
-            for (Movie m : term.getMovieList()) {
-                moviePanel.add(new MovieBlock(m));
-            }
-        }
-        moviePanel.add(new JPanel());
-        moviePanel.revalidate();
+        updateMoviePanel("");
     }
 
     public static void updateMovieDetails(String imdbID) {
