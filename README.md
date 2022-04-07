@@ -35,5 +35,18 @@ For more details, please refer to the GitHub project [board](https://github.com/
 
 - This is incomplete.
 
-### App Demonstrations for Onlookers
+## App Demonstrations for Onlookers
+
+#### Main Page
+![image](docs/apr-07-main-page.png)
+
+#### Search Functionality
+![image](docs/apr-07-main-page-searched-results.png)
+
+#### Login Prompt
+![image](docs/apr-07-login-prompt.png)
+
+#### Favorite Icons Add and Remove from Collection Automatically with Icon
+![image](docs/apr-07-favorited-collection.png)
+
 
