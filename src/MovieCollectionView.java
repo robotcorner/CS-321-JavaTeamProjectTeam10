@@ -1,11 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class MovieCollectionView {
 
     private LoginManager loginManager;
     private ArrayList<MovieCollection> movieCollectionList;
+
+
 
     public MovieCollectionView(LoginManager loginManager) {
         this.loginManager = loginManager;
@@ -23,6 +27,26 @@ public class MovieCollectionView {
             for(MovieCollection mc: movieCollectionList) {
                 String cName = mc.getName();
                 JLabel cBlockLabel = new JLabel(cName);
+
+                cBlockLabel.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        MovieManagerView.updateMoviePanel(mc);
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
                 //cBlockLabel.setVisible(true);
                 //JPanel cBlock = new JPanel();
                 //cBlock.setLayout(new FlowLayout());
@@ -49,4 +73,13 @@ public class MovieCollectionView {
         cBlockList.setVisible(true);
         return cBlockList;
     }
+
+
+
+
+
+
+
+
+
 }

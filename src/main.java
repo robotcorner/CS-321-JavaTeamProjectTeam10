@@ -63,6 +63,6 @@ class Main {
         //Collections.sort(ml, Movie.sortByName());
         //movieManager.displayList();
         // Prints out the number of movies in the database
-        System.out.println(movieManager.size());
+        //System.out.println(movieManager.size());
     }
 }
