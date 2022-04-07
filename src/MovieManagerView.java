@@ -141,6 +141,9 @@ public class MovieManagerView {
             loginBtn = new JButton("Logout");
             loginBtn.addActionListener(e -> {
                 System.out.println("Pressed Logout Button");
+                boolean save = s.confirmed("Warning", "Do you want to save your progress?");
+                if (save)
+                    loginManager.save();
                 loginManager.logout();
                 updateLoginSection();
             });
