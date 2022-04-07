@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-public class MovieManager {
+public class MovieManager extends Searchable {
     // Used by an Instance
     private ArrayList<Movie> mediaList;
 
@@ -48,22 +48,7 @@ public class MovieManager {
      * @return ArrayList<Movie> result
      */
     public ArrayList<Movie> search(String term) {
-        if(term.isEmpty())
-            return mediaList;
-
-        ArrayList<Movie> result = new ArrayList<Movie>();
-        for (Movie m : mediaList) {
-            if(m.getTitle().toLowerCase(Locale.ROOT).contains(term.toLowerCase(Locale.ROOT)))
-                result.add(m);
-            else if(m.getDirector().toLowerCase(Locale.ROOT).contains(term.toLowerCase(Locale.ROOT)))
-                result.add(m);
-            else if(m.getActors().toLowerCase(Locale.ROOT).contains(term.toLowerCase(Locale.ROOT)))
-                result.add(m);
-            else if(m.getGenre().toLowerCase(Locale.ROOT).contains(term.toLowerCase(Locale.ROOT)))
-                result.add(m);
-        }
-
-        return result;
+        return super.search(mediaList, term);
     }
 
     /**
