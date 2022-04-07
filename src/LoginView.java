@@ -29,7 +29,7 @@ public class LoginView {
 
         final int FIELD_WIDTH = 25;
         JTextField userTextField = new JTextField(FIELD_WIDTH);
-        JTextField passwordTextField = new JTextField(FIELD_WIDTH);
+        JPasswordField passwordTextField = new JPasswordField(FIELD_WIDTH);
 
         JButton logIn = new JButton("Log In");
         JButton cancel = new JButton("Cancel");
@@ -40,9 +40,10 @@ public class LoginView {
         logIn.addActionListener(event -> {
 
             String username = userTextField.getText();
-            String password = passwordTextField.getText();
+            char[] password = passwordTextField.getPassword();
+            String passwordString = new String(password);
 
-            if (loginManager.login(username, password) == false) {
+            if (!loginManager.login(username, passwordString)) {
                 s.message("Error", "Password and/or username is incorrect. Please try again.");
             } else {
                 MovieManagerView.updateLoginSection();

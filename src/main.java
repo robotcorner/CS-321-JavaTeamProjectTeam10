@@ -21,13 +21,20 @@ import java.util.Collections;
  */
 class Main {
 
+    static LoginManager loginManager;
+    static MovieManagerView movieManagerView;
+
     public static void main(String[] args) throws ParseException {
 
-        Tests test = new Tests();
+        LoginView l = new LoginView(loginManager, movieManagerView);
 
-        test.loginFlow();
+        l.openLogInView();
+
+        //Tests test = new Tests();
+
+        //test.loginFlow();
         // Exit if movie file does not exist
-        if(! new File("data/SampleMovieFile.json").exists()) {
+        /*if(! new File("data/SampleMovieFile.json").exists()) {
             System.out.println("No SampleMovieFile.json. Exiting...");
             return;
         }
@@ -64,6 +71,6 @@ class Main {
         //Collections.sort(ml, Movie.sortByName());
         //movieManager.displayList();
         // Prints out the number of movies in the database
-        System.out.println(movieManager.size());
+        System.out.println(movieManager.size());*/
     }
 }
