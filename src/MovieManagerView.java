@@ -24,7 +24,9 @@ public class MovieManagerView {
     static JPanel moviePanel;
     static JPanel movieDetails;
     static JPanel loginSection;
-    static JScrollPane cListWidget;
+    //static JScrollPane cListWidget;
+    static JPanel collectionsPanel;
+    static JPanel frameP;
 
     /**
      * sets the instances of LoginManager, MovieManager, and MovieCollectionView so that the methods
@@ -33,28 +35,18 @@ public class MovieManagerView {
      * @param movieManager
      * @param movieCollection
      */
-    public MovieManagerView(LoginManager loginManager, MovieManager movieManager, MovieCollectionView movieCollection) {
+    public MovieManagerView(LoginManager loginManager, MovieManager movieManager) {
         this.accountView = new LoginView(loginManager, this);
         this.loginManager = loginManager;
         this.movieManager = movieManager;
-        this.movieCollectionView = movieCollection;
+        this.movieCollectionView = new MovieCollectionView(loginManager);
         System.out.println("initialized account view");
     }
 
     public static void updateCollectionPanel() {
-        // clear old view
-        if (cListWidget != null) {
-            cListWidget.removeAll();
-        }
-
-        // create new view
-        movieCollectionView = new MovieCollectionView(loginManager);
-        cListWidget = new JScrollPane(movieCollectionView.refreshCollectionView());
-
-        // revalidate view
-        cListWidget.setMinimumSize(new Dimension(80, 40));
-        cListWidget.revalidate();
-        cListWidget.setVisible(true);
+        collectionsPanel.removeAll();
+        collectionsPanel.add(movieCollectionView.refreshCollectionView());
+        collectionsPanel.revalidate();
     }
 
     public static void updateMoviepanel(String term) {
@@ -144,7 +136,7 @@ public class MovieManagerView {
                 loginManager.logout();
                 updateLoginSection();
             });
-            updateCollectionPanel();
+            //updateCollectionPanel();
             signupBtn.setVisible(false);
         }
         loginSection.add(loginBtn);
@@ -187,16 +179,16 @@ public class MovieManagerView {
             }
         });
 
-        searchBarIcon.setVisible(true);
         searchBar.setLocation(frame.getWidth() / 2, 20);
-        searchBar.setVisible(true);
 
+        // create collections panel before it gets updated with the login section
+        collectionsPanel = new JPanel();
+        collectionsPanel.setLayout(new GridLayout(0, 1));
 
         loginSection = new JPanel();
         loginSection.add(new JLabel("Login/Signup: "));
         updateLoginSection();
         loginSection.setLocation((frame.getWidth() - 60), 20);
-        loginSection.setVisible(true);
 
 
         JPanel topBar = new JPanel();
@@ -211,8 +203,7 @@ public class MovieManagerView {
         updateMoviepanel("");
 
         JScrollPane movieScroll = new JScrollPane(moviePanel);
-
-        updateCollectionPanel();
+        JScrollPane cListWidget = new JScrollPane(collectionsPanel);
 
         movieDetails = new JPanel();
 

@@ -23,26 +23,27 @@ public class MovieCollectionView {
             for(MovieCollection mc: movieCollectionList) {
                 String cName = mc.getName();
                 JLabel cBlockLabel = new JLabel(cName);
-                cBlockLabel.setVisible(true);
-                JPanel cBlock = new JPanel();
-                cBlock.setLayout(new FlowLayout());
-                cBlock.setName(cName);
-                cBlock.add(cBlockLabel);
-                cBlock.revalidate();
-                cBlock.setVisible(true);
-                cBlockList.add(cBlock);
+                //cBlockLabel.setVisible(true);
+                //JPanel cBlock = new JPanel();
+                //cBlock.setLayout(new FlowLayout());
+                //cBlock.setName(cName);
+                //cBlock.add(cBlockLabel);
+                //cBlock.revalidate();
+                //cBlock.setVisible(true);
+                //cBlockList.add(cBlock);
+                cBlockList.add(cBlockLabel);
             }
         } else {
             String cName = "mustLogIn";
             JLabel cBlockLabel = new JLabel(cName);
-            cBlockLabel.setVisible(true);
-            JPanel cBlock = new JPanel();
-            cBlock.setLayout(new FlowLayout());
-            cBlock.setName(cName);
-            cBlock.add(cBlockLabel);
-            cBlock.revalidate();
-            cBlock.setVisible(true);
-            cBlockList.add(cBlock);
+            //cBlockLabel.setVisible(true);
+            //JPanel cBlock = new JPanel();
+            //cBlock.setLayout(new FlowLayout());
+            //cBlock.setName(cName);
+            //cBlock.add(cBlockLabel);
+            //cBlock.revalidate();
+            //cBlock.setVisible(true);
+            cBlockList.add(cBlockLabel);
         }
         cBlockList.revalidate();
         cBlockList.setVisible(true);
