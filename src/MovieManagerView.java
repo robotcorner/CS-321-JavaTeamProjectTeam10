@@ -142,10 +142,15 @@ public class MovieManagerView {
             loginBtn.addActionListener(e -> {
                 System.out.println("Pressed Logout Button");
                 boolean save = s.confirmed("Warning", "Do you want to save your progress?");
-                if (save)
+                if (save) {
                     loginManager.save();
-                loginManager.logout();
-                updateLoginSection();
+                    loginManager.logout();
+                    updateLoginSection();
+                }
+                else if (!save) {
+                    loginManager.logout();
+                    updateLoginSection();
+                }
             });
             updateCollectionPanel();
             signupBtn.setVisible(false);
