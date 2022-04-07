@@ -14,6 +14,7 @@ public class MovieManagerView {
     // Views
     static LoginView accountView;
     static MovieCollectionView movieCollectionView;
+    static SaveMessage saveMessage;
     static SimpleMessage s = new SimpleMessage();
 
     // Dependencies
@@ -38,6 +39,7 @@ public class MovieManagerView {
         this.loginManager = loginManager;
         this.movieManager = movieManager;
         this.movieCollectionView = movieCollection;
+        this.saveMessage = new SaveMessage(loginManager);
         System.out.println("initialized account view");
     }
 
@@ -141,11 +143,7 @@ public class MovieManagerView {
             loginBtn = new JButton("Logout");
             loginBtn.addActionListener(e -> {
                 System.out.println("Pressed Logout Button");
-                int save = s.confirmed("Warning", "Do you want to save your progress?");
-                if (save == 0 && !s.checkConfirm()) {
-                    loginManager.save();
-                }
-                loginManager.logout();
+                saveMessage.save();
                 updateLoginSection();
             });
             updateCollectionPanel();
