@@ -13,9 +13,11 @@ public class User {
      * @param p password goes here
      */
     User(String u, String p) {
-
         this.username = u;
         this.password = p;
+        newCollection("Favorites");
+        newCollection("To Watch");
+        newCollection("Watched");
     }
 
     /**

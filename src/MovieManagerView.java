@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
 public class MovieManagerView {
     // Views
     static LoginView accountView;
@@ -20,68 +19,63 @@ public class MovieManagerView {
     // Dependencies
     static LoginManager loginManager;
     static MovieManager movieManager;
+    static MovieCollection currentCollection;
 
     // UI Components
     static JPanel moviePanel;
     static JPanel movieDetails;
     static JPanel loginSection;
-    static JScrollPane cListWidget;
+    static JPanel collectionsPanel;
 
     /**
      * sets the instances of LoginManager, MovieManager, and MovieCollectionView so that the methods
      * in those classes can be used here
      * @param loginManager
      * @param movieManager
-     * @param movieCollection
      */
-    public MovieManagerView(LoginManager loginManager, MovieManager movieManager, MovieCollectionView movieCollection) {
+    public MovieManagerView(LoginManager loginManager, MovieManager movieManager) {
         this.accountView = new LoginView(loginManager, this);
         this.loginManager = loginManager;
         this.movieManager = movieManager;
-        this.movieCollectionView = movieCollection;
+
         this.saveMessage = new SaveMessage(loginManager);
+
+        this.movieCollectionView = new MovieCollectionView(loginManager);
+        currentCollection = new MovieCollection(movieManager.getMediaList());
+
         System.out.println("initialized account view");
     }
 
     public static void updateCollectionPanel() {
-        // clear old view
-        if (cListWidget != null) {
-            cListWidget.removeAll();
-        }
-
-        // create new view
-        movieCollectionView = new MovieCollectionView(loginManager);
-        cListWidget = new JScrollPane(movieCollectionView.refreshCollectionView());
-
-        // revalidate view
-        cListWidget.setMinimumSize(new Dimension(80, 40));
-        cListWidget.revalidate();
-        cListWidget.setVisible(true);
+        collectionsPanel.removeAll();
+        collectionsPanel.add(movieCollectionView.refreshCollectionView());
+        collectionsPanel.revalidate();
     }
 
-    public static void updateMoviepanel(String term) {
+    // search within the current collection
+    public static void updateMoviePanel(String term) {
         moviePanel.removeAll();
-        if(movieManager.search(term).isEmpty()) {
+        if(currentCollection.search(term).isEmpty()) {
             s.message("None found", "Error: No movies match your search.");
         } else {
-            for (Movie m : movieManager.search(term)) {
-                JPanel movieBlock = new JPanel();
-                JLabel title = new JLabel(m.getTitle());
-                movieBlock.setLayout(new FlowLayout());
-                movieBlock.add(title);
-                moviePanel.add(movieBlock);
-                String imdbID = m.getImdbID();
-                movieBlock.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        // add movie panel to side
-                        updateMovieDetails(imdbID);
-                    }
-                });
+            MovieCollection temp;
+            if (loginManager.getCurrentUser() !=null) {
+                temp = loginManager.getCurrentUser().getCollection("Favorites");
+            } else {
+                temp = new MovieCollection("None");
+            }
+            for (Movie m : currentCollection.search(term)) {
+                boolean heartStatus = temp.getMovieList().contains(m);
+                moviePanel.add(new MovieBlock(m, heartStatus));
             }
         }
         moviePanel.add(new JPanel());
         moviePanel.revalidate();
+    }
+
+    public static void updateMoviePanel(MovieCollection term) {
+        currentCollection = term;
+        updateMoviePanel("");
     }
 
     public static void updateMovieDetails(String imdbID) {
@@ -89,7 +83,6 @@ public class MovieManagerView {
         Movie movie = movieManager.get(imdbID);
         movieDetails.setVisible(false);
         movieDetails.removeAll();
-        //movieDetails.setLayout(new GridLayout(0, 1));
         movieDetails.setLayout(new BoxLayout(movieDetails, BoxLayout.PAGE_AXIS));
         movieDetails.setMaximumSize(new Dimension(100, 100));
 
@@ -121,6 +114,20 @@ public class MovieManagerView {
         movieDetails.revalidate();
     }
 
+    public static boolean userAddMovieToCollection(String name, Movie movie) {
+        if (loginManager.getCurrentUser() == null) {
+            s.message("Must Log In", "You're not allowed to favorite movies or add to the collection until you log in.");
+            return false;
+        } else {
+            loginManager.getCurrentUser().getCollection(name).addMovie(movie);
+            return true;
+        }
+    }
+
+    public static void userRemoveMovieFromCollection(String name, Movie movie) {
+        loginManager.getCurrentUser().getCollection(name).removeMovie(movie);
+    }
+
     public static void updateLoginSection() {
         loginSection.removeAll();
         loginSection.add(new JLabel("Login/Signup: "));
@@ -132,7 +139,7 @@ public class MovieManagerView {
             accountView.openSignUpView();
         });
 
-        if (loginManager.verifyLogin() == false) {
+        if (!loginManager.verifyLogin()) {      // user failed login
             loginBtn = new JButton("Login");
             loginBtn.addActionListener(e -> {
                 System.out.println("Pressed Login Button");
@@ -146,7 +153,6 @@ public class MovieManagerView {
                 saveMessage.save();
                 updateLoginSection();
             });
-            updateCollectionPanel();
             signupBtn.setVisible(false);
         }
         loginSection.add(loginBtn);
@@ -185,20 +191,23 @@ public class MovieManagerView {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                updateMoviepanel(searchBar.getText());
+                updateMoviePanel(searchBar.getText());
             }
         });
 
-        searchBarIcon.setVisible(true);
         searchBar.setLocation(frame.getWidth() / 2, 20);
-        searchBar.setVisible(true);
+
+        // create collections panel before it gets updated with the login section
+        collectionsPanel = new JPanel();
+        collectionsPanel.setLayout(new GridLayout(0, 1));
+
+
 
 
         loginSection = new JPanel();
         loginSection.add(new JLabel("Login/Signup: "));
         updateLoginSection();
         loginSection.setLocation((frame.getWidth() - 60), 20);
-        loginSection.setVisible(true);
 
 
         JPanel topBar = new JPanel();
@@ -207,14 +216,22 @@ public class MovieManagerView {
         topBar.add(loginSection);
         topBar.setVisible(true);
 
+        // Creates a Mouse Listener that refreshes the movie panel
+        topBar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                currentCollection = new MovieCollection(movieManager.getMediaList());
+                updateMoviePanel("");
+            }
+        });
+
         // create movie panel
         moviePanel = new JPanel();
         moviePanel.setLayout(new GridLayout(0, 1));
-        updateMoviepanel("");
+        updateMoviePanel("");
 
         JScrollPane movieScroll = new JScrollPane(moviePanel);
-
-        updateCollectionPanel();
+        JScrollPane cListWidget = new JScrollPane(collectionsPanel);
 
         movieDetails = new JPanel();
 
@@ -224,8 +241,7 @@ public class MovieManagerView {
         frameP.add(movieDetails, BorderLayout.LINE_END);
         frameP.setVisible(true);
         frame.setContentPane(frameP);
-        //frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-}
+};

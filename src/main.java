@@ -26,8 +26,6 @@ class Main {
 
     public static void main(String[] args) throws ParseException {
 
-        //Tests test = new Tests();
-        //test.loginFlow();
         // Exit if movie file does not exist
         if(! new File("data/SampleMovieFile.json").exists()) {
             System.out.println("No SampleMovieFile.json. Exiting...");
@@ -54,8 +52,7 @@ class Main {
 
         // Create Movie List Object for the Movie List View to display
         MovieManager movieManager = new MovieManager(movieList);
-        MovieCollectionView mcView = new MovieCollectionView(loginManager);
-        MovieManagerView mainView = new MovieManagerView(loginManager, movieManager, mcView);
+        MovieManagerView mainView = new MovieManagerView(loginManager, movieManager);
         mainView.main();
 
         // Run Tests
@@ -66,6 +63,6 @@ class Main {
         //Collections.sort(ml, Movie.sortByName());
         //movieManager.displayList();
         // Prints out the number of movies in the database
-        System.out.println(movieManager.size());
+        //System.out.println(movieManager.size());
     }
 }

@@ -52,11 +52,10 @@ class Tests {
             loginManager.signup("new", "guy") // returns false if user already exists
         );
         if(loginManager.verifyLogin()) { // returns false if user already exists
-            loginManager.getCurrentUser().newCollection("watched list");
-            loginManager.getCurrentUser().newCollection("watchlist");
-            loginManager.getCurrentUser().getCollection("watched list").addMovie(movielist.get(5));
-            loginManager.getCurrentUser().getCollection("watchlist").addMovie(movielist.get(25));
-            loginManager.getCurrentUser().getCollection("watchlist").addMovie(movielist.get(32));
+            loginManager.getCurrentUser().newCollection("To Watch");
+            loginManager.getCurrentUser().getCollection("Watched").addMovie(movielist.get(5));
+            loginManager.getCurrentUser().getCollection("Watched").addMovie(movielist.get(25));
+            loginManager.getCurrentUser().getCollection("Watched").addMovie(movielist.get(32));
             System.out.println("Check users.json to see the data that changed!");
         }
 
@@ -67,9 +66,9 @@ class Tests {
         // log back in and modify account
         if(loginManager.login("new", "guy")) {
             loginManager.getCurrentUser().newCollection("successful login");
-            loginManager.getCurrentUser().getCollection("watchlist").removeMovie(movielist.get(25));
-            loginManager.getCurrentUser().getCollection("watchlist").removeMovie(movielist.get(9));
-            loginManager.getCurrentUser().getCollection("watchlist").addMovie(movielist.get(2));
+            loginManager.getCurrentUser().getCollection("Watched").removeMovie(movielist.get(25));
+            loginManager.getCurrentUser().getCollection("Watched").removeMovie(movielist.get(9));
+            loginManager.getCurrentUser().getCollection("Watched").addMovie(movielist.get(2));
             loginManager.save();
             System.out.println("Logged back in. Check users.json to see the data that changed!");
         }
