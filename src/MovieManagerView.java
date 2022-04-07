@@ -59,6 +59,19 @@ public class MovieManagerView {
         moviePanel.revalidate();
     }
 
+    public static void updateMoviePanel(MovieCollection term) {
+        moviePanel.removeAll();
+        if(term.getMovieList().isEmpty()) {
+            s.message("None found", "Error: No movies match your search.");
+        } else {
+            for (Movie m : term.getMovieList()) {
+                moviePanel.add(new MovieBlock(m));
+            }
+        }
+        moviePanel.add(new JPanel());
+        moviePanel.revalidate();
+    }
+
     public static void updateMovieDetails(String imdbID) {
         System.out.println(imdbID);
         Movie movie = movieManager.get(imdbID);
@@ -167,6 +180,9 @@ public class MovieManagerView {
         // create collections panel before it gets updated with the login section
         collectionsPanel = new JPanel();
         collectionsPanel.setLayout(new GridLayout(0, 1));
+
+
+
 
         loginSection = new JPanel();
         loginSection.add(new JLabel("Login/Signup: "));
