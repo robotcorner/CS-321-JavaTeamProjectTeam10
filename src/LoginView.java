@@ -43,7 +43,7 @@ public class LoginView {
             char[] password = passwordTextField.getPassword();
             String passwordString = new String(password);
 
-            if (!loginManager.login(username, passwordString)) {
+            if (loginManager.login(username, passwordString) == false) {
                 s.message("Error", "Password and/or username is incorrect. Please try again.");
             } else {
                 MovieManagerView.updateLoginSection();
