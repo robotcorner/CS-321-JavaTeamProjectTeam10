@@ -1,9 +1,13 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 public class MovieManagerView {
@@ -18,6 +22,7 @@ public class MovieManagerView {
 
     // UI Components
     static JPanel moviePanel;
+    static JPanel movieDetails;
     static JPanel loginSection;
     static JScrollPane cListWidget;
 
@@ -63,10 +68,55 @@ public class MovieManagerView {
                 movieBlock.setLayout(new FlowLayout());
                 movieBlock.add(title);
                 moviePanel.add(movieBlock);
+                String imdbID = m.getImdbID();
+                movieBlock.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        // add movie panel to side
+                        updateMovieDetails(imdbID);
+                    }
+                });
             }
         }
         moviePanel.add(new JPanel());
         moviePanel.revalidate();
+    }
+
+    public static void updateMovieDetails(String imdbID) {
+        System.out.println(imdbID);
+        Movie movie = movieManager.get(imdbID);
+        movieDetails.setVisible(false);
+        movieDetails.removeAll();
+        //movieDetails.setLayout(new GridLayout(0, 1));
+        movieDetails.setLayout(new BoxLayout(movieDetails, BoxLayout.PAGE_AXIS));
+        movieDetails.setMaximumSize(new Dimension(100, 100));
+
+        // get movie poster
+        try {
+            URL url = new URL(movie.getPoster());
+            Image image = ImageIO.read(url);
+            if(image == null) {
+                movieDetails.add(new JLabel(movie.getPoster()));
+            } else {
+                JLabel icon = new JLabel();
+                icon.setIcon(new ImageIcon(image));
+                movieDetails.add(icon);
+            }
+        } catch(IOException e) {
+            movieDetails.add(new JLabel("Image could not be displayed"));
+        }
+
+        // add other movie details
+        movieDetails.add(new JLabel(movie.getTitle()));
+        movieDetails.add(new JLabel("Released: " + String.valueOf(movie.getYear())));
+        movieDetails.add(new JLabel("Genre: " + String.valueOf(movie.getGenre())));
+        movieDetails.add(new JLabel("Rating: " + String.valueOf(movie.getImdbRating())));
+        movieDetails.add(new JLabel("Metascore: " + String.valueOf(movie.getMetascore())));
+        movieDetails.add(new JLabel("Director: \n" + movie.getDirector()));
+        JLabel label = new JLabel("Actors: " + movie.getActors());
+        movieDetails.add(label);
+        movieDetails.setVisible(true);
+        movieDetails.revalidate();
     }
 
     public static void updateLoginSection() {
@@ -161,13 +211,15 @@ public class MovieManagerView {
         updateMoviepanel("");
 
         JScrollPane movieScroll = new JScrollPane(moviePanel);
-        movieScroll.setVisible(true);
 
         updateCollectionPanel();
+
+        movieDetails = new JPanel();
 
         frameP.add(topBar, BorderLayout.PAGE_START);
         frameP.add(movieScroll, BorderLayout.CENTER);
         frameP.add(cListWidget, BorderLayout.LINE_START);
+        frameP.add(movieDetails, BorderLayout.LINE_END);
         frameP.setVisible(true);
         frame.setContentPane(frameP);
         //frame.pack();

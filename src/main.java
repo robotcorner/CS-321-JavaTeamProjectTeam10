@@ -26,15 +26,10 @@ class Main {
 
     public static void main(String[] args) throws ParseException {
 
-        LoginView l = new LoginView(loginManager, movieManagerView);
-
-        l.openLogInView();
-
         //Tests test = new Tests();
-
         //test.loginFlow();
         // Exit if movie file does not exist
-        /*if(! new File("data/SampleMovieFile.json").exists()) {
+        if(! new File("data/SampleMovieFile.json").exists()) {
             System.out.println("No SampleMovieFile.json. Exiting...");
             return;
         }
@@ -71,6 +66,6 @@ class Main {
         //Collections.sort(ml, Movie.sortByName());
         //movieManager.displayList();
         // Prints out the number of movies in the database
-        System.out.println(movieManager.size());*/
+        System.out.println(movieManager.size());
     }
 }
