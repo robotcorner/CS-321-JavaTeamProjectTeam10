@@ -66,8 +66,6 @@ public class SimpleMessage {
             return true;
         else if (no.getModel().isPressed())
             return false;
-        else if (!yes.getModel().isPressed() && !no.getModel().isPressed())
-            return confirmed(t, m);
         else
             return false;
     }
