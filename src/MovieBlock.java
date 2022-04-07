@@ -26,9 +26,11 @@ public class MovieBlock extends JPanel {
                 if (!heartToggled[0]) {
                     heart.setText("❤");
                     heartToggled[0] = true;
+                    MovieManagerView.userAddMovieToCollection("Favorites", m);
                 } else {
                     heart.setText("♡");
                     heartToggled[0] = false;
+                    MovieManagerView.userRemoveMovieFromCollection("Favorites", m);
                 }
             }
         });
