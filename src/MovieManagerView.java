@@ -196,6 +196,14 @@ public class MovieManagerView {
         topBar.add(loginSection);
         topBar.setVisible(true);
 
+        // Creates a Mouse Listener that refreshes the movie panel
+        topBar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                updateMoviePanel("");
+            }
+        });
+
         // create movie panel
         moviePanel = new JPanel();
         moviePanel.setLayout(new GridLayout(0, 1));

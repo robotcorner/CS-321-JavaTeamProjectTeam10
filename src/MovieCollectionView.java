@@ -37,16 +37,6 @@ public class MovieCollectionView {
 
 
 
-
-
-
-
-
-
-
-
-
-
                 //cBlockLabel.setVisible(true);
                 //JPanel cBlock = new JPanel();
                 //cBlock.setLayout(new FlowLayout());
