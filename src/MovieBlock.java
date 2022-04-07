@@ -18,5 +18,20 @@ public class MovieBlock extends JPanel {
                 MovieManagerView.updateMovieDetails(imdbID);
             }
         });
+        final boolean[] heartToggled = {false};
+        JLabel heart = new JLabel("♡");
+        heart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!heartToggled[0]) {
+                    heart.setText("❤");
+                    heartToggled[0] = true;
+                } else {
+                    heart.setText("♡");
+                    heartToggled[0] = false;
+                }
+            }
+        });
+        this.add(heart);
     }
 }
