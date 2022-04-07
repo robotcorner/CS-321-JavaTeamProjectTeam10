@@ -4,7 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class MovieBlock extends JPanel {
-    MovieBlock(Movie m) {
+    MovieBlock(Movie m, boolean heartStatus) {
         super();
 
         JLabel title = new JLabel(m.getTitle());
@@ -18,8 +18,13 @@ public class MovieBlock extends JPanel {
                 MovieManagerView.updateMovieDetails(imdbID);
             }
         });
-        final boolean[] heartToggled = {false};
-        JLabel heart = new JLabel("♡");
+        final boolean[] heartToggled = {heartStatus};
+        JLabel heart;
+        if (heartStatus) {
+            heart = new JLabel("❤");
+        } else {
+            heart = new JLabel("♡");
+        }
         heart.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

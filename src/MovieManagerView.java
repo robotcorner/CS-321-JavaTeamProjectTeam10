@@ -53,8 +53,15 @@ public class MovieManagerView {
         if(currentCollection.search(term).isEmpty()) {
             s.message("None found", "Error: No movies match your search.");
         } else {
+            MovieCollection temp;
+            if (loginManager.getCurrentUser() !=null) {
+                temp = loginManager.getCurrentUser().getCollection("Favorites");
+            } else {
+                temp = new MovieCollection("None");
+            }
             for (Movie m : currentCollection.search(term)) {
-                moviePanel.add(new MovieBlock(m));
+                boolean heartStatus = temp.getMovieList().contains(m);
+                moviePanel.add(new MovieBlock(m, heartStatus));
             }
         }
         moviePanel.add(new JPanel());
