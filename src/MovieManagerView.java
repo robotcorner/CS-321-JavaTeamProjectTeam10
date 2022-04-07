@@ -108,8 +108,14 @@ public class MovieManagerView {
         movieDetails.revalidate();
     }
 
-    public static void userAddMovieToCollection(String name, Movie movie) {
-        loginManager.getCurrentUser().getCollection(name).addMovie(movie);
+    public static boolean userAddMovieToCollection(String name, Movie movie) {
+        if (loginManager.getCurrentUser() == null) {
+            s.message("Must Log In", "You're not allowed to favorite movies or add to the collection until you log in.");
+            return false;
+        } else {
+            loginManager.getCurrentUser().getCollection(name).addMovie(movie);
+            return true;
+        }
     }
 
     public static void userRemoveMovieFromCollection(String name, Movie movie) {

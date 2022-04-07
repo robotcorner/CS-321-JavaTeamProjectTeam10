@@ -24,9 +24,11 @@ public class MovieBlock extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (!heartToggled[0]) {
-                    heart.setText("❤");
-                    heartToggled[0] = true;
-                    MovieManagerView.userAddMovieToCollection("Favorites", m);
+                    boolean success = MovieManagerView.userAddMovieToCollection("Favorites", m);
+                    if(success) {
+                        heart.setText("❤");
+                        heartToggled[0] = true;
+                    }
                 } else {
                     heart.setText("♡");
                     heartToggled[0] = false;
