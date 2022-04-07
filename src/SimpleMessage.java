@@ -66,8 +66,9 @@ public class SimpleMessage {
             return true;
         else if (no.getModel().isPressed())
             return false;
-        //probably need to add in an else if for if the window is closed via the "x" button
-        else
+        else if (!yes.getModel().isPressed() && !no.getModel().isPressed())
             return confirmed(t, m);
+        else
+            return false;
     }
 }
