@@ -106,7 +106,7 @@ public class MovieManagerView {
             accountView.openSignUpView();
         });
 
-        if (loginManager.verifyLogin() == false) {
+        if (!loginManager.verifyLogin()) {      // user failed login
             loginBtn = new JButton("Login");
             loginBtn.addActionListener(e -> {
                 System.out.println("Pressed Login Button");
@@ -120,7 +120,6 @@ public class MovieManagerView {
                 loginManager.logout();
                 updateLoginSection();
             });
-            //updateCollectionPanel();
             signupBtn.setVisible(false);
         }
         loginSection.add(loginBtn);
@@ -197,7 +196,6 @@ public class MovieManagerView {
         frameP.add(movieDetails, BorderLayout.LINE_END);
         frameP.setVisible(true);
         frame.setContentPane(frameP);
-        //frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
