@@ -27,15 +27,17 @@ public class SimpleMessage {
         ok.addActionListener(event -> messageFrame.setVisible(false));
     }
 
+    JFrame confirmFrame;
+
     /**
      * Displays a small frame with a simple message, which can vary depending on the circumstance
      * @param t frame text
      * @param m main message
      * @return true if yes is pressed, false if no or "x" button is pressed, and itself if nothing is pressed
      */
-    public boolean confirmed (String t, String m) {
+    public int confirmed (String t, String m) {
 
-        JFrame confirmFrame = new JFrame(t);
+        confirmFrame = new JFrame(t);
 
         JLabel confirmText = new JLabel(m);
 
@@ -63,9 +65,17 @@ public class SimpleMessage {
         });
 
         if (yes.getModel().isPressed())
-            return true;
+            return 0;
         else if (no.getModel().isPressed())
-            return false;
+            return 1;
+        else
+            return 2;
+    }
+
+    public boolean checkConfirm() {
+
+        if (confirmFrame.isActive())
+            return true;
         else
             return false;
     }
