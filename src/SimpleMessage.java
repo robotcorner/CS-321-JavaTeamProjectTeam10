@@ -62,12 +62,13 @@ public class SimpleMessage {
             confirmFrame.setVisible(false);
         });
 
+        // look up how to create a blocking confirm dialog
         if (yes.getModel().isPressed())
             return true;
         else if (no.getModel().isPressed())
             return false;
-        else if (!yes.getModel().isPressed() && !no.getModel().isPressed())
-            return confirmed(t, m);
+        //else if (!yes.getModel().isPressed() && !no.getModel().isPressed())
+        //    return confirmed(t, m);
         else
             return false;
     }
