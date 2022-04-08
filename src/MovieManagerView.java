@@ -149,6 +149,8 @@ public class MovieManagerView {
             loginBtn.addActionListener(e -> {
                 System.out.println("Pressed Logout Button");
                 saveMessage.save();
+                MovieManagerView w = new MovieManagerView(loginManager, movieManager);
+                w.waitMethod();
                 updateLoginSection();
             });
             signupBtn.setVisible(false);
@@ -241,5 +243,15 @@ public class MovieManagerView {
         frame.setContentPane(frameP);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    synchronized public void waitMethod() {
+
+        try {
+            wait();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 };

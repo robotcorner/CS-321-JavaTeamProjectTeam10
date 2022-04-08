@@ -12,7 +12,7 @@ public class SaveMessage {
     /**
      * Displays a small frame with a simple message, which can vary depending on the circumstance
      */
-    public void save() {
+    synchronized public void save() {
 
         JFrame saveFrame = new JFrame("Warning");
 
@@ -35,12 +35,14 @@ public class SaveMessage {
             saveFrame.setVisible(false);
             loginManager.save();
             loginManager.logout();
+            notify();
         });
 
         no.addActionListener(event -> {
 
             saveFrame.setVisible(false);
             loginManager.logout();
+            notify();
         });
     }
 }
