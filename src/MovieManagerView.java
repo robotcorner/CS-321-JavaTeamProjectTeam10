@@ -37,9 +37,7 @@ public class MovieManagerView {
         this.accountView = new LoginView(loginManager, this);
         this.loginManager = loginManager;
         this.movieManager = movieManager;
-
         this.saveMessage = new SaveMessage(loginManager);
-
         this.movieCollectionView = new MovieCollectionView(loginManager);
         currentCollection = new MovieCollection(movieManager.getMediaList());
 
