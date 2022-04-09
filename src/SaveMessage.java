@@ -12,37 +12,23 @@ public class SaveMessage {
     /**
      * Displays a small frame with a simple message, which can vary depending on the circumstance
      */
-    synchronized public void save() {
+    public void save() {
 
-        JFrame saveFrame = new JFrame("Warning");
-
-        JLabel saveText = new JLabel("Do you wish to save your progress?");
-
-        JButton yes = new JButton("Yes");
-        JButton no = new JButton("No");
-
-        saveFrame.setLayout(new FlowLayout());
-
-        saveFrame.add(saveText);
-        saveFrame.add(yes);
-        saveFrame.add(no);
-        saveFrame.setBounds(0,0,700, 120);
+        JFrame saveFrame = new JFrame();
         saveFrame.setLocationRelativeTo(null);
-        saveFrame.setVisible(true);
 
-        yes.addActionListener(event -> {
+        int result = JOptionPane.showConfirmDialog(saveFrame,"Do you want to save your progress?", "Warning",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if(result == JOptionPane.YES_OPTION) {
 
-            saveFrame.setVisible(false);
             loginManager.save();
             loginManager.logout();
-            notify();
-        });
+        }
 
-        no.addActionListener(event -> {
+        else if (result == JOptionPane.NO_OPTION) {
 
-            saveFrame.setVisible(false);
             loginManager.logout();
-            notify();
-        });
+        }
     }
 }
