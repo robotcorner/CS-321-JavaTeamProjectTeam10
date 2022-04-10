@@ -44,13 +44,19 @@ public class MovieManagerView {
         System.out.println("initialized account view");
     }
 
+    /**
+     * updates the collection panel
+     */
     public static void updateCollectionPanel() {
         collectionsPanel.removeAll();
         collectionsPanel.add(movieCollectionView.refreshCollectionView());
         collectionsPanel.revalidate();
     }
 
-    // search within the current collection
+    /**
+     * updates the movie panel
+     * searches within the current collection
+     */
     public static void updateMoviePanel(String term) {
         moviePanel.removeAll();
         if(currentCollection.search(term).isEmpty()) {
@@ -76,6 +82,9 @@ public class MovieManagerView {
         updateMoviePanel("");
     }
 
+    /**
+     * updates the details regarding a certain movie
+     */
     public static void updateMovieDetails(String imdbID) {
         System.out.println(imdbID);
         Movie movie = movieManager.get(imdbID);
@@ -112,6 +121,9 @@ public class MovieManagerView {
         movieDetails.revalidate();
     }
 
+    /**
+     * adds a movie to the collection
+     */
     public static boolean userAddMovieToCollection(String name, Movie movie) {
         if (loginManager.getCurrentUser() == null) {
             s.message("Must Log In", "You're not allowed to favorite movies or add to the collection until you log in.");
@@ -122,10 +134,16 @@ public class MovieManagerView {
         }
     }
 
+    /**
+     * removes a movie from the collection
+     */
     public static void userRemoveMovieFromCollection(String name, Movie movie) {
         loginManager.getCurrentUser().getCollection(name).removeMovie(movie);
     }
 
+    /**
+     * updates the login section whenever the user logs in or logs out
+     */
     public static void updateLoginSection() {
         loginSection.removeAll();
         loginSection.add(new JLabel("Login/Signup: "));
