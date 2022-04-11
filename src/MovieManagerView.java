@@ -26,6 +26,7 @@ public class MovieManagerView {
     static JPanel movieDetails;
     static JPanel loginSection;
     static JPanel collectionsPanel;
+    static JLabel accountSection;
 
     /**
      * sets the instances of LoginManager, MovieManager, and MovieCollectionView so that the methods
@@ -167,9 +168,11 @@ public class MovieManagerView {
             loginBtn.addActionListener(e -> {
                 System.out.println("Pressed Logout Button");
                 saveMessage.save();
+                accountSection.setText("guest");
                 updateLoginSection();
             });
             signupBtn.setVisible(false);
+            accountSection.setText(loginManager.getCurrentUser().getUsername());
         }
         loginSection.add(loginBtn);
         loginSection.add(signupBtn);
@@ -182,15 +185,15 @@ public class MovieManagerView {
         JPanel frameP = new JPanel();
         frameP.setLayout(new BorderLayout(5, 5));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 1000);
+        frame.setSize(1200, 1000);
 
         // Build out the TopBar
         // The SEARCH bar for the top middle section
-        // JLabel searchBarIcon = new JLabel("Search: ");🔎
         JLabel searchBarIcon = new JLabel("Search: ");
         JTextField searchBar = new JTextField("Search Here");
         searchBar.setMinimumSize(searchBar.getSize());
-        searchBar.setPreferredSize(new Dimension(225, 30));
+        searchBar.setPreferredSize(new Dimension(200, 30));
+        searchBar.setMaximumSize(new Dimension(250, 30));
         searchBar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -218,18 +221,42 @@ public class MovieManagerView {
         collectionsPanel.setLayout(new GridLayout(0, 1));
 
 
-
-
         loginSection = new JPanel();
         loginSection.add(new JLabel("Login/Signup: "));
         updateLoginSection();
         loginSection.setLocation((frame.getWidth() - 60), 20);
+        loginSection.setVisible(true);
 
+        JLabel appTitle = new JLabel("MAML - My Awesome Movie Library");
+        appTitle.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("pressed app title - trigger app detail overview window");
+            }
+        });
+        appTitle.setLocation(0, 0);
+
+        accountSection = new JLabel("guest");
+        accountSection.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("pressed account name - trigger account view for logged in user");
+            }
+        });
+
+        JPanel searchSection = new JPanel(new FlowLayout());
+        searchSection.add(searchBarIcon);
+        searchSection.add(searchBar);
+
+        JPanel rightSection = new JPanel(new FlowLayout());
+        rightSection.add(accountSection);
+        rightSection.add(loginSection);
 
         JPanel topBar = new JPanel();
-        topBar.add(searchBarIcon);
-        topBar.add(searchBar);
-        topBar.add(loginSection);
+        topBar.setLayout(new BorderLayout(10, 3));
+        topBar.add(appTitle, BorderLayout.LINE_START);
+        topBar.add(searchSection, BorderLayout.CENTER);
+        topBar.add(rightSection, BorderLayout.LINE_END);
         topBar.setVisible(true);
 
         // Creates a Mouse Listener that refreshes the movie panel
