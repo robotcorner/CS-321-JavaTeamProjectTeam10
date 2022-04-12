@@ -317,6 +317,11 @@ public class MovieManagerView {
             }
         });
 
+
+
+
+
+
         // create movie panel
         moviePanel = new JPanel();
         moviePanel.setLayout(new GridLayout(0, 1));
