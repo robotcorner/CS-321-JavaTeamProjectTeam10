@@ -97,4 +97,18 @@ public class LoginManager {
         else
             return true;
     }
+
+    // TODO finish this - Stephen
+    // ids, how many favorites
+    public int favoritePlusOne(String id) {
+        return 1;
+    }
+
+    public int favoriteMinusOne(String id) {
+        return 1;
+    }
+
+    public int getFavorites4Id(String id) {
+        return 1;
+    }
 }
