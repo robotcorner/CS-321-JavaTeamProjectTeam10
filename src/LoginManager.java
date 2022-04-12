@@ -109,6 +109,11 @@ public class LoginManager {
     }
 
     public int getFavorites4Id(String id) {
-        return 1;
+        int result = 0;
+        for (User u : userList) {
+            if(u.getCollection("favorites").hasID(id))
+                ++result;
+        }
+        return result;
     }
 }

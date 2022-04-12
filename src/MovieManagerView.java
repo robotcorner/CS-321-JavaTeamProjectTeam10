@@ -130,7 +130,6 @@ public class MovieManagerView {
                 movieDetails.add(new JLabel("Image could not be displayed"));
             }
 
-
             // add other movie details
             movieDetails.add(new JLabel(movie.getTitle()));
             movieDetails.add(new JLabel("Released: " + String.valueOf(movie.getYear())));
@@ -148,6 +147,13 @@ public class MovieManagerView {
                 });
                 movieDetails.add(new JScrollPane(commentSection));
                 movieDetails.add(commentButton);
+                JButton deleteBtn = new JButton("Delete");
+                deleteBtn.addActionListener(e -> {
+                    currentCollection.removeMovie(movie);
+                    updateMoviePanel("");
+                    updateMovieDetails("");
+                });
+                movieDetails.add(deleteBtn);
             }
             movieDetails.setVisible(true);
         }
@@ -329,8 +335,8 @@ public class MovieManagerView {
 
         JScrollPane movieScroll = new JScrollPane(moviePanel);
         JScrollPane cListWidget = new JScrollPane(collectionsPanel);
-
         movieDetails = new JPanel();
+        //JScrollPane detailScroll = new JScrollPane(movieDetails);
 
         frameP.add(topBar, BorderLayout.PAGE_START);
         frameP.add(movieScroll, BorderLayout.CENTER);

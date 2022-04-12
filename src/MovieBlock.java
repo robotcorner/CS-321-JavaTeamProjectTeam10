@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.dnd.MouseDragGestureRecognizer;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -33,13 +32,10 @@ public class MovieBlock extends JPanel {
                 originalx[0] = screenX[0];
                 originaly[0] = screenY[0];
 
-
-
                 myX[0] = getX();
                 myY[0] = getY();
 
                 MovieManagerView.updateMovieDetails(imdbID);
-
             }
 
 
@@ -69,15 +65,9 @@ public class MovieBlock extends JPanel {
                 setLocation(myX[0] + deltaX, myY[0] + deltaY);
             }
 
-
             @Override
             public void mouseMoved(MouseEvent e) { }
-
         });
-
-
-
-
 
 
         final boolean[] heartToggled = {heartStatus};

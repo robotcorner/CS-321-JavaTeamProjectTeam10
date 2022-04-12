@@ -32,6 +32,12 @@ public class MovieCollection extends Searchable {
             mediaList.remove(m);
     }
 
+    public boolean hasID(String imdbID) {
+        if(ids.contains(imdbID))
+            return true;
+        return false;
+    }
+
     // This function allows us to store IDs in JSON and get movielist in memory
     public void buildMovieCollectionFromIds(ArrayList<Movie> allMovies) {
         mediaList = new ArrayList<Movie>();
