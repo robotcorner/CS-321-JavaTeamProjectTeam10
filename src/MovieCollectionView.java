@@ -60,7 +60,6 @@ public class MovieCollectionView {
             cBlockList.add(cBlockLabel);
         }
         cBlockList.revalidate();
-        cBlockList.setVisible(true);
         return cBlockList;
     }
 

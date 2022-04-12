@@ -13,12 +13,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * The HelloWorldApp class implements an application that
- * simply prints "Hello World!" to standard output.
- * This type of comment is considered documentation.
- * This part will be removed and is just for an example.
- */
 class Main {
 
     static LoginManager loginManager;
@@ -50,8 +44,6 @@ class Main {
         ArrayList<User> userList = operator.GetAllUsers();
         LoginManager loginManager = new LoginManager(userList, movieList, operator);
 
-        Tests.loginFlow();
-
         // Create Movie List Object for the Movie List View to display
         MovieManager movieManager = new MovieManager(movieList);
         MovieManagerView mainView = new MovieManagerView(loginManager, movieManager);
@@ -60,11 +52,5 @@ class Main {
         // Run Tests
         // Tests.testMovie(); // Tests that movies get loaded and prints to console
         // Tests.loginFlow(); // Tests the basic login flow
-
-        //ArrayList<Movie> ml = movieManager.search("Short");
-        //Collections.sort(ml, Movie.sortByName());
-        //movieManager.displayList();
-        // Prints out the number of movies in the database
-        //System.out.println(movieManager.size());
     }
 }

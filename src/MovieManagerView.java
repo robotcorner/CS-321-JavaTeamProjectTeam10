@@ -53,7 +53,8 @@ public class MovieManagerView {
      */
     public static void updateCollectionPanel() {
         collectionsPanel.removeAll();
-        collectionsPanel.add(movieCollectionView.refreshCollectionView());
+        if(loginManager.verifyLogin())
+            collectionsPanel.add(movieCollectionView.refreshCollectionView());
         collectionsPanel.revalidate();
     }
 
@@ -81,7 +82,7 @@ public class MovieManagerView {
             s.message("None found", "Error: No movies match your search.");
         } else {
             MovieCollection temp;
-            if (loginManager.getCurrentUser() !=null) {
+            if (loginManager.verifyLogin()) {
                 temp = loginManager.getCurrentUser().getCollection("Favorites");
             } else {
                 temp = new MovieCollection("None");
@@ -139,7 +140,7 @@ public class MovieManagerView {
             movieDetails.add(new JLabel("Director: \n" + movie.getDirector()));
             JLabel label = new JLabel("Actors: " + movie.getActors());
             movieDetails.add(label);
-            if (loginManager.getCurrentUser() != null) {
+            if (loginManager.verifyLogin()) {
                 commentSection = new JTextArea(loginManager.getCurrentUser().getComment(movie.getImdbID()));
                 JButton commentButton = new JButton("Save Comment");
                 commentButton.addActionListener(e -> {
@@ -157,7 +158,7 @@ public class MovieManagerView {
      * adds a movie to the collection
      */
     public static boolean userAddMovieToCollection(String name, Movie movie) {
-        if (loginManager.getCurrentUser() == null) {
+        if (!loginManager.verifyLogin()) {
             s.message("Must Log In", "You're not allowed to favorite movies or add to the collection until you log in.");
             return false;
         } else {
