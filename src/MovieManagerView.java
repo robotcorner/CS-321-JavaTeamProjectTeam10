@@ -112,43 +112,44 @@ public class MovieManagerView {
         movieDetails.setVisible(false);
         movieDetails.removeAll();
         movieDetails.setLayout(new BoxLayout(movieDetails, BoxLayout.PAGE_AXIS));
-        movieDetails.setMaximumSize(new Dimension(100, 100));
-
-        // get movie poster
-        try {
-            URL url = new URL(movie.getPoster());
-            Image image = ImageIO.read(url);
-            if(image == null) {
-                movieDetails.add(new JLabel(movie.getPoster()));
-            } else {
-                JLabel icon = new JLabel();
-                icon.setIcon(new ImageIcon(image));
-                movieDetails.add(icon);
+        movieDetails.setMaximumSize(new Dimension(200, 100));
+        if(movie != null) {
+            // get movie poster
+            try {
+                URL url = new URL(movie.getPoster());
+                Image image = ImageIO.read(url);
+                if (image == null) {
+                    movieDetails.add(new JLabel(movie.getPoster()));
+                } else {
+                    JLabel icon = new JLabel();
+                    icon.setIcon(new ImageIcon(image));
+                    movieDetails.add(icon);
+                }
+            } catch (IOException e) {
+                movieDetails.add(new JLabel("Image could not be displayed"));
             }
-        } catch(IOException e) {
-            movieDetails.add(new JLabel("Image could not be displayed"));
-        }
 
 
-        // add other movie details
-        movieDetails.add(new JLabel(movie.getTitle()));
-        movieDetails.add(new JLabel("Released: " + String.valueOf(movie.getYear())));
-        movieDetails.add(new JLabel("Genre: " + String.valueOf(movie.getGenre())));
-        movieDetails.add(new JLabel("Rating: " + String.valueOf(movie.getImdbRating())));
-        movieDetails.add(new JLabel("Metascore: " + String.valueOf(movie.getMetascore())));
-        movieDetails.add(new JLabel("Director: \n" + movie.getDirector()));
-        JLabel label = new JLabel("Actors: " + movie.getActors());
-        movieDetails.add(label);
-        if(loginManager.getCurrentUser() != null) {
-            commentSection = new JTextArea(loginManager.getCurrentUser().getComment(movie.getImdbID()));
-            JButton commentButton = new JButton("Save Comment");
-            commentButton.addActionListener(e -> {
-                loginManager.getCurrentUser().addComment(movie.getImdbID(), commentSection.getText());
-            });
-            movieDetails.add(new JScrollPane(commentSection));
-            movieDetails.add(commentButton);
+            // add other movie details
+            movieDetails.add(new JLabel(movie.getTitle()));
+            movieDetails.add(new JLabel("Released: " + String.valueOf(movie.getYear())));
+            movieDetails.add(new JLabel("Genre: " + String.valueOf(movie.getGenre())));
+            movieDetails.add(new JLabel("Rating: " + String.valueOf(movie.getImdbRating())));
+            movieDetails.add(new JLabel("Metascore: " + String.valueOf(movie.getMetascore())));
+            movieDetails.add(new JLabel("Director: \n" + movie.getDirector()));
+            JLabel label = new JLabel("Actors: " + movie.getActors());
+            movieDetails.add(label);
+            if (loginManager.getCurrentUser() != null) {
+                commentSection = new JTextArea(loginManager.getCurrentUser().getComment(movie.getImdbID()));
+                JButton commentButton = new JButton("Save Comment");
+                commentButton.addActionListener(e -> {
+                    loginManager.getCurrentUser().addComment(movie.getImdbID(), commentSection.getText());
+                });
+                movieDetails.add(new JScrollPane(commentSection));
+                movieDetails.add(commentButton);
+            }
+            movieDetails.setVisible(true);
         }
-        movieDetails.setVisible(true);
         movieDetails.revalidate();
     }
 
@@ -200,6 +201,9 @@ public class MovieManagerView {
                 saveMessage.save();
                 accountSection.setText("guest");
                 updateLoginSection();
+                currentCollection = new MovieCollection(movieManager.getMediaList());
+                updateMoviePanel(currentCollection);
+                updateMovieDetails("");
             });
 
             signupBtn = new JButton("Save");
