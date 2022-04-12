@@ -48,6 +48,22 @@ public class MovieCollection extends Searchable {
         return super.search(mediaList, term);
     }
 
+    public ArrayList<Movie> searchTitle(String term) {
+        return super.searchTitle(mediaList, term);
+    }
+
+    public ArrayList<Movie> searchGenre(String term) {
+        return super.searchGenre(mediaList, term);
+    }
+
+    public ArrayList<Movie> searchCast(String term) {
+        return super.searchCast(mediaList, term);
+    }
+
+    public ArrayList<Movie> searchDirector(String term) {
+        return super.searchDirector(mediaList, term);
+    }
+
     // Get a movies list
     public ArrayList<Movie> getMovieList() {
         return mediaList;

@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MovieManagerView {
     // Views
@@ -28,6 +29,7 @@ public class MovieManagerView {
     static JPanel collectionsPanel;
     static JLabel accountSection;
     static JTextArea commentSection;
+    static JComboBox select;
 
     /**
      * sets the instances of LoginManager, MovieManager, and MovieCollectionView so that the methods
@@ -60,7 +62,22 @@ public class MovieManagerView {
      */
     public static void updateMoviePanel(String term) {
         moviePanel.removeAll();
-        if(currentCollection.search(term).isEmpty()) {
+        ArrayList<Movie> result = new ArrayList<>();
+        String type = (String) select.getSelectedItem();
+        if(type == "All"){
+            result = currentCollection.search(term);
+        } else if(type == "Title") {
+            result = currentCollection.searchTitle(term);
+        } else if(type == "Genre") {
+            result = currentCollection.searchGenre(term);
+        } else if(type == "Cast") {
+            result = currentCollection.searchCast(term);
+        } else if(type == "Director") {
+            result = currentCollection.searchDirector(term);
+        }
+
+
+        if(result.isEmpty()) {
             s.message("None found", "Error: No movies match your search.");
         } else {
             MovieCollection temp;
@@ -69,7 +86,7 @@ public class MovieManagerView {
             } else {
                 temp = new MovieCollection("None");
             }
-            for (Movie m : currentCollection.search(term)) {
+            for (Movie m : result) {
                 boolean heartStatus = temp.getMovieList().contains(m);
                 moviePanel.add(new MovieBlock(m, heartStatus));
             }
@@ -162,12 +179,7 @@ public class MovieManagerView {
         loginSection.removeAll();
         loginSection.add(new JLabel("Login/Signup: "));
         JButton loginBtn;
-
-        JButton signupBtn = new JButton("Sign-up");
-        signupBtn.addActionListener(e -> {
-            System.out.println("Pressed Sign-Up Button");
-            accountView.openSignUpView();
-        });
+        JButton signupBtn;
 
         if (!loginManager.verifyLogin()) {      // user failed login
             loginBtn = new JButton("Login");
@@ -175,7 +187,12 @@ public class MovieManagerView {
                 System.out.println("Pressed Login Button");
                 accountView.openLogInView();
             });
-            signupBtn.setVisible(true);
+
+            signupBtn = new JButton("Sign-up");
+            signupBtn.addActionListener(e -> {
+                System.out.println("Pressed Sign-Up Button");
+                accountView.openSignUpView();
+            });
         }  else {
             loginBtn = new JButton("Logout");
             loginBtn.addActionListener(e -> {
@@ -184,7 +201,14 @@ public class MovieManagerView {
                 accountSection.setText("guest");
                 updateLoginSection();
             });
-            signupBtn.setVisible(false);
+
+            signupBtn = new JButton("Save");
+            signupBtn.addActionListener(e -> {
+                if(loginManager.save())
+                    s.message("Saved!", "Your changes have been saved successfully");
+                else
+                    s.message("Error", "Something went wrong...");
+            });
             accountSection.setText(loginManager.getCurrentUser().getUsername());
         }
         loginSection.add(loginBtn);
@@ -227,6 +251,12 @@ public class MovieManagerView {
             }
         });
 
+        String[] options = {"All", "Title", "Genre", "Cast", "Director"};
+        select = new JComboBox(options);
+        select.addActionListener(e -> {
+            updateMoviePanel(searchBar.getText());
+        });
+
         searchBar.setLocation(frame.getWidth() / 2, 20);
 
         // create collections panel before it gets updated with the login section
@@ -259,6 +289,7 @@ public class MovieManagerView {
 
         JPanel searchSection = new JPanel(new FlowLayout());
         searchSection.add(searchBarIcon);
+        searchSection.add(select);
         searchSection.add(searchBar);
 
         JPanel rightSection = new JPanel(new FlowLayout());

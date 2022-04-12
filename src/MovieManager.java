@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-public class MovieManager extends Searchable {
+public class MovieManager {
     // Used by an Instance
     private ArrayList<Movie> mediaList;
 
@@ -40,15 +40,6 @@ public class MovieManager extends Searchable {
      */
     public ArrayList<Movie> getMediaList() {
         return mediaList;
-    }
-
-    /**
-     * Searches a few interesting fields and returns a list of all matches
-     * @param term whatever the user enters in the GUI
-     * @return ArrayList<Movie> result
-     */
-    public ArrayList<Movie> search(String term) {
-        return super.search(mediaList, term);
     }
 
     /**
