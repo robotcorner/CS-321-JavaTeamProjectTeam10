@@ -60,14 +60,13 @@ public class LoginManager {
     }
 
     /**
-     * Save user data and log out
+     * Log out
      * @return true if success, false if already logged out
      */
     public boolean logout() {
         if(currentUser == null)
             return false;
 
-        jsonOperator.SaveAllUsers(userList);
         currentUser = null;
         return true;
     }

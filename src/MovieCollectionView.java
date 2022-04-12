@@ -8,12 +8,12 @@ public class MovieCollectionView {
 
     private LoginManager loginManager;
     private ArrayList<MovieCollection> movieCollectionList;
-
+    private ArrayList<JLabel> labels = new ArrayList<JLabel>();
 
 
     public MovieCollectionView(LoginManager loginManager) {
         this.loginManager = loginManager;
-        if (loginManager.getCurrentUser() != null) { // they are signed in
+        if (loginManager.verifyLogin()) { // signed in
             this.movieCollectionList = loginManager.getCurrentUser().getallCollections();
         }
     }
@@ -24,51 +24,35 @@ public class MovieCollectionView {
 
         if(loginManager.getCurrentUser() != null) {
             movieCollectionList = loginManager.getCurrentUser().getallCollections();
+            labels.clear();
             for(MovieCollection mc: movieCollectionList) {
                 String cName = mc.getName();
                 JLabel cBlockLabel = new JLabel(cName);
-
+                labels.add(cBlockLabel);
                 cBlockLabel.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        MovieManagerView.updateMoviePanel(mc);
+                        if(cBlockLabel.getForeground().equals(Color.red)) {
+                            MovieManagerView.updateMoviePanel(new MovieCollection(MovieManagerView.movieManager.getMediaList()));
+                            MovieManagerView.updateMovieDetails("");
+                            cBlockLabel.setForeground(Color.black);
+                        } else {
+                            MovieManagerView.updateMoviePanel(mc);
+                            for (JLabel l : labels) {
+                                if (cBlockLabel.equals(l)) cBlockLabel.setForeground(Color.red);
+                                else l.setForeground(Color.black);
+                            }
+                        }
                     }
                 });
 
 
-
-                //cBlockLabel.setVisible(true);
-                //JPanel cBlock = new JPanel();
-                //cBlock.setLayout(new FlowLayout());
-                //cBlock.setName(cName);
-                //cBlock.add(cBlockLabel);
-                //cBlock.revalidate();
-                //cBlock.setVisible(true);
-                //cBlockList.add(cBlock);
                 cBlockList.add(cBlockLabel);
             }
-        } else {
-            String cName = "mustLogIn";
-            JLabel cBlockLabel = new JLabel(cName);
-            //cBlockLabel.setVisible(true);
-            //JPanel cBlock = new JPanel();
-            //cBlock.setLayout(new FlowLayout());
-            //cBlock.setName(cName);
-            //cBlock.add(cBlockLabel);
-            //cBlock.revalidate();
-            //cBlock.setVisible(true);
-            cBlockList.add(cBlockLabel);
         }
+
         cBlockList.revalidate();
         return cBlockList;
     }
-
-
-
-
-
-
-
-
 
 }
