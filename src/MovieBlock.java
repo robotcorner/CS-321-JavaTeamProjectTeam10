@@ -22,8 +22,10 @@ public class MovieBlock extends JPanel {
         JLabel heart;
         if (heartStatus) {
             heart = new JLabel("❤");
+            heart.setForeground(Color.red);
         } else {
             heart = new JLabel("♡");
+            heart.setForeground(Color.black);
         }
         heart.addMouseListener(new MouseAdapter() {
             @Override
@@ -32,10 +34,12 @@ public class MovieBlock extends JPanel {
                     boolean success = MovieManagerView.userAddMovieToCollection("Favorites", m);
                     if(success) {
                         heart.setText("❤");
+                        heart.setForeground(Color.red);
                         heartToggled[0] = true;
                     }
                 } else {
                     heart.setText("♡");
+                    heart.setForeground(Color.black);
                     heartToggled[0] = false;
                     MovieManagerView.userRemoveMovieFromCollection("Favorites", m);
                 }
