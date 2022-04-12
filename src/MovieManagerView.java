@@ -89,7 +89,7 @@ public class MovieManagerView {
             }
             for (Movie m : result) {
                 boolean heartStatus = temp.getMovieList().contains(m);
-                moviePanel.add(new MovieBlock(m, heartStatus));
+                moviePanel.add(new MovieBlock(m, heartStatus, loginManager.verifyLogin()));
             }
         }
         moviePanel.add(new JPanel());
