@@ -11,25 +11,49 @@ Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell, Braden Willingham
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
+
+class Config {
+    public String moviePath;
+    public String userPath;
+}
 
 class Main {
 
     static LoginManager loginManager;
     static MovieManagerView movieManagerView;
+    static String configPath = "data/config.json";
 
     public static void main(String[] args) throws ParseException {
+        // Try to create if config file does not exist
+        try {
+            if (new File(configPath).createNewFile()) {
+                FileOutputStream writer = new FileOutputStream(configPath);
+                writer.write(
+                        ("{\"moviePath\":\"data/SampleMovieFile.json\", \"userPath\":\"data/users.json\"}").getBytes()
+                );
+                writer.close();
+            }
+        } catch(IOException e) {
+            System.out.println(e);
+            return;
+        }
+        if(! new File("data/config.json").exists()) {
+            System.out.println("No config.json. Exiting...");
+            return;
+        }
+        // config is hard coded. Everything else depends upon it
+        Config configuration = new MovieJsonOperator().GetConfig("data/config.json");
 
         // Exit if movie file does not exist
-        if(! new File("data/SampleMovieFile.json").exists()) {
+        if(! new File(configuration.moviePath).exists()) {
             System.out.println("No SampleMovieFile.json. Exiting...");
             return;
         }
 
         // Create user file if it does not exist
         try {
-            if (new File("data/users.json").createNewFile()) {
-                FileOutputStream writer = new FileOutputStream("data/users.json");
+            if (new File(configuration.userPath).createNewFile()) {
+                FileOutputStream writer = new FileOutputStream(configuration.userPath);
                 writer.write(("[]").getBytes());
                 writer.close();
             }
@@ -39,7 +63,7 @@ class Main {
         }
 
         // Initialize dependencies for our app
-        MovieJsonOperator operator = new MovieJsonOperator("data/SampleMovieFile.json", "data/users.json");
+        MovieJsonOperator operator = new MovieJsonOperator(configuration.moviePath, configuration.userPath);
         ArrayList<Movie> movieList = operator.GetAllMovies();
         ArrayList<User> userList = operator.GetAllUsers();
         LoginManager loginManager = new LoginManager(userList, movieList, operator);

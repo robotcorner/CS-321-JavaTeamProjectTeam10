@@ -11,6 +11,8 @@ public class MovieJsonOperator {
     private String movie_filename;
     private String user_filename;
 
+    MovieJsonOperator() {}
+
     MovieJsonOperator(String movie_filename, String user_filename) {
         this.movie_filename = movie_filename;
         this.user_filename  = user_filename;
@@ -62,6 +64,18 @@ public class MovieJsonOperator {
         try {
             User[] users = gson.fromJson(new FileReader(user_filename), User[].class);
             return new ArrayList<User>(List.of(users));
+        } catch (FileNotFoundException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Get the contents of a config.json
+     * @return config
+     */
+    public Config GetConfig(String filename) {
+        try {
+            return gson.fromJson(new FileReader(filename), Config.class);
         } catch (FileNotFoundException e) {
             return null;
         }
