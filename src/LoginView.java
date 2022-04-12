@@ -48,6 +48,7 @@ public class LoginView {
             } else {
                 MovieManagerView.updateLoginSection();
                 userView.setVisible(false);
+                MovieManagerView.updateMoviePanel("");
             }
         });
 
