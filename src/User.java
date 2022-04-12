@@ -6,6 +6,7 @@ public class User {
     private String username;
     private String password;
     private ArrayList<MovieCollection> collections = new ArrayList<MovieCollection>();
+    private Hashtable<String, String> comments = new Hashtable<String, String>();
 
     /**
      * Parametrized constructor for User
@@ -68,6 +69,28 @@ public class User {
      */
     public ArrayList<MovieCollection> getallCollections(){
         return collections;
+    }
+
+    /**
+     *
+     * @param imdbID
+     * @return
+     */
+    public String getComment(String imdbID) {
+        if(comments == null) {
+            comments = new Hashtable<String, String>();
+            return "";
+        }
+        return comments.get(imdbID);
+    }
+
+    /**
+     *
+     * @param imdbID
+     * @return
+     */
+    public String addComment(String imdbID, String comment) {
+        return comments.put(imdbID, comment);
     }
 
     /**

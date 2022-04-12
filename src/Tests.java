@@ -56,11 +56,12 @@ class Tests {
             loginManager.getCurrentUser().getCollection("Watched").addMovie(movielist.get(5));
             loginManager.getCurrentUser().getCollection("Watched").addMovie(movielist.get(25));
             loginManager.getCurrentUser().getCollection("Watched").addMovie(movielist.get(32));
+            loginManager.save();
             System.out.println("Check users.json to see the data that changed!");
         }
 
         System.out.println("Logged out: " +
-            loginManager.logout() // automatically saves. returns false if not logged in
+            loginManager.logout() // returns false if not logged in
         );
 
         // log back in and modify account
@@ -69,6 +70,9 @@ class Tests {
             loginManager.getCurrentUser().getCollection("Watched").removeMovie(movielist.get(25));
             loginManager.getCurrentUser().getCollection("Watched").removeMovie(movielist.get(9));
             loginManager.getCurrentUser().getCollection("Watched").addMovie(movielist.get(2));
+            loginManager.getCurrentUser().addComment(movielist.get(5).getImdbID(), "my comment!");
+            loginManager.getCurrentUser().addComment(movielist.get(5).getImdbID(), "updated comment!");
+            String blah = loginManager.getCurrentUser().getComment(movielist.get(5).getImdbID());
             loginManager.save();
             System.out.println("Logged back in. Check users.json to see the data that changed!");
         }

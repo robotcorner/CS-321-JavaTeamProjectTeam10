@@ -27,6 +27,7 @@ public class MovieManagerView {
     static JPanel loginSection;
     static JPanel collectionsPanel;
     static JLabel accountSection;
+    static JTextArea commentSection;
 
     /**
      * sets the instances of LoginManager, MovieManager, and MovieCollectionView so that the methods
@@ -55,8 +56,7 @@ public class MovieManagerView {
     }
 
     /**
-     * updates the movie panel
-     * searches within the current collection
+     * updates the movie panel when the user searches
      */
     public static void updateMoviePanel(String term) {
         moviePanel.removeAll();
@@ -78,6 +78,9 @@ public class MovieManagerView {
         moviePanel.revalidate();
     }
 
+    /**
+     * Updates the movie panel when user clicks a collection
+     */
     public static void updateMoviePanel(MovieCollection term) {
         currentCollection = term;
         updateMoviePanel("");
@@ -109,6 +112,7 @@ public class MovieManagerView {
             movieDetails.add(new JLabel("Image could not be displayed"));
         }
 
+
         // add other movie details
         movieDetails.add(new JLabel(movie.getTitle()));
         movieDetails.add(new JLabel("Released: " + String.valueOf(movie.getYear())));
@@ -118,6 +122,15 @@ public class MovieManagerView {
         movieDetails.add(new JLabel("Director: \n" + movie.getDirector()));
         JLabel label = new JLabel("Actors: " + movie.getActors());
         movieDetails.add(label);
+        if(loginManager.getCurrentUser() != null) {
+            commentSection = new JTextArea(loginManager.getCurrentUser().getComment(movie.getImdbID()));
+            JButton commentButton = new JButton("Save Comment");
+            commentButton.addActionListener(e -> {
+                loginManager.getCurrentUser().addComment(movie.getImdbID(), commentSection.getText());
+            });
+            movieDetails.add(new JScrollPane(commentSection));
+            movieDetails.add(commentButton);
+        }
         movieDetails.setVisible(true);
         movieDetails.revalidate();
     }

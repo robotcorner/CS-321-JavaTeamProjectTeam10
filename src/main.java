@@ -50,6 +50,8 @@ class Main {
         ArrayList<User> userList = operator.GetAllUsers();
         LoginManager loginManager = new LoginManager(userList, movieList, operator);
 
+        Tests.loginFlow();
+
         // Create Movie List Object for the Movie List View to display
         MovieManager movieManager = new MovieManager(movieList);
         MovieManagerView mainView = new MovieManagerView(loginManager, movieManager);
