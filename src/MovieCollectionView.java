@@ -22,17 +22,17 @@ public class MovieCollectionView {
         JPanel cBlockList = new JPanel();       // collection blocks list
         cBlockList.setLayout(new GridLayout(0, 1));
 
-        if(loginManager.getCurrentUser() != null) {
+        if (loginManager.getCurrentUser() != null) {
             movieCollectionList = loginManager.getCurrentUser().getallCollections();
             labels.clear();
-            for(MovieCollection mc: movieCollectionList) {
+            for (MovieCollection mc : movieCollectionList) {
                 String cName = mc.getName();
                 JLabel cBlockLabel = new JLabel(cName);
                 labels.add(cBlockLabel);
                 cBlockLabel.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if(cBlockLabel.getForeground().equals(Color.red)) {
+                        if (cBlockLabel.getForeground().equals(Color.red)) {
                             MovieManagerView.updateMoviePanel(new MovieCollection(MovieManagerView.movieManager.getMediaList()));
                             MovieManagerView.updateMovieDetails("");
                             cBlockLabel.setForeground(Color.black);
@@ -54,5 +54,4 @@ public class MovieCollectionView {
         cBlockList.revalidate();
         return cBlockList;
     }
-
 }
