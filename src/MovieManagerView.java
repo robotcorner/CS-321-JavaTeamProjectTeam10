@@ -90,7 +90,10 @@ public class MovieManagerView {
             }
             for (Movie m : result) {
                 boolean heartStatus = temp.getMovieList().contains(m);
-                moviePanel.add(new MovieBlock(m, heartStatus, loginManager.verifyLogin()));
+                String count;
+                if (loginManager.verifyLogin()) {count = Integer.toString(loginManager.getFavorites4Id(m.getImdbID()));}
+                else {count = "0";}
+                moviePanel.add(new MovieBlock(m, heartStatus, loginManager.verifyLogin(), count));
             }
         }
         moviePanel.add(new JPanel());
