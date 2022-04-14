@@ -23,7 +23,8 @@ public class MovieBlock extends JPanel {
         this.setLayout(new FlowLayout());
         this.add(title);
         String imdbID = m.getImdbID();
-
+        Color origColor = this.getBackground();
+        Color hoverColor = new Color(210, 210, 210, 80);
 
         if(isLoggedin) {
             addMouseListener(new MouseAdapter() {
@@ -38,9 +39,7 @@ public class MovieBlock extends JPanel {
 
                     myX[0] = getX();
                     myY[0] = getY();
-
                     MovieManagerView.updateMovieDetails(imdbID);
-
                 }
 
 
@@ -53,10 +52,14 @@ public class MovieBlock extends JPanel {
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
+                    setOpaque(true);
+                    setBackground(hoverColor);
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
+                    setOpaque(false);
+                    setBackground(origColor);
                 }
 
             });
@@ -116,6 +119,17 @@ public class MovieBlock extends JPanel {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     MovieManagerView.updateMovieDetails(imdbID);
+                }
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    setOpaque(true);
+                    setBackground(hoverColor);
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    setOpaque(false);
+                    setBackground(origColor);
                 }
             });
         }
