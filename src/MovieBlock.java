@@ -44,6 +44,7 @@ public class MovieBlock extends JPanel {
                     myX[0] = getX();
                     myY[0] = getY();
                     MovieManagerView.updateMovieDetails(imdbID);
+                    MovieManagerView.drag = true;
                 }
 
 
@@ -53,6 +54,7 @@ public class MovieBlock extends JPanel {
                     if(MovieManagerView.drop != null)
                         MovieManagerView.loginManager.getCurrentUser().getCollection(MovieManagerView.drop.getText()).addMovie(m);
                     MovieManagerView.drop = null;
+                    MovieManagerView.drag = false;
                 }
 
                 @Override

@@ -27,7 +27,6 @@ public class MovieManagerView {
     static LoginManager loginManager;
     static MovieManager movieManager;
     static MovieCollection currentCollection;
-    static MovieBlock movieBlock;
 
 
     // UI Components
@@ -39,6 +38,7 @@ public class MovieManagerView {
     static JTextArea commentSection;
     static JComboBox select;
     static JLabel drop;
+    static boolean drag = false;
 
 
     /**
@@ -168,7 +168,7 @@ public class MovieManagerView {
                 movieDetails.add(new JScrollPane(commentSection));
                 movieDetails.add(commentButton);
                 if(currentCollection.getName() != null) {
-                    JButton deleteBtn = new JButton("Delete");
+                    JButton deleteBtn = new JButton("Delete From Collection");
                     deleteBtn.addActionListener(e -> {
                         currentCollection.removeMovie(movie);
                         updateMoviePanel("");

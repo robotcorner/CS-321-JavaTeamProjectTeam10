@@ -32,34 +32,42 @@ public class MovieCollectionView {
             for (MovieCollection mc : movieCollectionList) {
                 String cName = mc.getName();
                 JPanel panel = new JPanel();
-
                 JLabel cBlockLabel = new JLabel(cName);
-                cBlockLabel.addMouseListener(new MouseListener() {
+                Color defaultColor = panel.getBackground();
+                MouseListener dragDrop = new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-
-                    }
-
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-
-                    }
-
-                    @Override
-                    public void mouseReleased(MouseEvent e) {
-                        System.out.println("released!");
+                        if (cBlockLabel.getForeground().equals(Color.red)) {
+                            MovieManagerView.resetCollection();
+                            cBlockLabel.setForeground(Color.black);
+                        } else {
+                            MovieManagerView.updateMoviePanel(mc);
+                            for (JLabel l : labels) {
+                                if (cBlockLabel.equals(l)) cBlockLabel.setForeground(Color.red);
+                                else l.setForeground(Color.black);
+                            }
+                        }
                     }
 
                     @Override
                     public void mouseEntered(MouseEvent e) {
-                        MovieManagerView.drop = cBlockLabel;
+                        if(MovieManagerView.drag == true) {
+                            MovieManagerView.drop = cBlockLabel;
+                            panel.setBackground(new Color(200, 200, 200));
+                        }
                     }
 
                     @Override
                     public void mouseExited(MouseEvent e) {
                         MovieManagerView.drop = null;
+                        panel.setBackground(defaultColor);
                     }
-                });
+                    public void mousePressed(MouseEvent e) {}
+                    public void mouseReleased(MouseEvent e) {}
+                };
+                panel.addMouseListener(dragDrop);
+                cBlockLabel.addMouseListener(dragDrop);
+
                 JLabel deleteBtn = new JLabel();
                 try {
                     File url = new File("data/trashcan.png");
@@ -87,27 +95,6 @@ public class MovieCollectionView {
                 });
 
                 labels.add(cBlockLabel);
-                cBlockLabel.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (cBlockLabel.getForeground().equals(Color.red)) {
-                            MovieManagerView.resetCollection();
-                            cBlockLabel.setForeground(Color.black);
-                        } else {
-                            MovieManagerView.updateMoviePanel(mc);
-                            for (JLabel l : labels) {
-                                if (cBlockLabel.equals(l)) cBlockLabel.setForeground(Color.red);
-                                else l.setForeground(Color.black);
-                            }
-                        }
-
-                    }
-
-                });
-
-
-
-
                 panel.add(cBlockLabel);
                 panel.add(deleteBtn);
                 cBlockList.add(panel);
@@ -116,10 +103,4 @@ public class MovieCollectionView {
         cBlockList.revalidate();
         return cBlockList;
     }
-
-
-
-
-
-
 }
