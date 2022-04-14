@@ -44,12 +44,9 @@ public class MovieCollectionView {
                         }
                     }
                 });
-
-
                 cBlockList.add(cBlockLabel);
             }
         }
-
         cBlockList.revalidate();
         return cBlockList;
     }

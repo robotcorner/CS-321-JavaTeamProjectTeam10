@@ -98,20 +98,10 @@ public class LoginManager {
             return true;
     }
 
-    // TODO finish this - Stephen
-    // ids, how many favorites
-    public int favoritePlusOne(String id) {
-        return 1;
-    }
-
-    public int favoriteMinusOne(String id) {
-        return 1;
-    }
-
     public int getFavorites4Id(String id) {
         int result = 0;
         for (User u : userList) {
-            if(u.getCollection("favorites").hasID(id))
+            if(u.getCollection("Favorites").hasID(id))
                 ++result;
         }
         return result;
