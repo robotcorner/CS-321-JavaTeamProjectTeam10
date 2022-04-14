@@ -31,6 +31,7 @@ public class MovieManagerView {
     static JLabel accountSection;
     static JTextArea commentSection;
     static JComboBox select;
+    static JLabel drop;
 
     /**
      * sets the instances of LoginManager, MovieManager, and MovieCollectionView so that the methods

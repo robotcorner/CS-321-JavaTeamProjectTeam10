@@ -28,7 +28,6 @@ public class MovieBlock extends JPanel {
 
         if(isLoggedin) {
             addMouseListener(new MouseAdapter() {
-
                 public void mousePressed(MouseEvent e) {
                     screenX[0] = e.getXOnScreen();
                     screenY[0] = e.getYOnScreen();
@@ -36,18 +35,19 @@ public class MovieBlock extends JPanel {
                     originalx[0] = screenX[0];
                     originaly[0] = screenY[0];
 
-
                     myX[0] = getX();
                     myY[0] = getY();
                     MovieManagerView.updateMovieDetails(imdbID);
+                    MovieManagerView.drag = m;
                 }
 
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-
                     MovieManagerView.updateMoviePanel("");
-
+                    if(MovieManagerView.drop != null)
+                        MovieManagerView.loginManager.getCurrentUser().getCollection(MovieManagerView.drop.getText()).addMovie(m);
+                    MovieManagerView.drop = null;
                 }
 
                 @Override

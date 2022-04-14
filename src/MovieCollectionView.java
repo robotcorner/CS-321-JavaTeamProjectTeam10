@@ -14,7 +14,6 @@ public class MovieCollectionView {
     private ArrayList<MovieCollection> movieCollectionList;
     private ArrayList<JLabel> labels = new ArrayList<JLabel>();
 
-
     public MovieCollectionView(LoginManager loginManager) {
         this.loginManager = loginManager;
         if (loginManager.verifyLogin()) { // signed in
@@ -32,7 +31,34 @@ public class MovieCollectionView {
             for (MovieCollection mc : movieCollectionList) {
                 String cName = mc.getName();
                 JPanel panel = new JPanel();
+
                 JLabel cBlockLabel = new JLabel(cName);
+                cBlockLabel.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        System.out.println("released!");
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        MovieManagerView.drop = cBlockLabel;
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        MovieManagerView.drop = null;
+                    }
+                });
                 JLabel deleteBtn = new JLabel();
                 try {
                     File url = new File("data/trashcan.png");
