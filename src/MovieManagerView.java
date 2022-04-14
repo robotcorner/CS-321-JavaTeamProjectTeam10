@@ -284,7 +284,7 @@ public class MovieManagerView {
 
         JLabel appTitle = new JLabel("MAML - My Awesome Movie Library");
         try {
-            File url = new File("MAML Logo (w no background.png");
+            File url = new File("MAML Logo (w no background).png");
             Image image = ImageIO.read(url);
             if (image == null) {
                 // could not load image
