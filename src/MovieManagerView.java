@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -282,6 +283,21 @@ public class MovieManagerView {
         loginSection.setVisible(true);
 
         JLabel appTitle = new JLabel("MAML - My Awesome Movie Library");
+        try {
+            File url = new File("MAML Logo (w no background.png");
+            Image image = ImageIO.read(url);
+            if (image == null) {
+                // could not load image
+                appTitle.add(new JLabel("MAML - My Awesome Movie Library"));
+            } else {
+                // set image here
+                JLabel icon = new JLabel();
+                icon.setIcon(new ImageIcon(image));
+                appTitle.add(icon);
+            }
+        } catch (IOException e) {
+            appTitle.add(new JLabel("MAML - My Awesome Movie Library"));
+        }
         appTitle.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
