@@ -26,6 +26,19 @@ public class MovieCollectionView {
         JPanel cBlockList = new JPanel();       // collection blocks list
         cBlockList.setLayout(new GridLayout(0, 1));
 
+        JButton addCollectionButton = new JButton("Add Collection");
+        JPanel blah = new JPanel();
+
+        addCollectionButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String name = JOptionPane.showInputDialog("New Collection Name");
+                loginManager.getCurrentUser().newCollection(name);
+                MovieManagerView.updateCollectionPanel();
+            }
+        });
+
+
         if (loginManager.verifyLogin()) {
             movieCollectionList = loginManager.getCurrentUser().getallCollections();
             labels.clear();
@@ -68,6 +81,7 @@ public class MovieCollectionView {
                 panel.addMouseListener(dragDrop);
                 cBlockLabel.addMouseListener(dragDrop);
 
+
                 JLabel deleteBtn = new JLabel();
                 try {
                     File url = new File("data/trashcan.png");
@@ -100,6 +114,9 @@ public class MovieCollectionView {
                 cBlockList.add(panel);
             }
         }
+
+        blah.add(addCollectionButton);
+        cBlockList.add(blah);
         cBlockList.revalidate();
         return cBlockList;
     }
