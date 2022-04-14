@@ -76,6 +76,8 @@ public class MovieBlock extends JPanel {
             });
 
             JLabel countFav = new JLabel(count);
+            Font f = countFav.getFont();
+            countFav.setFont(f.deriveFont(f.getStyle() & ~Font.BOLD));
             final boolean[] heartToggled = {heartStatus};
             JLabel heart;
             if (heartStatus) {
