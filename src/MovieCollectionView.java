@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -99,8 +100,13 @@ public class MovieCollectionView {
                                 else l.setForeground(Color.black);
                             }
                         }
+
                     }
+
                 });
+
+
+
 
                 panel.add(cBlockLabel);
                 panel.add(deleteBtn);
@@ -110,4 +116,10 @@ public class MovieCollectionView {
         cBlockList.revalidate();
         return cBlockList;
     }
+
+
+
+
+
+
 }

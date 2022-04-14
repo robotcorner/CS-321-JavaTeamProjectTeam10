@@ -1,12 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.dnd.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 public class MovieBlock extends JPanel {
+
+    private Movie movie;
+
     MovieBlock(Movie m, boolean heartStatus, boolean isLoggedin, String count) {
         super();
+
 
         boolean login;
 
@@ -18,6 +23,7 @@ public class MovieBlock extends JPanel {
         final int[] originalx = new int[1];
         final int[] originaly = new int[1];
 
+        this.movie = m;
 
         JLabel title = new JLabel(m.getTitle());
         this.setLayout(new FlowLayout());
@@ -38,7 +44,6 @@ public class MovieBlock extends JPanel {
                     myX[0] = getX();
                     myY[0] = getY();
                     MovieManagerView.updateMovieDetails(imdbID);
-                    MovieManagerView.drag = m;
                 }
 
 
@@ -71,11 +76,17 @@ public class MovieBlock extends JPanel {
                     int deltaY = e.getYOnScreen() - screenY[0];
 
                     setLocation(myX[0] + deltaX, myY[0] + deltaY);
+
+
+
                 }
 
                 @Override
                 public void mouseMoved(MouseEvent e) {
+
                 }
+
+
             });
 
             JLabel countFav = new JLabel(count);
@@ -136,4 +147,11 @@ public class MovieBlock extends JPanel {
 
 
     }
+
+    public Movie getMovie(){
+        return movie;
+    }
+
+
+
 }

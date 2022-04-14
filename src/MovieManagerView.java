@@ -1,6 +1,11 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -22,6 +27,8 @@ public class MovieManagerView {
     static LoginManager loginManager;
     static MovieManager movieManager;
     static MovieCollection currentCollection;
+    static MovieBlock movieBlock;
+
 
     // UI Components
     static JPanel moviePanel;
@@ -32,6 +39,7 @@ public class MovieManagerView {
     static JTextArea commentSection;
     static JComboBox select;
     static JLabel drop;
+
 
     /**
      * sets the instances of LoginManager, MovieManager, and MovieCollectionView so that the methods
