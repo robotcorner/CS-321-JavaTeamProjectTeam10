@@ -1,7 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SimpleMessage {
+
+    LoginManager loginManager;
+
 
     /**
      * Displays a small frame with a simple message, which can vary depending on the circumstance

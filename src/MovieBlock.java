@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 public class MovieBlock extends JPanel {
 
     private Movie movie;
+    private MovieCollectionView movieCollectionView;
 
     MovieBlock(Movie m, boolean heartStatus, boolean isLoggedin, String count) {
         super();
@@ -76,6 +77,8 @@ public class MovieBlock extends JPanel {
                     int deltaY = e.getYOnScreen() - screenY[0];
 
                     setLocation(myX[0] + deltaX, myY[0] + deltaY);
+
+
 
 
 
