@@ -45,7 +45,6 @@ public class MovieCollectionView {
                     }
                 });
 
-
                 cBlockList.add(cBlockLabel);
             }
         }

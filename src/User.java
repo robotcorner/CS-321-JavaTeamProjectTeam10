@@ -71,6 +71,10 @@ public class User {
         return collections;
     }
 
+    public void deleteCollection(String name) {
+        collections.remove(getCollection(name));
+    }
+
     /**
      *
      * @param imdbID
