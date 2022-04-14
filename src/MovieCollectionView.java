@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +14,8 @@ public class MovieCollectionView {
     private LoginManager loginManager;
     private ArrayList<MovieCollection> movieCollectionList;
     private ArrayList<JLabel> labels = new ArrayList<JLabel>();
-
+    private MovieBlock movieBlock;
+    private MovieManagerView movieManagerView;
 
     public MovieCollectionView(LoginManager loginManager) {
         this.loginManager = loginManager;
@@ -73,8 +75,21 @@ public class MovieCollectionView {
                                 else l.setForeground(Color.black);
                             }
                         }
+
+                 cBlockLabel.addMouseListener(new MouseAdapter() {
+                     @Override
+                     public void mouseReleased(MouseEvent e) {
+                         loginManager.getCurrentUser().getCollection(cBlockLabel.getName()).addMovie(movieBlock.getMovie());
+
+                     }
+                 });
+
                     }
+
                 });
+
+
+
 
                 panel.add(cBlockLabel);
                 panel.add(deleteBtn);
@@ -84,4 +99,10 @@ public class MovieCollectionView {
         cBlockList.revalidate();
         return cBlockList;
     }
+
+
+
+
+
+
 }
