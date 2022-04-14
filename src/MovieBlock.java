@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 public class MovieBlock extends JPanel {
-    MovieBlock(Movie m, boolean heartStatus, boolean isLoggedin) {
+    MovieBlock(Movie m, boolean heartStatus, boolean isLoggedin, String count) {
         super();
 
         boolean login;
@@ -19,15 +19,13 @@ public class MovieBlock extends JPanel {
         final int[] originaly = new int[1];
 
 
-
         JLabel title = new JLabel(m.getTitle());
         this.setLayout(new FlowLayout());
         this.add(title);
         String imdbID = m.getImdbID();
 
 
-
-        if(isLoggedin == true) {
+        if(isLoggedin) {
             addMouseListener(new MouseAdapter() {
 
                 public void mousePressed(MouseEvent e) {
@@ -77,7 +75,9 @@ public class MovieBlock extends JPanel {
                 }
             });
 
-
+            JLabel countFav = new JLabel(count);
+            Font f = countFav.getFont();
+            countFav.setFont(f.deriveFont(f.getStyle() & ~Font.BOLD));
             final boolean[] heartToggled = {heartStatus};
             JLabel heart;
             if (heartStatus) {
@@ -96,16 +96,20 @@ public class MovieBlock extends JPanel {
                             heart.setText("❤");
                             heart.setForeground(Color.red);
                             heartToggled[0] = true;
+                            countFav.setText(Integer.toString(Integer.parseInt(countFav.getText())+1));
                         }
                     } else {
                         heart.setText("♡");
                         heart.setForeground(Color.black);
                         heartToggled[0] = false;
                         MovieManagerView.userRemoveMovieFromCollection("Favorites", m);
+                        countFav.setText(Integer.toString(Integer.parseInt(countFav.getText())-1));
                     }
                 }
             });
             this.add(heart);
+            this.add(countFav);
+            this.setVisible(true);
         }
         else {
             addMouseListener(new MouseAdapter() {
@@ -115,5 +119,7 @@ public class MovieBlock extends JPanel {
                 }
             });
         }
+
+
     }
 }
