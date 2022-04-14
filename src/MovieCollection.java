@@ -21,8 +21,10 @@ public class MovieCollection extends Searchable {
     }
 
     public void addMovie(Movie m) {
-        ids.add(m.getImdbID());
-        mediaList.add(m);
+        if(!ids.contains(m))
+            ids.add(m.getImdbID());
+        if(!mediaList.contains(m))
+            mediaList.add(m);
     }
 
     public void removeMovie(Movie m) {
