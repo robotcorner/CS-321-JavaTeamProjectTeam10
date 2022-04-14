@@ -104,6 +104,13 @@ public class MovieManagerView {
         updateMoviePanel("");
     }
 
+    public static void resetCollection() {
+        currentCollection = new MovieCollection(movieManager.getMediaList()); // reset current collection
+        updateMoviePanel(""); // reset movie panel
+        // updateMoviePanel(currentCollection); also works
+        updateMovieDetails(""); // empty movie details
+    }
+
     /**
      * updates the details regarding a certain movie
      */
@@ -147,13 +154,15 @@ public class MovieManagerView {
                 });
                 movieDetails.add(new JScrollPane(commentSection));
                 movieDetails.add(commentButton);
-                JButton deleteBtn = new JButton("Delete");
-                deleteBtn.addActionListener(e -> {
-                    currentCollection.removeMovie(movie);
-                    updateMoviePanel("");
-                    updateMovieDetails("");
-                });
-                movieDetails.add(deleteBtn);
+                if(currentCollection.getName() != null) {
+                    JButton deleteBtn = new JButton("Delete");
+                    deleteBtn.addActionListener(e -> {
+                        currentCollection.removeMovie(movie);
+                        updateMoviePanel("");
+                        updateMovieDetails("");
+                    });
+                    movieDetails.add(deleteBtn);
+                }
             }
             movieDetails.setVisible(true);
         }
@@ -208,9 +217,7 @@ public class MovieManagerView {
                 saveMessage.save();
                 accountSection.setText("guest");
                 updateLoginSection();
-                currentCollection = new MovieCollection(movieManager.getMediaList());
-                updateMoviePanel(currentCollection);
-                updateMovieDetails("");
+                resetCollection();
             });
 
             signupBtn = new JButton("Save");
@@ -313,19 +320,6 @@ public class MovieManagerView {
         topBar.add(searchSection, BorderLayout.CENTER);
         topBar.add(rightSection, BorderLayout.LINE_END);
         topBar.setVisible(true);
-
-        // Creates a Mouse Listener that refreshes the movie panel
-        topBar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                currentCollection = new MovieCollection(movieManager.getMediaList());
-                updateMoviePanel("");
-            }
-        });
-
-
-
-
 
 
         // create movie panel

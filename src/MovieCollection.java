@@ -79,4 +79,5 @@ public class MovieCollection extends Searchable {
     public String getName() {
         return name;
     }
+    public void setName(String n) { name = n; }
 }

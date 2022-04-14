@@ -33,8 +33,7 @@ public class MovieCollectionView {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (cBlockLabel.getForeground().equals(Color.red)) {
-                            MovieManagerView.updateMoviePanel(new MovieCollection(MovieManagerView.movieManager.getMediaList()));
-                            MovieManagerView.updateMovieDetails("");
+                            MovieManagerView.resetCollection();
                             cBlockLabel.setForeground(Color.black);
                         } else {
                             MovieManagerView.updateMoviePanel(mc);
