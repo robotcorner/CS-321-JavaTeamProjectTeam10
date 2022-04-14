@@ -98,6 +98,10 @@ public class LoginManager {
             return true;
     }
 
+    public void reloadUsers() {
+        userList = jsonOperator.GetAllUsers();
+    }
+
     public int getFavorites4Id(String id) {
         int result = 0;
         for (User u : userList) {

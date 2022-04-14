@@ -21,13 +21,11 @@ public class SaveMessage {
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if(result == JOptionPane.YES_OPTION) {
-
             loginManager.save();
             loginManager.logout();
         }
 
         else if (result == JOptionPane.NO_OPTION) {
-
             loginManager.logout();
         }
     }

@@ -219,6 +219,7 @@ public class MovieManagerView {
             loginBtn.addActionListener(e -> {
                 System.out.println("Pressed Logout Button");
                 saveMessage.save();
+                loginManager.reloadUsers();
                 accountSection.setText("guest");
                 updateLoginSection();
                 resetCollection();
