@@ -289,21 +289,19 @@ public class MovieManagerView {
         loginSection.setLocation((frame.getWidth() - 60), 20);
         loginSection.setVisible(true);
 
-        JLabel appTitle = new JLabel("MAML - My Awesome Movie Library");
+        JLabel appTitle = new JLabel();
         try {
-            File url = new File("MAML Logo (w no background).png");
+            File url = new File("data/logo.png");
             Image image = ImageIO.read(url);
             if (image == null) {
                 // could not load image
-                appTitle.add(new JLabel("MAML - My Awesome Movie Library"));
+                appTitle.setText("MAML - My Awesome Movie Library");
             } else {
                 // set image here
-                JLabel icon = new JLabel();
-                icon.setIcon(new ImageIcon(image));
-                appTitle.add(icon);
+                appTitle.setIcon(new ImageIcon(image));
             }
         } catch (IOException e) {
-            appTitle.add(new JLabel("MAML - My Awesome Movie Library"));
+            appTitle.setText("MAML - My Awesome Movie Library");
         }
         appTitle.addMouseListener(new MouseAdapter() {
             @Override
