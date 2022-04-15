@@ -12,14 +12,27 @@ public class MovieCollection extends Searchable {
     private transient ArrayList<Movie> mediaList = new ArrayList<Movie>(); // array of movies
     private String name;
 
+    /**
+     * Create empty collection
+     * @param name the title of the collection
+     */
     MovieCollection(String name) {
         this.name = name;
     }
 
+    /**
+     * Create collection populated with movies from list
+     * @param m list of movies
+     */
     MovieCollection(ArrayList<Movie> m) {
         mediaList = m;
+        m.forEach(e -> ids.add(e.getImdbID()));
     }
 
+    /**
+     * Add movie to both lists
+     * @param m movie
+     */
     public void addMovie(Movie m) {
         if(!ids.contains(m))
             ids.add(m.getImdbID());
@@ -27,6 +40,10 @@ public class MovieCollection extends Searchable {
             mediaList.add(m);
     }
 
+    /**
+     * Remove movie from both lists
+     * @param m movie
+     */
     public void removeMovie(Movie m) {
         if(ids.contains(m.getImdbID()))
             ids.remove(m.getImdbID());
@@ -34,13 +51,21 @@ public class MovieCollection extends Searchable {
             mediaList.remove(m);
     }
 
+    /**
+     * Returns whether or not a movie is in this collection
+     * @param imdbID id of movie
+     * @return true if movie in collection. false otherwise
+     */
     public boolean hasID(String imdbID) {
         if(ids.contains(imdbID))
             return true;
         return false;
     }
 
-    // This function allows us to store IDs in JSON and get movielist in memory
+    /**
+     * This function allows us to store IDs in JSON and load movielist into memory
+     * @param allMovies canonical list of movies
+     */
     public void buildMovieCollectionFromIds(ArrayList<Movie> allMovies) {
         mediaList = new ArrayList<Movie>();
         for (String id: ids) {
@@ -52,34 +77,71 @@ public class MovieCollection extends Searchable {
         }
     }
 
+    /**
+     * inherited from Searchable
+     * @param term
+     * @return
+     */
     public ArrayList<Movie> search(String term) {
         return super.search(mediaList, term);
     }
 
+    /**
+     * inherited from Searchable
+     * @param term
+     * @return
+     */
     public ArrayList<Movie> searchTitle(String term) {
         return super.searchTitle(mediaList, term);
     }
 
+    /**
+     * inherited from Searchable
+     * @param term
+     * @return
+     */
     public ArrayList<Movie> searchGenre(String term) {
         return super.searchGenre(mediaList, term);
     }
 
+    /**
+     * inherited from Searchable
+     * @param term
+     * @return
+     */
     public ArrayList<Movie> searchCast(String term) {
         return super.searchCast(mediaList, term);
     }
 
+    /**
+     * inherited from Searchable
+     * @param term
+     * @return
+     */
     public ArrayList<Movie> searchDirector(String term) {
         return super.searchDirector(mediaList, term);
     }
 
-    // Get a movies list
+    /**
+     *
+     * @return list of movies in collection
+     */
     public ArrayList<Movie> getMovieList() {
         return mediaList;
     }
 
 
+    /**
+     *
+     * @return name of collection
+     */
     public String getName() {
         return name;
     }
+
+    /**
+     * Unused - sets name of collection to name passed in
+     * @param n name
+     */
     public void setName(String n) { name = n; }
 }

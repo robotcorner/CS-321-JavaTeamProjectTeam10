@@ -271,10 +271,7 @@ public class MovieManagerView {
         });
 
         searchBar.addKeyListener(new KeyListener() {
-            @Override
             public void keyTyped(KeyEvent e) {}
-
-            @Override
             public void keyPressed(KeyEvent e) {}
 
             @Override
@@ -295,13 +292,13 @@ public class MovieManagerView {
         collectionsPanel = new JPanel();
         collectionsPanel.setLayout(new GridLayout(0, 1));
 
-
         loginSection = new JPanel();
         loginSection.add(new JLabel("Login/Signup: "));
         updateLoginSection();
         loginSection.setLocation((frame.getWidth() - 60), 20);
         loginSection.setVisible(true);
 
+        // Create logo or fallback image
         JLabel appTitle = new JLabel();
         try {
             File url = new File("data/logo.png");
@@ -348,7 +345,6 @@ public class MovieManagerView {
         topBar.add(rightSection, BorderLayout.LINE_END);
         topBar.setVisible(true);
 
-
         // create movie panel
         moviePanel = new JPanel();
         moviePanel.setLayout(new GridLayout(0, 1));
@@ -357,7 +353,6 @@ public class MovieManagerView {
         JScrollPane movieScroll = new JScrollPane(moviePanel);
         JScrollPane cListWidget = new JScrollPane(collectionsPanel);
         movieDetails = new JPanel();
-        //JScrollPane detailScroll = new JScrollPane(movieDetails);
 
         frameP.add(topBar, BorderLayout.PAGE_START);
         frameP.add(movieScroll, BorderLayout.CENTER);

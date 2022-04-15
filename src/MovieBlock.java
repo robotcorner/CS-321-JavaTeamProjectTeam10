@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.dnd.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -8,13 +7,9 @@ import java.awt.event.MouseMotionListener;
 public class MovieBlock extends JPanel {
 
     private Movie movie;
-    private MovieCollectionView movieCollectionView;
 
     MovieBlock(Movie m, boolean heartStatus, boolean isLoggedin, String count) {
         super();
-
-
-        boolean login;
 
         final int[] screenX = {0};
         final int[] screenY = {0};
@@ -48,7 +43,6 @@ public class MovieBlock extends JPanel {
                     MovieManagerView.drag = true;
                 }
 
-
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     MovieManagerView.updateMoviePanel("");
@@ -60,16 +54,13 @@ public class MovieBlock extends JPanel {
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    //setOpaque(true);
                     setBackground(hoverColor);
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    //setOpaque(false);
                     setBackground(origColor);
                 }
-
             });
 
             addMouseMotionListener(new MouseMotionListener() {
@@ -79,19 +70,8 @@ public class MovieBlock extends JPanel {
                     int deltaY = e.getYOnScreen() - screenY[0];
 
                     setLocation(myX[0] + deltaX, myY[0] + deltaY);
-
-
-
-
-
                 }
-
-                @Override
-                public void mouseMoved(MouseEvent e) {
-
-                }
-
-
+                public void mouseMoved(MouseEvent e) {}
             });
 
             JLabel countFav = new JLabel(count);
@@ -138,25 +118,18 @@ public class MovieBlock extends JPanel {
                 }
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    //setOpaque(true);
                     setBackground(hoverColor);
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    //setOpaque(false);
                     setBackground(origColor);
                 }
             });
         }
-
-
     }
 
     public Movie getMovie(){
         return movie;
     }
-
-
-
 }
