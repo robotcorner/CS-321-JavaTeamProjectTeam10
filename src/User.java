@@ -66,6 +66,7 @@ public class User {
 
     /**
      * Gets collection list
+     * @return all collections associated with this user
      */
     public ArrayList<MovieCollection> getallCollections(){
         return collections;
@@ -78,7 +79,7 @@ public class User {
     /**
      *
      * @param imdbID
-     * @return
+     * @return comment of type String
      */
     public String getComment(String imdbID) {
         if(comments == null) {
@@ -91,7 +92,7 @@ public class User {
     /**
      *
      * @param imdbID
-     * @return
+     * @return comment of type String
      */
     public String addComment(String imdbID, String comment) {
         return comments.put(imdbID, comment);
