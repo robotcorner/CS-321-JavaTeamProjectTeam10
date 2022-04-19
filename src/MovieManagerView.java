@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MovieManagerView {
     // Views
@@ -31,6 +32,7 @@ public class MovieManagerView {
     static JLabel accountSection;
     static JTextArea commentSection;
     static JComboBox select;
+    static JComboBox selectSort;
     static JLabel drop;
     static boolean drag = false;
 
@@ -77,6 +79,13 @@ public class MovieManagerView {
             result = currentCollection.searchCast(term);
         } else if(type.equals("Director")) {
             result = currentCollection.searchDirector(term);
+        }
+
+        String typeSort = (String) selectSort.getSelectedItem();
+        if(typeSort.equals("Title")){
+            Collections.sort(result, Movie.sortByName());
+        } else if(typeSort.equals("Year")) {
+            Collections.sort(result, Movie.sortByYear());
         }
 
         if(result.isEmpty()) {
@@ -281,6 +290,12 @@ public class MovieManagerView {
             updateMoviePanel(searchBar.getText());
         });
 
+        String[] options2 = {"None", "Title", "Year"};
+        selectSort = new JComboBox(options2);
+        selectSort.addActionListener(e -> {
+            updateMoviePanel(searchBar.getText());
+        });
+
         searchBar.setLocation(frame.getWidth() / 2, 20);
 
         // create collections panel before it gets updated with the login section
@@ -328,6 +343,7 @@ public class MovieManagerView {
         searchSection.add(searchBarIcon);
         searchSection.add(select);
         searchSection.add(searchBar);
+        searchSection.add(selectSort);
 
         JPanel rightSection = new JPanel(new FlowLayout());
         rightSection.add(accountSection);

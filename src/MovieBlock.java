@@ -6,7 +6,7 @@ import java.awt.event.MouseMotionListener;
 
 public class MovieBlock extends JPanel {
 
-    private Movie movie;
+    private final Movie movie;
 
     MovieBlock(Movie m, boolean heartStatus, boolean isLoggedin, String count) {
         super();
@@ -15,9 +15,6 @@ public class MovieBlock extends JPanel {
         final int[] screenY = {0};
         final int[] myX = {0};
         final int[] myY = {0};
-
-        final int[] originalx = new int[1];
-        final int[] originaly = new int[1];
 
         this.movie = m;
 
@@ -33,9 +30,6 @@ public class MovieBlock extends JPanel {
                 public void mousePressed(MouseEvent e) {
                     screenX[0] = e.getXOnScreen();
                     screenY[0] = e.getYOnScreen();
-
-                    originalx[0] = screenX[0];
-                    originaly[0] = screenY[0];
 
                     myX[0] = getX();
                     myY[0] = getY();

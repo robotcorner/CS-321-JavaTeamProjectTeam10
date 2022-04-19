@@ -12,22 +12,21 @@ import java.util.Date;
 public class Movie{
 
     // Instance Variables
-    private String imdbID;   // uniquely identifies the movie.
-    private String Title;
-    private int Year;
-    private String Rated;
-    private String Released;
-    private Date dateReleased;
-    private String Runtime;
-    private String Genre;
-    private String Director;
-    private String Actors;
-    private String Languages;
-    private String Poster;
-    private String Metascore;
-    private float imdbRating;
-    private String imdbVotes;
-    private String Type;
+    private final String imdbID;   // uniquely identifies the movie.
+    private final String Title;
+    private final int Year;
+    private final String Rated;
+    private final Date dateReleased;
+    private final String Runtime;
+    private final String Genre;
+    private final String Director;
+    private final String Actors;
+    private final String Languages;
+    private final String Poster;
+    private final String Metascore;
+    private final float imdbRating;
+    private final String imdbVotes;
+    private final String Type;
 
     Movie(String title, String year, String rated, String released, String runtime, String genre, String director, String actors, String languages, String poster, String metascore, String imdbRating, String imdbVotes, String imdbID, String typeOfContent) throws ParseException {
         this.Title = title;
