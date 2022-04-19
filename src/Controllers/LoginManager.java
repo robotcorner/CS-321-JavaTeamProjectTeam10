@@ -1,4 +1,9 @@
+package Controllers;
+
 import java.util.ArrayList;
+import Main.MovieJsonOperator;
+import Models.User;
+import Models.Movie;
 
 public class LoginManager {
     private ArrayList<User> userList;
@@ -7,13 +12,13 @@ public class LoginManager {
     private final MovieJsonOperator jsonOperator;
 
     /**
-     * sets the instances of UserList, MovieList, and MovieJsonOperator so that the info
+     * sets the instances of UserList, MovieList, and Main.MovieJsonOperator so that the info
      * in those json files can be used here
      * @param userList canonical list of all user accounts
      * @param movieList canonical list of all movies in the json file
      * @param jsonOperator object that directly handles json data
      */
-    LoginManager(ArrayList<User> userList, ArrayList<Movie> movieList, MovieJsonOperator jsonOperator) {
+    public LoginManager(ArrayList<User> userList, ArrayList<Movie> movieList, MovieJsonOperator jsonOperator) {
         this.userList = userList;
         this.jsonOperator = jsonOperator;
         this.movieList = movieList;

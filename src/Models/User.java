@@ -1,4 +1,8 @@
-import java.lang.reflect.Array;
+package Models;
+
+import Models.Movie;
+import Models.MovieCollection;
+
 import java.util.*;
 
 public class User {
@@ -9,11 +13,11 @@ public class User {
     private Hashtable<String, String> comments = new Hashtable<String, String>();
 
     /**
-     * Parametrized constructor for User
+     * Parametrized constructor for Models.User
      * @param u username goes here
      * @param p password goes here
      */
-    User(String u, String p) {
+    public User(String u, String p) {
         this.username = u;
         this.password = p;
         newCollection("Favorites");

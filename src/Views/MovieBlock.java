@@ -1,3 +1,8 @@
+package Views;
+
+import Models.Movie;
+import Views.MovieManagerView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -41,8 +46,8 @@ public class MovieBlock extends JPanel {
                 public void mouseReleased(MouseEvent e) {
                     if(MovieManagerView.drop != null) {
                         MovieManagerView.loginManager.getCurrentUser().getCollection(MovieManagerView.drop.getText()).addMovie(m);
-                        MovieManagerView.updateMovieDetails(imdbID);
                     }
+                    MovieManagerView.updateMovieDetails(imdbID);
                     MovieManagerView.drop = null;
                     MovieManagerView.drag = false;
                 }

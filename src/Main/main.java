@@ -1,4 +1,4 @@
-/*
+package Main;/*
 Course:         CS-321
 Project:        Build an app with GUI in swing for managing a book or movie watch later personal list.
 Requirements:
@@ -7,6 +7,12 @@ Requirements:
 
 Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell, Braden Willingham
  */
+
+import Controllers.LoginManager;
+import Controllers.MovieManager;
+import Models.Movie;
+import Models.User;
+import Views.MovieManagerView;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -64,7 +70,7 @@ class Main {
         ArrayList<User> userList = operator.GetAllUsers();
         LoginManager loginManager = new LoginManager(userList, movieList, operator);
 
-        // Create Movie List Object for the Movie List View to display
+        // Create Models.Movie List Object for the Models.Movie List View to display
         MovieManager movieManager = new MovieManager(movieList);
         MovieManagerView.Initialize(loginManager, movieManager);
         MovieManagerView.main();

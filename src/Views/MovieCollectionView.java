@@ -1,3 +1,8 @@
+package Views;
+
+import Controllers.LoginManager;
+import Models.MovieCollection;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

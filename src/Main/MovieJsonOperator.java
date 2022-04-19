@@ -1,3 +1,7 @@
+package Main;
+
+import Models.Movie;
+import Models.User;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -12,7 +16,7 @@ public class MovieJsonOperator {
 
     MovieJsonOperator() {}
 
-        MovieJsonOperator(String movie_filename, String user_filename) {
+        public MovieJsonOperator(String movie_filename, String user_filename) {
         this.movie_filename = movie_filename;
         this.user_filename  = user_filename;
     }

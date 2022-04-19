@@ -1,4 +1,10 @@
-import javax.swing.*;
+package Tests;
+
+import Controllers.LoginManager;
+import Models.Movie;
+import Models.User;
+import Main.MovieJsonOperator;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -18,7 +24,7 @@ class Tests {
         Movie.printSimpleMovieToConsole(movie1);
 
         // TEST: MOVIE GETTER FUNCTIONS
-        System.out.println("Movie Title: " + movie1.getTitle() + "|  Movie Genre: " + movie1.getYear());
+        System.out.println("Models.Movie Title: " + movie1.getTitle() + "|  Models.Movie Genre: " + movie1.getYear());
 
         // TEST: MOVIE GETTER FUNCTION - STRING WITH COMMAS
         System.out.println(movie1.getGenre());

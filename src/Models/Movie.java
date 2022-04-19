@@ -1,10 +1,12 @@
+package Models;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 
 /**
- * This is a Movie Object Template
+ * This is a Models.Movie Object Template
  *      Each constructor will be populated from the JSON file.
  *      We don't need setters for everything because we expect the contructor
  *          to do that.
@@ -28,7 +30,7 @@ public class Movie{
     private final String imdbVotes;
     private final String Type;
 
-    Movie(String title, String year, String rated, String released, String runtime, String genre, String director, String actors, String languages, String poster, String metascore, String imdbRating, String imdbVotes, String imdbID, String typeOfContent) throws ParseException {
+    public Movie(String title, String year, String rated, String released, String runtime, String genre, String director, String actors, String languages, String poster, String metascore, String imdbRating, String imdbVotes, String imdbID, String typeOfContent) throws ParseException {
         this.Title = title;
         this.Year = Integer.parseInt(year);
         this.Rated = rated;
@@ -127,7 +129,7 @@ public class Movie{
      * I just used the compareTo function Braden already wrote.
      * We can make more sort functions following this pattern
      * Like sorting Genre, Director, Rating (G, PG, ...), etc.
-     * Usage Collections.sort(movieList, Movie.sortByName());
+     * Usage Collections.sort(movieList, Models.Movie.sortByName());
      * @return Comparator with compare function
      */
     public static Comparator<Movie> sortByName() {

@@ -1,6 +1,8 @@
+package Controllers;
+
+import Models.Movie;
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Locale;
 
 public class MovieManager {
     // Used by an Instance
@@ -10,7 +12,7 @@ public class MovieManager {
         this.mediaList = new ArrayList<Movie>();
     }
 
-    MovieManager(ArrayList<Movie> medias) {
+    public MovieManager(ArrayList<Movie> medias) {
         this.mediaList = medias;
     }
 
@@ -25,7 +27,7 @@ public class MovieManager {
     /**
      * Gets a movie by its imdbID
      * @param imdbID
-     * @return Movie or null if not found
+     * @return Models.Movie or null if not found
      */
     public Movie get(String imdbID) {
         for (Movie movie: mediaList)

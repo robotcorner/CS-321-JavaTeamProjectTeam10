@@ -1,3 +1,7 @@
+package Models;
+
+import Models.Movie;
+
 import java.util.ArrayList;
 
 public interface ISearchable {

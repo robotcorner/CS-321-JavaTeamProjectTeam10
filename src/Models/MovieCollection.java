@@ -1,11 +1,12 @@
-import java.lang.reflect.Array;
+package Models;
+
 import java.util.ArrayList;
 
 /**
  * This holds a movie collection that the user has
  * The id ArrayList is from the json file
- * The Movie ArrayList is built from the id ArrayList
- * (use the Movie arraylist for everything)
+ * The Models.Movie ArrayList is built from the id ArrayList
+ * (use the Models.Movie arraylist for everything)
  */
 public class MovieCollection extends Searchable {
     private ArrayList<String> ids = new ArrayList<>(); // array of movie IDs
@@ -16,7 +17,7 @@ public class MovieCollection extends Searchable {
      * Create empty collection
      * @param name the title of the collection
      */
-    MovieCollection(String name) {
+    public MovieCollection(String name) {
         this.name = name;
     }
 
@@ -24,7 +25,7 @@ public class MovieCollection extends Searchable {
      * Create collection populated with movies from list
      * @param m list of movies
      */
-    MovieCollection(ArrayList<Movie> m) {
+    public MovieCollection(ArrayList<Movie> m) {
         mediaList = m;
         m.forEach(e -> ids.add(e.getImdbID()));
     }
@@ -78,7 +79,7 @@ public class MovieCollection extends Searchable {
     }
 
     /**
-     * inherited from Searchable
+     * inherited from Models.Searchable
      * @param term
      * @return
      */
@@ -87,7 +88,7 @@ public class MovieCollection extends Searchable {
     }
 
     /**
-     * inherited from Searchable
+     * inherited from Models.Searchable
      * @param term
      * @return
      */
@@ -96,7 +97,7 @@ public class MovieCollection extends Searchable {
     }
 
     /**
-     * inherited from Searchable
+     * inherited from Models.Searchable
      * @param term
      * @return
      */
@@ -105,7 +106,7 @@ public class MovieCollection extends Searchable {
     }
 
     /**
-     * inherited from Searchable
+     * inherited from Models.Searchable
      * @param term
      * @return
      */
@@ -114,7 +115,7 @@ public class MovieCollection extends Searchable {
     }
 
     /**
-     * inherited from Searchable
+     * inherited from Models.Searchable
      * @param term
      * @return
      */

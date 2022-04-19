@@ -1,3 +1,10 @@
+package Views;
+
+import Views.LoginView;
+import Controllers.*;
+import Models.MovieCollection;
+import Models.Movie;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +45,7 @@ public class MovieManagerView {
 
 
     /**
-     * sets the instances of LoginManager and MovieManager so the methods
+     * sets the instances of Controllers.LoginManager and Controllers.MovieManager so the methods
      * in those classes can be used here
      * @param _loginManager controller that exposes methods to this view
      * @param _movieManager controller that exposes methods to this view
@@ -315,13 +322,13 @@ public class MovieManagerView {
             Image image = ImageIO.read(url);
             if (image == null) {
                 // could not load image
-                appTitle.setText("MAML - My Awesome Movie Library");
+                appTitle.setText("MAML - My Awesome Models.Movie Library");
             } else {
                 // set image here
                 appTitle.setIcon(new ImageIcon(image));
             }
         } catch (IOException e) {
-            appTitle.setText("MAML - My Awesome Movie Library");
+            appTitle.setText("MAML - My Awesome Models.Movie Library");
         }
         appTitle.addMouseListener(new MouseAdapter() {
             @Override

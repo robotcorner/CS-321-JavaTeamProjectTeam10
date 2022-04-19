@@ -1,3 +1,8 @@
+package Models;
+
+import Models.ISearchable;
+import Models.Movie;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -5,7 +10,7 @@ public class Searchable implements ISearchable {
     /**
      * Searches a few interesting fields and returns a list of all matches
      * @param term whatever the user enters in the GUI
-     * @return ArrayList<Movie> result
+     * @return ArrayList<Models.Movie> result
      */
     public ArrayList<Movie> search(ArrayList<Movie> mediaList, String term) {
         if(term.isEmpty())

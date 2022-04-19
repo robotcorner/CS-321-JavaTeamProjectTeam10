@@ -1,3 +1,7 @@
+package Views;
+
+import Controllers.LoginManager;
+
 import javax.swing.*;
 
 public class SaveMessage {

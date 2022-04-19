@@ -1,3 +1,7 @@
+package Views;
+
+import Controllers.LoginManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -111,12 +115,12 @@ public class LoginView {
                 String username = userTextField.getText();
 
                 if(loginManager.signup(username, passwordString1)) {
-                    s.message("New User Created", "Press 'OK' to proceed.");
+                    s.message("New Models.User Created", "Press 'OK' to proceed.");
                     loginManager.save();
                     MovieManagerView.updateLoginSection();
                     MovieManagerView.updateMoviePanel("");
                 } else {
-                    s.message("Error", "User already exists.");
+                    s.message("Error", "Models.User already exists.");
                 }
 
                 newUserView.setVisible(false);
