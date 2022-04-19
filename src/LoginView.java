@@ -3,19 +3,16 @@ import java.awt.*;
 
 public class LoginView {
 
-    private LoginManager loginManager;
-    private MovieManagerView movieManagerView;
+    private final LoginManager loginManager;
     SimpleMessage s = new SimpleMessage();
 
     /**
      * sets the instances of LoginManager and MovieManagerView so that the methods
      * in those classes can be used here
      * @param loginManager
-     * @param movieManagerView
      */
-    public LoginView(LoginManager loginManager, MovieManagerView movieManagerView) {
+    public LoginView(LoginManager loginManager) {
         this.loginManager = loginManager;
-        this.movieManagerView = movieManagerView;
     }
 
     /**
@@ -118,7 +115,8 @@ public class LoginView {
                 if(loginManager.signup(username, password)) {
                     s.message("New User Created", "Press 'OK' to proceed.");
                     loginManager.save();
-                    movieManagerView.updateLoginSection();
+                    MovieManagerView.updateLoginSection();
+                    MovieManagerView.updateMoviePanel("");
                 } else {
                     s.message("Error", "User already exists.");
                 }

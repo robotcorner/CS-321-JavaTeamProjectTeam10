@@ -13,7 +13,7 @@ public class MovieJsonOperator {
 
     MovieJsonOperator() {}
 
-    MovieJsonOperator(String movie_filename, String user_filename) {
+        MovieJsonOperator(String movie_filename, String user_filename) {
         this.movie_filename = movie_filename;
         this.user_filename  = user_filename;
     }

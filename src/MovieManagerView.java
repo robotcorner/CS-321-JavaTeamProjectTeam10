@@ -48,7 +48,7 @@ public class MovieManagerView {
      * @param movieManager
      */
     public MovieManagerView(LoginManager loginManager, MovieManager movieManager) {
-        this.accountView = new LoginView(loginManager, this);
+        this.accountView = new LoginView(loginManager);
         this.loginManager = loginManager;
         this.movieManager = movieManager;
         this.saveMessage = new SaveMessage(loginManager);
