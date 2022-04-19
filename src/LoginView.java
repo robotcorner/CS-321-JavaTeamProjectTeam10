@@ -106,7 +106,7 @@ public class LoginView {
         char[] password1 = passwordTextField.getPassword();
         String passwordString1 = new String(password1);
         char[] password2 = verifyPasswordTextField.getPassword();
-        String passwordString2 = new String(password1);
+        String passwordString2 = new String(password2);
 
         signUp.addActionListener(event -> {
 
