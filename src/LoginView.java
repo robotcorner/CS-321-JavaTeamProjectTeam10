@@ -82,12 +82,12 @@ public class LoginView {
 
         final int FIELD_WIDTH = 25;
         JTextField userTextField = new JTextField(FIELD_WIDTH);
-        JTextField passwordTextField = new JTextField(FIELD_WIDTH);
+        JPasswordField passwordTextField = new JPasswordField(FIELD_WIDTH);
 
         JLabel verifyUserText = new JLabel("Re-Enter your username and password.");
 
         JTextField verifyUserTextField = new JTextField(FIELD_WIDTH);
-        JTextField verifyPasswordTextField = new JTextField(FIELD_WIDTH);
+        JPasswordField verifyPasswordTextField = new JPasswordField(FIELD_WIDTH);
 
         JButton signUp = new JButton("Sign Up");
         JButton cancel = new JButton("Cancel");
@@ -103,12 +103,17 @@ public class LoginView {
         newUserView.add(signUp);
         newUserView.add(cancel);
 
+        char[] password1 = passwordTextField.getPassword();
+        String passwordString1 = new String(password1);
+        char[] password2 = verifyPasswordTextField.getPassword();
+        String passwordString2 = new String(password1);
+
         signUp.addActionListener(event -> {
 
-            if (userTextField.getText().equals(verifyUserTextField.getText()) && passwordTextField.getText().equals(verifyPasswordTextField.getText())) {
+            if (userTextField.getText().equals(verifyUserTextField.getText()) && passwordString1.equals(passwordString2)) {
 
                 String username = userTextField.getText();
-                String password = passwordTextField.getText();
+                String password = passwordString1;
 
                 if(loginManager.signup(username, password)) {
                     s.message("New User Created", "Press 'OK' to proceed.");
@@ -121,12 +126,12 @@ public class LoginView {
                 newUserView.setVisible(false);
             }
 
-            else if (userTextField.getText().equals(verifyUserTextField.getText()) && !passwordTextField.getText().equals(verifyPasswordTextField.getText())) {
+            else if (userTextField.getText().equals(verifyUserTextField.getText()) && !passwordString1.equals(passwordString2)) {
 
                 s.message("Error", "Password does not match.");
             }
 
-            else if (!userTextField.getText().equals(verifyUserTextField.getText()) && passwordTextField.getText().equals(verifyPasswordTextField.getText())) {
+            else if (!userTextField.getText().equals(verifyUserTextField.getText()) && passwordString1.equals(passwordString2)) {
 
                 s.message("Error", "Username does not match.");
             }
