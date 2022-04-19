@@ -4,7 +4,7 @@ import java.util.Locale;
 
 public class MovieManager {
     // Used by an Instance
-    private ArrayList<Movie> mediaList;
+    private final ArrayList<Movie> mediaList;
 
     MovieManager() {
         this.mediaList = new ArrayList<Movie>();
@@ -42,16 +42,6 @@ public class MovieManager {
         return mediaList;
     }
 
-    /**
-     *  A function that displays every movie title
-     */
-
-    public void displayList()
-    {
-        for (Movie movie: mediaList)
-            System.out.println(movie.getTitle());
-    }
-
 
     /**
      *
@@ -61,28 +51,10 @@ public class MovieManager {
         return mediaList.size();
     }
 
-
     /**
-     * Sorts media list by title alphabetically
-     */
-    public void sortbyName(){
-        Collections.sort(mediaList, Movie.sortByName());
-    }
-
-    /**
-     * Sorts media list by year released
-     */
-    public void sortbyYear(){
-        Collections.sort(mediaList, Movie.sortByYear());
-    }
-
-    /**
-     * Sees if a movie title is in the media list
+     * Returns if a movie title is in the media list
      */
     public boolean find(String title){
-        if(mediaList.contains(title))
-            return true;
-        else
-            return false;
+        return mediaList.contains(title);
     }
 }

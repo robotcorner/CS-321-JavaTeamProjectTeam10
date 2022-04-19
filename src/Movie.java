@@ -108,7 +108,7 @@ public class Movie{
 
     /**
      * Prints out the movie to the console
-     * @param media
+     * @param media a single movie record
      */
     public static void printSimpleMovieToConsole(Movie media) {
         // This is independent of the instances and tests a single movie object passed in.

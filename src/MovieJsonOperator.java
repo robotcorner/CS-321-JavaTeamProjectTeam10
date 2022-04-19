@@ -1,13 +1,12 @@
 import com.google.gson.Gson;
 
 import java.io.*;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class MovieJsonOperator {
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
     private String movie_filename;
     private String user_filename;
 
@@ -20,7 +19,7 @@ public class MovieJsonOperator {
 
     /**
      * Get movie by imdbID
-     * @param imdbID
+     * @param imdbID id given in json file
      * @return movie
      */
     public Movie Get(String imdbID) {
@@ -31,7 +30,7 @@ public class MovieJsonOperator {
             while (sc.hasNextLine()) {
                 movie = gson.fromJson(sc.nextLine(), Movie.class);
                 System.out.println("in while loop");
-                if (movie.getImdbID() == imdbID) {
+                if (movie.getImdbID().equals(imdbID)) {
                     Movie.printSimpleMovieToConsole(movie); // debug
                     return movie;
                 }
@@ -50,7 +49,7 @@ public class MovieJsonOperator {
     public ArrayList<Movie> GetAllMovies() {
         try {
             Movie[] movies = gson.fromJson(new FileReader(movie_filename), Movie[].class);
-            return new ArrayList<Movie>(List.of(movies));
+            return new ArrayList<>(List.of(movies));
         } catch (FileNotFoundException e) {
             return null;
         }
@@ -63,7 +62,7 @@ public class MovieJsonOperator {
     public ArrayList<User> GetAllUsers() {
         try {
             User[] users = gson.fromJson(new FileReader(user_filename), User[].class);
-            return new ArrayList<User>(List.of(users));
+            return new ArrayList<>(List.of(users));
         } catch (FileNotFoundException e) {
             return null;
         }

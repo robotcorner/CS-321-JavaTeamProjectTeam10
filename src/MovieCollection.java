@@ -8,8 +8,8 @@ import java.util.ArrayList;
  * (use the Movie arraylist for everything)
  */
 public class MovieCollection extends Searchable {
-    private ArrayList<String> ids = new ArrayList<String>(); // array of movie IDs
-    private transient ArrayList<Movie> mediaList = new ArrayList<Movie>(); // array of movies
+    private ArrayList<String> ids = new ArrayList<>(); // array of movie IDs
+    private transient ArrayList<Movie> mediaList = new ArrayList<>(); // array of movies
     private String name;
 
     /**
@@ -34,7 +34,7 @@ public class MovieCollection extends Searchable {
      * @param m movie
      */
     public void addMovie(Movie m) {
-        if(!ids.contains(m))
+        if(!ids.contains(m.getImdbID()))
             ids.add(m.getImdbID());
         if(!mediaList.contains(m))
             mediaList.add(m);
@@ -67,7 +67,7 @@ public class MovieCollection extends Searchable {
      * @param allMovies canonical list of movies
      */
     public void buildMovieCollectionFromIds(ArrayList<Movie> allMovies) {
-        mediaList = new ArrayList<Movie>();
+        mediaList = new ArrayList<>();
         for (String id: ids) {
             for (Movie m: allMovies) {
                 if(id.equals(m.getImdbID())) {

@@ -4,16 +4,15 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class MovieCollectionView {
 
-    private LoginManager loginManager;
+    private final LoginManager loginManager;
     private ArrayList<MovieCollection> movieCollectionList;
-    private ArrayList<JLabel> labels = new ArrayList<JLabel>();
+    private final ArrayList<JLabel> labels = new ArrayList<>();
 
     public MovieCollectionView(LoginManager loginManager) {
         this.loginManager = loginManager;
@@ -64,7 +63,7 @@ public class MovieCollectionView {
 
                     @Override
                     public void mouseEntered(MouseEvent e) {
-                        if(MovieManagerView.drag == true) {
+                        if(MovieManagerView.drag) {
                             MovieManagerView.drop = cBlockLabel;
                             panel.setBackground(new Color(200, 200, 200));
                         }
