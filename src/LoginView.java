@@ -7,9 +7,8 @@ public class LoginView {
     SimpleMessage s = new SimpleMessage();
 
     /**
-     * sets the instances of LoginManager and MovieManagerView so that the methods
-     * in those classes can be used here
-     * @param loginManager
+     * Instantiates the view that allows a user to login or sign up
+     * @param loginManager controller that handles all login functionality
      */
     public LoginView(LoginManager loginManager) {
         this.loginManager = loginManager;
@@ -110,9 +109,8 @@ public class LoginView {
             if (userTextField.getText().equals(verifyUserTextField.getText()) && passwordString1.equals(passwordString2)) {
 
                 String username = userTextField.getText();
-                String password = passwordString1;
 
-                if(loginManager.signup(username, password)) {
+                if(loginManager.signup(username, passwordString1)) {
                     s.message("New User Created", "Press 'OK' to proceed.");
                     loginManager.save();
                     MovieManagerView.updateLoginSection();

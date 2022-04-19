@@ -9,7 +9,6 @@ Authors:    Stephen Stammen, Daniel Mills, Caleb Bagwell, Braden Willingham
  */
 
 import java.io.*;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 class Config {
@@ -18,12 +17,9 @@ class Config {
 }
 
 class Main {
-
-    static LoginManager loginManager;
-    static MovieManagerView movieManagerView;
     static String configPath = "data/config.json";
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         // Try to create if config file does not exist
         try {
             if (new File(configPath).createNewFile()) {
@@ -70,8 +66,8 @@ class Main {
 
         // Create Movie List Object for the Movie List View to display
         MovieManager movieManager = new MovieManager(movieList);
-        MovieManagerView mainView = new MovieManagerView(loginManager, movieManager);
-        mainView.main();
+        MovieManagerView.Initialize(loginManager, movieManager);
+        MovieManagerView.main();
 
         // Run Tests
         // Tests.testMovie(); // Tests that movies get loaded and prints to console

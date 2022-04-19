@@ -2,16 +2,16 @@ import java.util.ArrayList;
 
 public class LoginManager {
     private ArrayList<User> userList;
-    private ArrayList<Movie> movieList;
+    private final ArrayList<Movie> movieList;
     private User currentUser;
-    private MovieJsonOperator jsonOperator;
+    private final MovieJsonOperator jsonOperator;
 
     /**
      * sets the instances of UserList, MovieList, and MovieJsonOperator so that the info
      * in those json files can be used here
-     * @param userList
-     * @param movieList
-     * @param jsonOperator
+     * @param userList canonical list of all user accounts
+     * @param movieList canonical list of all movies in the json file
+     * @param jsonOperator object that directly handles json data
      */
     LoginManager(ArrayList<User> userList, ArrayList<Movie> movieList, MovieJsonOperator jsonOperator) {
         this.userList = userList;
@@ -21,8 +21,8 @@ public class LoginManager {
 
     /**
      * Creates a new user account and logs him in
-     * @param username
-     * @param password
+     * @param username name of user
+     * @param password assign to user
      * @return true if logged in, false if error occurred
      */
     public boolean signup(String username, String password) {
@@ -92,10 +92,7 @@ public class LoginManager {
      * @return true if logged in, false if not
      */
     public boolean verifyLogin() {
-        if (currentUser == null)
-            return false; // guest
-        else
-            return true;
+        return currentUser != null;
     }
 
     public void reloadUsers() {

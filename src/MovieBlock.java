@@ -45,9 +45,10 @@ public class MovieBlock extends JPanel {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    MovieManagerView.updateMoviePanel("");
-                    if(MovieManagerView.drop != null)
+                    if(MovieManagerView.drop != null) {
                         MovieManagerView.loginManager.getCurrentUser().getCollection(MovieManagerView.drop.getText()).addMovie(m);
+                        MovieManagerView.updateMovieDetails(imdbID);
+                    }
                     MovieManagerView.drop = null;
                     MovieManagerView.drag = false;
                 }
@@ -120,7 +121,6 @@ public class MovieBlock extends JPanel {
                 public void mouseEntered(MouseEvent e) {
                     setBackground(hoverColor);
                 }
-
                 @Override
                 public void mouseExited(MouseEvent e) {
                     setBackground(origColor);

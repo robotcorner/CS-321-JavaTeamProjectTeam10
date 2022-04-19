@@ -1,18 +1,12 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.DragGestureListener;
-import java.awt.dnd.DragSource;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -42,24 +36,22 @@ public class MovieManagerView {
 
 
     /**
-     * sets the instances of LoginManager, MovieManager, and MovieCollectionView so that the methods
+     * sets the instances of LoginManager and MovieManager so the methods
      * in those classes can be used here
-     * @param loginManager
-     * @param movieManager
+     * @param _loginManager controller that exposes methods to this view
+     * @param _movieManager controller that exposes methods to this view
      */
-    public MovieManagerView(LoginManager loginManager, MovieManager movieManager) {
-        this.accountView = new LoginView(loginManager);
-        this.loginManager = loginManager;
-        this.movieManager = movieManager;
-        this.saveMessage = new SaveMessage(loginManager);
-        this.movieCollectionView = new MovieCollectionView(loginManager);
-        currentCollection = new MovieCollection(movieManager.getMediaList());
-
-        System.out.println("initialized account view");
+    public static void Initialize(LoginManager _loginManager, MovieManager _movieManager) {
+        accountView = new LoginView(_loginManager);
+        loginManager = _loginManager;
+        movieManager = _movieManager;
+        saveMessage = new SaveMessage(_loginManager);
+        movieCollectionView = new MovieCollectionView(_loginManager);
+        currentCollection = new MovieCollection(_movieManager.getMediaList());
     }
 
     /**
-     * updates the collection panel
+     * updates the collection panel to show the user's collections
      */
     public static void updateCollectionPanel() {
         collectionsPanel.removeAll();
@@ -75,18 +67,17 @@ public class MovieManagerView {
         moviePanel.removeAll();
         ArrayList<Movie> result = new ArrayList<>();
         String type = (String) select.getSelectedItem();
-        if(type == "All"){
+        if(type.equals("All")){
             result = currentCollection.search(term);
-        } else if(type == "Title") {
+        } else if(type.equals("Title")) {
             result = currentCollection.searchTitle(term);
-        } else if(type == "Genre") {
+        } else if(type.equals("Genre")) {
             result = currentCollection.searchGenre(term);
-        } else if(type == "Cast") {
+        } else if(type.equals("Cast")) {
             result = currentCollection.searchCast(term);
-        } else if(type == "Director") {
+        } else if(type.equals("Director")) {
             result = currentCollection.searchDirector(term);
         }
-
 
         if(result.isEmpty()) {
             s.message("None found", "Error: No movies match your search.");
@@ -117,6 +108,10 @@ public class MovieManagerView {
         updateMoviePanel("");
     }
 
+    /**
+     * Resets the current collection that is showing in the center panel
+     * Displays all movies in the app instead of showing a user's collection
+     */
     public static void resetCollection() {
         currentCollection = new MovieCollection(movieManager.getMediaList()); // reset current collection
         updateMoviePanel(""); // reset movie panel
@@ -152,11 +147,11 @@ public class MovieManagerView {
 
             // add other movie details
             movieDetails.add(new JLabel(movie.getTitle()));
-            movieDetails.add(new JLabel("Released: " + String.valueOf(movie.getYear())));
-            movieDetails.add(new JLabel("Genre: " + String.valueOf(movie.getGenre())));
-            movieDetails.add(new JLabel("Rating: " + String.valueOf(movie.getImdbRating())));
-            movieDetails.add(new JLabel("Metascore: " + String.valueOf(movie.getMetascore())));
-            movieDetails.add(new JLabel("Director: \n" + movie.getDirector()));
+            movieDetails.add(new JLabel("Released: " + movie.getYear()));
+            movieDetails.add(new JLabel("Genre: " + movie.getGenre()));
+            movieDetails.add(new JLabel("Rating: " + movie.getImdbRating()));
+            movieDetails.add(new JLabel("Metascore: " + movie.getMetascore()));
+            movieDetails.add(new JLabel("Director: " + movie.getDirector()));
             JLabel label = new JLabel("Actors: " + movie.getActors());
             movieDetails.add(label);
             if (loginManager.verifyLogin()) {
@@ -363,4 +358,4 @@ public class MovieManagerView {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-};
+}
