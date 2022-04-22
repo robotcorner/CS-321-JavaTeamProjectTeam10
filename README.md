@@ -12,6 +12,7 @@
 ## Task Overview
 
 This is six week team project for creating a **Java** Swing app related to organize a list of books or movies that the user chooses.
+This is a course requirement. It is a group project in Java for CS321 at the University of Alabama in Huntsville
 
 ### Summary of Actions
 
@@ -53,10 +54,6 @@ Please refer to the GitHub project [board](https://github.com/robotcorner/CS-321
 
 <p><img src='/docs/uml-class-diagram.svg'></p>
 
-#### Class Outline UML - Detailed
-
-- This is incomplete.
-
 ## App Demonstrations for Onlookers
 
 #### Main Page
@@ -71,4 +68,7 @@ Please refer to the GitHub project [board](https://github.com/robotcorner/CS-321
 #### Favorite Icons Add and Remove from Collection Automatically with Icon
 ![image](docs/apr-07-favorited-collection.png)
 
-
+# License
+Copyright 2022 AUTHORS.
+AUTHORS are Caleb Bagwell, Stephen Stammen, Daniel Mills, Braden Willingham
+Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.3, (3 November 2008) or any later version published by the Free Software Foundation; with no Invariant Sections, with no Front-Cover Texts, and with no Back-Cover Texts. A copy of the license can be found at https://www.gnu.org/licenses/fdl.html.
