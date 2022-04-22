@@ -45,9 +45,9 @@ Please refer to the GitHub project [board](https://github.com/robotcorner/CS-321
 **Path b**: Run via command line
 
 1. Open the terminal to the location where you downloaded the project.
-2. Type `javac main.java`
-3. Type `java main`
-
+2. Type `javac -encoding utf8 -d ./out src/*/* lib/gson-2.8.9.jar`
+3. Type `jar cvf CS-321-JavaTeamProjectTeam10.jar out/`
+4. Type `java -jar CS-321-JavaTeamProjectTeam10.jar`
 
 ### UML Diagrams
 #### Class Outline UML - Preliminary 
