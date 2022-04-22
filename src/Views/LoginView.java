@@ -103,12 +103,11 @@ public class LoginView {
         newUserView.add(signUp);
         newUserView.add(cancel);
 
-        char[] password1 = passwordTextField.getPassword();
-        String passwordString1 = new String(password1);
-        char[] password2 = verifyPasswordTextField.getPassword();
-        String passwordString2 = new String(password2);
-
         signUp.addActionListener(event -> {
+            char[] password1 = passwordTextField.getPassword();
+            String passwordString1 = new String(password1);
+            char[] password2 = verifyPasswordTextField.getPassword();
+            String passwordString2 = new String(password2);
 
             if (userTextField.getText().equals(verifyUserTextField.getText()) && passwordString1.equals(passwordString2)) {
 
